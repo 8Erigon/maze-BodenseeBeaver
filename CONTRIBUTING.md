@@ -1,3 +1,5 @@
-Main contribution by Erik Bergmann, Thomas Neidhardt, Hannes Falke
+**Changes may only be approved by Members of the Bodensee Milben** 
+_(Erik Bergmann, Thomas Neidhardt, Hannes Falke) ~10.10.24_
 
-Others: Bodenseedogs, Adafruit & other hardware library writers
+
+Contributers: Bodensee Milben, Bodensee Dogs, Adafruit

@@ -1,4 +1,4 @@
-# Maze Milbe Test 
+# Maze Staubmilbe25 2.0
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://git.markdorf-robotics.de/staubmilbe/maze-milbe-test.git
+git remote add origin https://git.markdorf-robotics.de/staubmilbe/maze-staubmilbe25-2.0.git
 git branch -M master
 git push -uf origin master
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://git.markdorf-robotics.de/staubmilbe/maze-milbe-test/-/settings/integrations)
+- [ ] [Set up project integrations](https://git.markdorf-robotics.de/staubmilbe/maze-staubmilbe25-2.0/-/settings/integrations)
 
 ## Collaborate with your team
 

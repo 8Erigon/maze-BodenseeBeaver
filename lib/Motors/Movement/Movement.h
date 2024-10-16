@@ -8,7 +8,7 @@
 class Movement
 {
 public:
-    Movement(Motor& _motor[4]);
+    Movement(Motor _motor[4]);
 
     Motor motor[4];
 };

@@ -55,6 +55,16 @@ void Robot::processExpanderInputs(){
     bottomExpander1Bits = bottomExpander1.input();
     bottomExpander2Bits = bottomExpander2.input();
 }
+/*
+@description Time passed since last use of this function (in microsec)
+@warning Will break after Teensy is on for 70min
+*/
+long Robot::deltaTime(){
+    long oldMicros = lastMicros;
+    lastMicros = micros();
+    return lastMicros - oldMicros;
+}
+
 bool Robot::getExpanderBit(Mutliplexer expander, uint8_t bit) {
     switch(expander){
         case MULTIPLEXER_TOP_1:

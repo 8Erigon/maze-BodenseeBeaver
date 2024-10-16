@@ -78,8 +78,11 @@ class Robot{
     void processExpanderInputs();
     bool readSwitch(Switch sw);
     bool readButton(Buttons button);
+    long deltaTime();
 
     private:
+    long lastMicros;
+
     TCA9534 topExpander1;
     TCA9534 topExpander2;
     TCA9534 bottomExpander1;
@@ -90,6 +93,8 @@ class Robot{
     uint8_t bottomExpander1Bits;
     uint8_t bottomExpander2Bits;
     bool getExpanderBit(Mutliplexer expander, uint8_t bit);
+
+
 };
 
 #endif

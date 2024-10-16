@@ -1,16 +1,16 @@
 #include "Motor.h"
 #include "../TCA9534-master/TCA9534.h"
 
-Motor::Motor(uint8_t _IN1, uint8_t _IN2, uint8_t _pwmPin, TCA9534* _motorExpander){
-    this->IN1Pin = _IN1;
-    this->IN2Pin = _IN2;
-    this->pwmPin = _pwmPin;
-    this->motorExpander = _motorExpander;
+Motor::Motor(uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* motorExpander){
+    this->IN1Pin = IN1;
+    this->IN2Pin = IN2;
+    this->pwmPin = pwmPin;
+    this->motorExpander = motorExpander;
     pinMode(pwmPin, OUTPUT);
 }
 
-void Motor::setSpeed(uint8_t _speed){
-    speed = _speed;
+void Motor::setSpeed(uint8_t speed){
+    this->speed = speed;
 }
 
 void Motor::processOutput(){

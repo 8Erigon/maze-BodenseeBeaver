@@ -10,8 +10,7 @@ class Movement
 public:
     Movement(Motor* _motor);
 
-private:
-    Motor* motor[4];
+    Motor motor[4];
 };
 
 #endif

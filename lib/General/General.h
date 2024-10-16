@@ -66,8 +66,8 @@ class Robot{
     public:
     bool init();
 
-    //Motor motors[4];
-    //Movement move;
+    Motor motors[4];
+    Movement move;
 
     //Adafruit_ILI9341 Display = Adafruit_ILI9341(7, 8);
 

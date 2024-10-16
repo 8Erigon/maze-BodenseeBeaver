@@ -1,5 +1,5 @@
 #include "Movement.h"
 
-Movement::Movement(Motor& _motor){
-    &motor = &_motor;
+Movement::Movement(Motor& _motor[4]){
+    &motor[] = &_motor[];
 }

@@ -9,10 +9,6 @@ Motor::Motor(uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* motorExpander){
     pinMode(pwmPin, OUTPUT);
 }
 
-void Motor::setSpeed(uint8_t speed){
-    this->speed = speed;
-}
-
 void Motor::processOutput(){
     //Speed
     uint8_t pwmOut;

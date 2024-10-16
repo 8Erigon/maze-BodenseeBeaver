@@ -8,10 +8,13 @@ public:
 
     Motor(uint8_t _IN1, uint8_t _IN2, uint8_t _pwmPin, TCA9534* _motorExpander);
 
-    void setSpeed(int _speed);
+    /*
+    @param Speed from 0-255
+    */
+    void setSpeed(uint8_t _speed);
     void processOutput();
 private:
-    int speed;
+    uint8_t speed; //0-255
 
     TCA9534* motorExpander;
     uint8_t IN1Pin;

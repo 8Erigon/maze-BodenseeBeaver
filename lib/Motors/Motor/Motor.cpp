@@ -6,9 +6,6 @@ Motor::Motor(uint8_t _IN1, uint8_t _IN2, uint8_t _pwmPin, TCA9534* _motorExpande
     this->IN2Pin = _IN2;
     this->pwmPin = _pwmPin;
     this->motorExpander = _motorExpander;
-}
-
-void Motor::initMotor() {
     pinMode(pwmPin, OUTPUT);
 }
 

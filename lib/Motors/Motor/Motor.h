@@ -7,7 +7,6 @@ class Motor{
 public:
 
     Motor(uint8_t _IN1, uint8_t _IN2, uint8_t _pwmPin, TCA9534* _motorExpander);
-    void initMotor();
 
     void setSpeed(int _speed);
     void processOutput();

@@ -8,7 +8,7 @@
 class Movement
 {
 public:
-    Movement(Motor (&_motor)[4]); //Benutzt "pass by reference"
+    Movement(Motor _motor[4]);
 
     Motor motor[4];
 };

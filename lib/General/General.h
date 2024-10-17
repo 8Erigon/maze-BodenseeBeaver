@@ -79,6 +79,10 @@ class Robot{
     bool readSwitch(Switch sw);
     bool readButton(Buttons button);
     long deltaTime();
+    /*
+    @description Processes everything. Should be used at the start of each loop
+    */
+    void process(){processExpanderInputs(); bno.getEvent(orientationData, Adafruit_BNO055::VECTOR_EULER);bno.getEvent(orientationData, Adafruit_BNO055::VECTOR_LINEARACCEL);};
 
     private:
     long lastMicros;

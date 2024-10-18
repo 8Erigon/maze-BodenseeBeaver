@@ -7,7 +7,7 @@ template <typename type> class vektors{
         content = new type[lenght];
     };
     ~vektors(){
-        free(content);
+        delete content;
     };
     type content[];
 

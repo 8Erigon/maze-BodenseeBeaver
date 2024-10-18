@@ -106,3 +106,7 @@ bool Robot::readButton(Buttons button) {
         return !getExpanderBit(MULTIPLEXER_TOP_1, button + 3); // Invertierung damit gedrückt = true und nicht gedrückt = false
     }
 }
+
+void Robot::computeCoordinates(){
+    
+}

@@ -65,6 +65,14 @@ enum SkyDirection{
 class Robot{
     public:
     bool init();
+    /*
+    @details x coordinate of the robot
+    */
+    int x;
+    /*
+    @details y coordinate of the robot
+    */
+    int y;
 
     //Motor motors[4];
     //Movement move;
@@ -100,6 +108,7 @@ class Robot{
     @details Time since last using this function
     */
     long computeDeltaTime();
+    void computeCoordinates();
 };
 
 #endif

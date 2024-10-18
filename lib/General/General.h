@@ -82,12 +82,7 @@ class Robot{
     /*
     @details Processes everything. Should be used at the start of each loop
     */
-    void process(){
-        processExpanderInputs(); 
-        bno.getEvent(&orientation, Adafruit_BNO055::VECTOR_EULER);
-        bno.getEvent(&acceleration, Adafruit_BNO055::VECTOR_LINEARACCEL);
-        deltaTime = deltaTime();
-    };
+    void process();
 
     private:
     long lastMicros;
@@ -104,7 +99,7 @@ class Robot{
     /*
     @details Time since last using this function
     */
-    long deltaTime();
+    long computeDeltaTime();
 };
 
 #endif

@@ -1,5 +1,11 @@
 #include "General.h"
 
+void Robot::process(){        
+    processExpanderInputs(); 
+    bno.getEvent(&orientation, Adafruit_BNO055::VECTOR_EULER);
+    bno.getEvent(&acceleration, Adafruit_BNO055::VECTOR_LINEARACCEL);
+    deltaTime = computeDeltaTime();
+}
 
 bool Robot::init() {
     Serial.begin(9600);
@@ -60,10 +66,10 @@ void Robot::processExpanderInputs(){
 }
 
 /*
-@description Time passed since last use of this function (in microsec)
+@details Time passed since last use of this function (in microsec)
 @warning Will break after Teensy is on for 70min
 */
-long Robot::deltaTime(){
+long Robot::computeDeltaTime(){
     long oldMicros = lastMicros;
     lastMicros = micros();
     return lastMicros - oldMicros;

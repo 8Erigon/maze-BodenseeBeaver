@@ -78,14 +78,15 @@ class Robot{
     void processExpanderInputs();
     bool readSwitch(Switch sw);
     bool readButton(Buttons button);
-    long deltaTime();
+    long deltaTime;
     /*
-    @description Processes everything. Should be used at the start of each loop
+    @details Processes everything. Should be used at the start of each loop
     */
     void process(){
         processExpanderInputs(); 
         bno.getEvent(&orientation, Adafruit_BNO055::VECTOR_EULER);
         bno.getEvent(&acceleration, Adafruit_BNO055::VECTOR_LINEARACCEL);
+        deltaTime = deltaTime();
     };
 
     private:
@@ -100,6 +101,10 @@ class Robot{
     uint8_t bottomExpander1Bits;
     uint8_t bottomExpander2Bits;
     bool getExpanderBit(Mutliplexer expander, uint8_t bit);
+    /*
+    @details Time since last using this function
+    */
+    long deltaTime();
 };
 
 #endif

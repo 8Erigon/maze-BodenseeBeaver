@@ -1,17 +1,22 @@
 #ifndef vektors_h
 #define vektors_h
 
-template <typename type> class vektors{
+template <typename type, int lenght> class vektors{
     public: 
-    vektors(int lenght){
-        content = new type[lenght];
-    };
-    ~vektors(){
-        delete content;
-    };
-    type content[];
+    type content[lenght];
 
-
+    vektors operator*(const int &other){
+        for(int i; i<lenght; i++){
+            content[i] *= other;
+        }
+        return this;
+    }
+    vektors operator/(const int &other){
+        for(int i; i<lenght; i++){
+            content[i] /= other;
+        }
+        return this;
+    }
 };
 
 

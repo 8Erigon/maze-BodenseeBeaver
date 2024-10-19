@@ -5,13 +5,13 @@ template <typename type, int lenght> class vektors{
     public: 
     type content[lenght];
 
-    vektors operator*(const int &other){
+    vektors operator*(const int &other){ //function for when you do "vektor * int"
         for(int i; i<lenght; i++){
             content[i] *= other;
         }
         return this;
     }
-    vektors operator/(const int &other){
+    vektors operator/(const int &other){ //function for when you do "vektor / int"
         for(int i; i<lenght; i++){
             content[i] /= other;
         }

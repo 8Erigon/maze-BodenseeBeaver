@@ -17,6 +17,19 @@ template <typename type, int lenght> class vektors{
         }
         return this;
     }
+
+    vektors<type, lenght> operator+(const vektors &other){ //function for when you do "vektor + vektor"
+        for(int i; i<lenght; i++){
+            content[i] += other.content[i];
+        }
+        return this;
+    }
+    vektors<type, lenght> operator-(const vektors &other){ //function for when you do "vektor - vektor"
+        for(int i; i<lenght; i++){
+            content[i] -= other.content[i];
+        }
+        return this;
+    }
 };
 
 

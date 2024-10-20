@@ -26,7 +26,7 @@ template <typename type, int lenght, int width> class matrix{
         matrix<double, lenght, width> preResult;
         for(int iLenght; iLenght<lenght; iLenght++){
             for(int iWidth; iWidth<width; iWidth++){
-                preResult.colums[iWidth] = colums[iWidth] * other;
+                preResult.colums[iWidth].content[iLenght] = colums[iWidth].conten[iLenght] * other.conten[iLenght];
                 result.content[iLenght] = result.content[iLenght] + preResult.colums[iWidth].content[iLenght];
             }
         }

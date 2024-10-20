@@ -24,10 +24,10 @@ template <typename type, int lenght, int width> class matrix{
     vektors<type, lenght> operator*(const vektors &other){ //function for when you do "matrix * vektors"
         vektors<type, lenght> result;
         matrix<double, lenght, width> preResult;
-        for(int iLenght; iLenght<lenght; iLenght++){
-            for(int iWidth; iWidth<width; iWidth++){
-                preResult.colums[iWidth].content[iLenght] = colums[iWidth].conten[iLenght] * other.conten[iLenght];
-                result.content[iLenght] = result.content[iLenght] + preResult.colums[iWidth].content[iLenght];
+        for(int iRow; iRow<lenght; iRow++){
+            for(int iColum; iColum<width; iColum++){
+                preResult.colums[iColum].content[iRow] = colums[iColum].conten[iRow] * other.conten[iRow]; //Multiplices each vektor element with each Element in their corresponding Row in the Matrix
+                result.content[iRow] = result.content[iRow] + preResult.colums[iColum].content[iRow]; //Adds together the whole Row of the Matrix
             }
         }
         return result;

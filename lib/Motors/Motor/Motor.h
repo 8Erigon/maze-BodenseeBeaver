@@ -12,6 +12,9 @@ public:
     @brief Speed from -255 to 255
     */
     int speed;
+    /*
+    @brief Call this function every loop. This processes what the motors should do
+    */
     void processOutput();
 private:
     TCA9534* motorExpander;

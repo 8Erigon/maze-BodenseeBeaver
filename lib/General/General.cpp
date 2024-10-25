@@ -42,7 +42,6 @@ bool Robot::init() {
     motorExpander.config(TCA9534::Config::OUT);
     motorExpander.polarity(TCA9534::Polarity::ORIGINAL);
 
-    Motor motors[4];
     motors[1] = Motor(MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander);
     motors[2] = Motor(MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander);
     motors[3] = Motor(MOTOR_FRONT_LEFT_IN1, MOTOR_FRONT_LEFT_IN2, MOTOR_FRONT_LEFT_PWM, &motorExpander);

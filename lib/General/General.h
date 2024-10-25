@@ -74,8 +74,7 @@ class Robot{
     */
     int y;
 
-    //Motor motors[4];
-    //Movement move;
+    Movement move;
 
     //Adafruit_ILI9341 Display = Adafruit_ILI9341(7, 8);
 

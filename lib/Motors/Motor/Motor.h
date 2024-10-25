@@ -6,14 +6,17 @@
 class Motor{
 public:
 
-    Motor(uint8_t _IN1, uint8_t _IN2, uint8_t _pwmPin, TCA9534* _motorExpander);
-    void initMotor();
+    Motor(uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* motorExpander);
 
-    void setSpeed(int _speed);
+    /*
+    @brief Speed from -255 to 255
+    */
+    int speed;
+    /*
+    @brief Call this function every loop. This processes what the motors should do
+    */
     void processOutput();
 private:
-    int speed;
-
     TCA9534* motorExpander;
     uint8_t IN1Pin;
     uint8_t IN2Pin;

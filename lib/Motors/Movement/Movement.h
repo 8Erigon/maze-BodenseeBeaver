@@ -13,12 +13,17 @@ public:
     @example Motor motors[4]; Movement move(motors[0]);
     */
     Movement(Motor &_motor);
-
+    /*
+    @brief drive the roboter forward or backwards with a speed upto 255
+    @param speed from -255 to 255; 
+    */
+    void forward(int speed);
+private:
     /*
     @brief Pointer to array of 4 motors. Just handle it like a normal array.
     @example motor[0].speed = 0;
     */
-    Motor* motor;
+    Motor* motors;
 };
 
 #endif

@@ -23,6 +23,15 @@ public:
     @brief Angle the robot should turn to in the end.
     */
     ushort goalAngle = 0;
+    #define turnSpeed 50
+    /*
+    @brief degrees the robots of from the goalAngle
+    */
+    short offGoal;
+    /*
+    @brief true == turns Movement class doesn't control Motors
+    */
+    bool manuellSteering = false;
     /*
     @brief Processes Motors&Movement. Should be used at the start of each loop
     */

@@ -5,7 +5,10 @@ Movement::Movement(Motor &_motor, sensors_event_t &gyro): motors(&_motor){ //Ben
 }
 
 void Movement::process(){
-    for(int i = 0;i<4; i++){
-        motors[i].processOutput();
+    offGoal = goalAngle - orientation->orientation.heading;
+    if(!manuellSteering){
+        for(int i = 0;i<4; i++){
+            motors[i].processOutput();
+        }
     }
 }

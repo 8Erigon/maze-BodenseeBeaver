@@ -11,7 +11,7 @@ public:
     /*
     @brief Speed from -255 to 255
     */
-    int speed;
+    short speed;
     /*
     @brief Call this function every loop. This processes what the motors should do
     */

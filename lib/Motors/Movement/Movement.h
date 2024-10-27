@@ -19,6 +19,14 @@ public:
     @param speed from -255 to 255; 
     */
     void forward(int speed);
+    /*
+    @brief Processes Motors&Movement. Should be used at the start of each loop
+    */
+    void process();
+    /*
+    @brief Angle the robot should turn to in the end.
+    */
+    ushort goalAngle = 0;
 private:
     /*
     @brief pointer to a sensor_event_t holding orientation data of a BNO 

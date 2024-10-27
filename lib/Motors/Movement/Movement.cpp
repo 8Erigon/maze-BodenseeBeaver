@@ -10,3 +10,8 @@ void Movement::forward(int speed){
     }
 }
 
+void Movement::process(){
+    for(int i = 0;i<4; i++){
+        motors[i].processOutput();
+    }
+}

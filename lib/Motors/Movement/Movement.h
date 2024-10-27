@@ -11,7 +11,7 @@ public:
     /*
     @param &_motor first element in a array of 4 motors 
     @param &gyro variable that holds the orientation data of a BNO
-    @example Motor motors[4]; Movement move(motors[0]);
+    @example Motor motors[4]; sensors_event_t gyro; Movement move(motors[0], gyro);
     */
     Movement(Motor &_motor, sensors_event_t &gyro);
     /*

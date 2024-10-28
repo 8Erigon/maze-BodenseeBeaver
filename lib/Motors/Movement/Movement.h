@@ -9,7 +9,7 @@ class Movement
 {
 public:
     /*
-    @param &_motor first element in a array of 4 motors 
+    @param &_motor first element in a array of 4 motors. First 2 elements are left motors. Last 2 are right motors. 
     @param &gyro variable that holds the orientation data of a BNO
     @example Motor motors[4]; sensors_event_t gyro; Movement move(motors[0], gyro);
     */
@@ -42,7 +42,7 @@ private:
     */
     sensors_event_t *orientation;
     /*
-    @brief Pointer to array of 4 motors. Just handle it like a normal array.
+    @brief Pointer to array of 4 motors. Just handle it like a normal array. First 2 elements are left motors. Last 2 are right motors. 
     @example motor[0].speed = 0;
     */
     Motor* motors;

@@ -13,7 +13,7 @@ void Movement::process(){
         motors[1].speed = sideSpeed;
         motors[2].speed = -sideSpeed;
         motors[3].speed = -sideSpeed;
-        if(abs(goalAngle) <= 5){ //Falls ungefähr richtige Richtung => fahre vorwährts
+        if(abs(goalAngle) <= offsetTreshhold){ //Falls ungefähr richtige Richtung => fahre vorwährts
             motors[0].speed += speed; 
             motors[1].speed += speed;
             motors[2].speed += speed;

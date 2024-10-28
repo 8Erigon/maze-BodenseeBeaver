@@ -24,6 +24,7 @@ public:
     */
     ushort goalAngle = 0;
     #define turnSpeed 2 //Motor speed when turning PER DEGREE to TURN
+    #define offsetTreshhold 5 //Degrees the robot can be of of goalAngle and still drive forward
     /*
     @brief degrees the robots of from the goalAngle
     */

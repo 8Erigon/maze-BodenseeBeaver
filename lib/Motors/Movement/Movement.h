@@ -9,11 +9,11 @@ class Movement
 {
 public:
     /*
-    @param &_motor first element in a array of 4 motors. First 2 elements are left motors. Last 2 are right motors. 
+    @param &motor first element in a array of 4 motors. First 2 elements are left motors. Last 2 are right motors. 
     @param &gyro variable that holds the orientation data of a BNO
     @example Motor motors[4]; sensors_event_t gyro; Movement move(motors[0], gyro);
     */
-    Movement(Motor &_motor, sensors_event_t &gyro);
+    Movement(Motor &motor, sensors_event_t &gyro);
     /*
     @brief drive the roboter forward or backwards with a speed upto 255
     @param speed from -255 to 255; 
@@ -23,7 +23,7 @@ public:
     @brief Angle the robot should turn to in the end.
     */
     ushort goalAngle = 0;
-    #define turnSpeed 50
+    #define turnSpeed 2 //Motor speed when turning PER DEGREE to TURN
     /*
     @brief degrees the robots of from the goalAngle
     */

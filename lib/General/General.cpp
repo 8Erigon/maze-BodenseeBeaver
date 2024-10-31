@@ -20,7 +20,13 @@ void Robot::setRunning(bool isRunning){
     }
 }
 
-bool Robot::init() {
+Robot::Robot() : //Member Initializer List
+    motors{Motor(MOTOR_FRONT_LEFT_IN1, MOTOR_FRONT_LEFT_IN2, MOTOR_FRONT_LEFT_PWM, &motorExpander),
+        Motor(MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander),
+        Motor(MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander),
+        Motor(MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander)},
+    move{Movement(motors[0], orientation)}
+    {
     Serial.begin(9600);
     //Expander
     topExpander1.attach(Wire);
@@ -55,18 +61,11 @@ bool Robot::init() {
     motorExpander.config(TCA9534::Config::OUT);
     motorExpander.polarity(TCA9534::Polarity::ORIGINAL);
 
-    motors[0] = Motor(MOTOR_FRONT_LEFT_IN1, MOTOR_FRONT_LEFT_IN2, MOTOR_FRONT_LEFT_PWM, &motorExpander);
-    motors[1] = Motor(MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander);
-    motors[2] = Motor(MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander);
-    motors[3] = Motor(MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander);
-    move = Movement(motors[0], orientation);
     //BNO
     if (!bno.begin()){
         Serial.print("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
         while (1);
     } 
-    //-----------
-    return 1;
 }
 
 void Robot::processExpanderInputs(){

@@ -3,10 +3,10 @@
 
 //Display
 #include "../Display/Adafruit_ILI9341-master/Adafruit_ILI9341.h"
-
 //Expander
 #include "../Motors/TCA9534-master/TCA9534.h"
 //Motors
+#include "../Motors/Motor/Motor.h"
 #include "../Motors/Movement/Movement.h"
 
 #define MOTOR_FREQUENCY 150
@@ -64,7 +64,6 @@ enum SkyDirection{
 
 class Robot{
     public:
-    bool init();
     /*
     @details x coordinate of the robot
     */
@@ -77,7 +76,7 @@ class Robot{
     Motor motors[4];
     Movement move;
 
-    Adafruit_ILI9341 Display = Adafruit_ILI9341(7, 8);
+    //Adafruit_ILI9341 display = Adafruit_ILI9341(7, 8);
 
     Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
     sensors_event_t orientation; //to process "bno.getEvent(&orientation, Adafruit_BNO055::VECTOR_EULER)"
@@ -97,7 +96,13 @@ class Robot{
     */
     void setRunning(bool isRunning);
 
+    ~Robot(){ //Destructor of the class
+        
+    };
+    Robot();
+
     private:
+
     long lastMicros;
     TCA9534 topExpander1;
     TCA9534 topExpander2;

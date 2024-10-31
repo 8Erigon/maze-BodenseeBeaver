@@ -14,6 +14,7 @@ public:
     @example Motor motors[4]; sensors_event_t gyro; Movement move(motors[0], gyro);
     */
     Movement(Motor &motor, sensors_event_t &gyro);
+    Movement();
     /*
     @brief drive the roboter forward or backwards with a speed upto 255
     @param speed from -255 to 255; 

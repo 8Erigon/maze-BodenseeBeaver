@@ -5,7 +5,7 @@
 
 class Motor{
 public:
-
+    Motor();
     Motor(uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* motorExpander);
 
     /*

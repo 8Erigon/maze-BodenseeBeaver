@@ -88,12 +88,12 @@ class Robot{
     bool readButton(Buttons button);
     long deltaTime;
     /*
-    @details Processes everything. Should be used at the start of each loop even when robot is paused
+    @brief Processes everything. Should be used at the start of each loop even when robot is paused
     */
     void process();
     /*
-    @details Function to pause the robot
-    @param isRunning true == Robot will run & move; false == Robot is paused
+    @brief Function to pause the robot
+    @param isRunning true = Robot will run & move; false = Robot is paused
     */
     void setRunning(bool isRunning);
 

@@ -92,7 +92,8 @@ class Robot{
     */
     void process();
     /*
-    @details Set false when pausing the robot. FALSE == roboter doesn't move
+    @details Function to pause the robot
+    @param isRunning true == Robot will run & move; false == Robot is paused
     */
     void setRunning(bool isRunning);
 

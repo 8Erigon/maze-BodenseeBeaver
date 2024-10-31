@@ -14,6 +14,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   if(robo.readSwitch(StartSwitch)){
     robo.process();
+    Serial.println("Start Switch On");
   } else {
     robo.setRunning(false);
   }

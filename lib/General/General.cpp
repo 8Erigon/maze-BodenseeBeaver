@@ -5,6 +5,19 @@ void Robot::process(){
     bno.getEvent(&orientation, Adafruit_BNO055::VECTOR_EULER);
     bno.getEvent(&acceleration, Adafruit_BNO055::VECTOR_LINEARACCEL);
     deltaTime = computeDeltaTime();
+    move.process();
+}
+
+void Robot::setRunning(bool isRunning){
+    if(isRunning){
+        move.manuellSteering = false;
+    } else {
+        move.manuellSteering = true;
+        for(int i = 0; i < 4; i++){
+            motors[i].speed = 0;
+            motors[i].processOutput();
+        }
+    }
 }
 
 bool Robot::init() {

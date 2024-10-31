@@ -77,7 +77,7 @@ class Robot{
     Motor motors[4];
     Movement move;
 
-    //Adafruit_ILI9341 Display = Adafruit_ILI9341(7, 8);
+    Adafruit_ILI9341 Display = Adafruit_ILI9341(7, 8);
 
     Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
     sensors_event_t orientation; //to process "bno.getEvent(&orientation, Adafruit_BNO055::VECTOR_EULER)"
@@ -88,9 +88,13 @@ class Robot{
     bool readButton(Buttons button);
     long deltaTime;
     /*
-    @details Processes everything. Should be used at the start of each loop
+    @details Processes everything. Should be used at the start of each loop even when robot is paused
     */
     void process();
+    /*
+    @details Set false when pausing the robot. FALSE == roboter doesn't move
+    */
+    void setRunning(bool isRunning);
 
     private:
     long lastMicros;

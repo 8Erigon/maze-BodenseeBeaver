@@ -64,7 +64,6 @@ Robot::Robot() : //Member Initializer List
     //BNO
     if (!bno.begin()){
         Serial.print("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
-        while (1);
     } 
 }
 

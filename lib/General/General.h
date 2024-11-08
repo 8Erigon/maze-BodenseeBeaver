@@ -33,18 +33,18 @@
 
 enum Buttons
 {
-    BUTTON1 = 1,
-    BUTTON2 = 2,
-    BUTTON3 = 3,
-    BUTTON4 = 4,
-    BUTTON5 = 5,
-    BUTTON6 = 6
+    BUTTON1 = 4,
+    BUTTON2 = 5,
+    BUTTON3 = 6,
+    BUTTON4 = 7,
+    BUTTON5 = 8,
+    BUTTON6 = 9
 };
 enum Switch{
-    Switch9 = 9,
-    Switch10 = 10,
-    Switch11 = 11,
-    Switch12 = 12,
+    SWITCH9 = 0,
+    SWITCH10 = 1,
+    SWITCH11 = 2,
+    SWITCH12 = 3,
     StartSwitch
 };
 

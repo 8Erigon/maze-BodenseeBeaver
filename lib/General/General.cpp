@@ -41,11 +41,11 @@ Robot::Robot() : //Member Initializer List
 
     topExpander1.config(TCA9534::Config::IN);
     topExpander2.config(TCA9534::Config::IN);
-//    topExpander2.config(DISPLAY_LIGHT, TCA9534::Config::OUT);
-//    topExpander2.config(BLUETOOTH, TCA9534::Config::OUT);
+    topExpander2.config(5, TCA9534::Config::OUT); //Display Light
+//    topExpander2.config(4, TCA9534::Config::OUT); //Bluetooth
     bottomExpander1.config(TCA9534::Config::OUT);
-//    bottomExpander1.config(AUX_SW1, TCA9534::Config::IN);
-//    bottomExpander1.config(AUX_SW2, TCA9534::Config::IN);
+    bottomExpander1.config(0, TCA9534::Config::IN); //AUX_SW1
+    bottomExpander1.config(1, TCA9534::Config::IN); //AUX_SW2
     
     bottomExpander2.config(TCA9534::Config::OUT);
 
@@ -54,6 +54,7 @@ Robot::Robot() : //Member Initializer List
     bottomExpander1.polarity(TCA9534::Polarity::ORIGINAL);
     bottomExpander2.polarity(TCA9534::Polarity::ORIGINAL);
     pinMode(3, INPUT); //Startswitchpin = 3
+    pinMode(10, OUTPUT); //ADC pin
 
     //Motors & Movement
     motorExpander.attach(Wire1);

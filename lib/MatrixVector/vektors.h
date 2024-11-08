@@ -2,7 +2,7 @@
 #define vektors_h
 
 template <typename type, int lenght> class vektors{
-    #if (type != int || type != long || type != float || type != double) //throw error if type is not a number when compiling
+    #if (type != int && type != long && type != float && type != double) //throw error if type is not a number when compiling
     #error "the class 'vektors' only allows a number type like int."
     #endif
     public: 

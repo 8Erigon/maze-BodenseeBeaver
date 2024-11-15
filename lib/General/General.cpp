@@ -1,11 +1,17 @@
 #include "General.h"
 
-void Robot::process(){        
+void Robot::process(){
+    Serial.println("Start processing");        
     processExpanderInputs(); 
+    Serial.println("expander");
     bno.getEvent(&orientation, Adafruit_BNO055::VECTOR_EULER);
+    Serial.println("bno orientation");
     bno.getEvent(&acceleration, Adafruit_BNO055::VECTOR_LINEARACCEL);
+    Serial.println("bno acceleration");
     deltaTime = computeDeltaTime();
+    Serial.println("delta time");
     move.process();
+    Serial.println("movement");
 }
 
 void Robot::setRunning(bool isRunning){
@@ -21,18 +27,20 @@ void Robot::setRunning(bool isRunning){
 }
 
 Robot::Robot() : //Member Initializer List
-    motors{Motor(MOTOR_FRONT_LEFT_IN1, MOTOR_FRONT_LEFT_IN2, MOTOR_FRONT_LEFT_PWM, &motorExpander),
-        Motor(MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander),
-        Motor(MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander),
-        Motor(MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander)},
+    motors{Motor(MOTOR_FREQUENCY, MOTOR_FRONT_LEFT_IN1, MOTOR_FRONT_LEFT_IN2, MOTOR_FRONT_LEFT_PWM, &motorExpander),
+        Motor(MOTOR_FREQUENCY, MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander),
+        Motor(MOTOR_FREQUENCY, MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander),
+        Motor(MOTOR_FREQUENCY, MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander)},
     move{Movement(motors[0], orientation)}
     {
     Serial.begin(9600);
     //Expander
+    Wire.begin();
+    Wire1.begin();
     topExpander1.attach(Wire);
     topExpander2.attach(Wire);
     bottomExpander1.attach(Wire1);
-    bottomExpander2.attach(Wire1);
+//    bottomExpander2.attach(Wire1);
 
     topExpander1.setDeviceAddress(0x20);
     topExpander2.setDeviceAddress(0x21);
@@ -46,13 +54,12 @@ Robot::Robot() : //Member Initializer List
     bottomExpander1.config(TCA9534::Config::OUT);
     bottomExpander1.config(0, TCA9534::Config::IN); //AUX_SW1
     bottomExpander1.config(1, TCA9534::Config::IN); //AUX_SW2
-    
-    bottomExpander2.config(TCA9534::Config::OUT);
+//    bottomExpander2.config(TCA9534::Config::OUT);
 
     topExpander1.polarity(TCA9534::Polarity::ORIGINAL);
     topExpander2.polarity(TCA9534::Polarity::ORIGINAL);
     bottomExpander1.polarity(TCA9534::Polarity::ORIGINAL);
-    bottomExpander2.polarity(TCA9534::Polarity::ORIGINAL);
+//    bottomExpander2.polarity(TCA9534::Polarity::ORIGINAL);
     pinMode(3, INPUT); //Startswitchpin = 3
     pinMode(10, OUTPUT); //ADC pin
 
@@ -72,7 +79,7 @@ void Robot::processExpanderInputs(){
     topExpander1Bits = topExpander1.input();
     topExpander2Bits = topExpander2.input();
     bottomExpander1Bits = bottomExpander1.input();
-    bottomExpander2Bits = bottomExpander2.input();
+//    bottomExpander2Bits = bottomExpander2.input();
 }
 
 /*

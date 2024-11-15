@@ -6,7 +6,7 @@
 class Motor{
 public:
     Motor();
-    Motor(uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* motorExpander);
+    Motor(uint frequency, uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* motorExpander);
 
     /*
     @brief Speed from -255 to 255

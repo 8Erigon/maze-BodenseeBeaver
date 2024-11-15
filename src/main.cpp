@@ -8,14 +8,14 @@ int main(){
   robo.move.speed = 10;
   robo.move.goalAngle = 180;
   while(true){
-    if(robo.readSwitch(SWITCH9)){
+    if(robo.readSwitch(SWITCH10)){
       robo.setRunning(true);
-      robo.process();
-      Serial.println("Switch 9 On");
+      Serial.println("Switch On");
     } else {
       robo.setRunning(false);
-      Serial.println("Switch 9 Off");
+      Serial.println("Switch Off");
     }
+    robo.process();
   }
 }
 // put function definitions here:

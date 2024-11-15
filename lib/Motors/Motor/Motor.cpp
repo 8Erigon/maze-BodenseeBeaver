@@ -1,12 +1,13 @@
 #include "Motor.h"
 #include "../TCA9534-master/TCA9534.h"
 
-Motor::Motor(uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* motorExpander){
+Motor::Motor(uint frequency, uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* motorExpander){
     this->IN1Pin = IN1;
     this->IN2Pin = IN2;
     this->pwmPin = pwmPin;
     this->motorExpander = motorExpander;
     pinMode(pwmPin, OUTPUT);
+    analogWriteFrequency(pwmPin, frequency);
 }
 
 void Motor::processOutput(){

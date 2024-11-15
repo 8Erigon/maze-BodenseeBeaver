@@ -28,7 +28,8 @@
 #define MOTOR_FRONT_RIGHT_PWM 9
 //BNO
 #include "../Adafruit_BNO055/Adafruit_BNO055.h"
-
+//TOF
+#include "../Adafruit_VL6180X-master/Adafruit_VL6180X.h"
 //------------------
 
 enum Buttons
@@ -55,6 +56,17 @@ enum Mutliplexer{
     MULTIPLEXER_BOTTOM_2,
 };
 
+enum TOF{
+    FRONTRIGHT,
+    FRONTLEFT,
+    RIGHTFRONT,
+    RIGHTBACK,
+    LEFTFRONT,
+    LEFTBACK,
+    BACKRIGHT,
+    BACKLEFT
+}
+
 enum SkyDirection{
     North,
     East,
@@ -75,6 +87,8 @@ class Robot{
 
     Motor motors[4];
     Movement move;
+
+    Adafruit_VL6180X TOF[8];
 
     //Adafruit_ILI9341 display = Adafruit_ILI9341(7, 8);
 

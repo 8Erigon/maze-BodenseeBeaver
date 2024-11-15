@@ -2,22 +2,20 @@
 #include "../lib/General/General.h"
 #include "../lib/MatrixVector/vektors.h"
 // put function declarations here:
-Robot robo;
 
-void setup() {
-  // put your setup code here, to run once:
+int main(){
+  Robot robo;
   robo.move.speed = 10;
   robo.move.goalAngle = 180;
-}
-
-void loop() {
-  // put your main code here, to run repeatedly:
-  if(robo.readSwitch(StartSwitch)){
-    robo.process();
-    Serial.println("Start Switch On");
-  } else {
-    robo.setRunning(false);
+  while(true){
+    if(robo.readSwitch(SWITCH9)){
+      robo.setRunning(true);
+      robo.process();
+      Serial.println("Switch 9 On");
+    } else {
+      robo.setRunning(false);
+      Serial.println("Switch 9 Off");
+    }
   }
 }
-
 // put function definitions here:

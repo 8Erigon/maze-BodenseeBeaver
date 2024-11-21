@@ -6,10 +6,10 @@
 class Motor{
 public:
     Motor();
-    Motor(uint frequency, uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* motorExpander);
+    Motor(uint frequency, uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* motorExpander, double pwmFactor = 1);
 
     /*
-    @brief Speed from -255 to 255
+    @warning must be between -255 and 255 AFTER multiplied with pwmFactor
     */
     short speed;
     /*
@@ -21,6 +21,7 @@ private:
     uint8_t IN1Pin;
     uint8_t IN2Pin;
     uint8_t pwmPin;
+    double pwmFactor;
 };
 
 

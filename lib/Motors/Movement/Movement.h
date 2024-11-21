@@ -5,6 +5,19 @@
 #include "../TCA9534-master/TCA9534.h"
 #include <Adafruit_BNO055.h>
 
+enum MotorPosition {
+    FrontLeft = 0,
+    BackLeft = 1,
+    FrontRight = 2,
+    BackRight = 3
+};
+
+enum MovementControl {
+    manuel,
+    compass,
+    TOF
+};
+
 class Movement
 {
 public:
@@ -33,7 +46,7 @@ public:
     /*
     @brief true == turns Movement class doesn't control Motors
     */
-    bool manuellSteering = false;
+    MovementControl movementControl = compass;
     /*
     @brief Processes Motors&Movement. Should be used at the start of each loop
     */

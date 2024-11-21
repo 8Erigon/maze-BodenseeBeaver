@@ -16,9 +16,9 @@ void Robot::process(){
 
 void Robot::setRunning(bool isRunning){
     if(isRunning){
-        move.manuellSteering = false;
+        move.movementControl = compass;
     } else {
-        move.manuellSteering = true;
+        move.movementControl = manuel;
         for(int i = 0; i < 4; i++){
             motors[i].speed = 0;
             motors[i].processOutput();

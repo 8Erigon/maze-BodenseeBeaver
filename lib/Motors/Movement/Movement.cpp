@@ -7,17 +7,17 @@ Movement::Movement(Motor &motor, sensors_event_t &gyro): motors(&motor){ //Benut
 void Movement::process(){
     offGoal = goalAngle - orientation->orientation.heading;
 
-    if(!manuellSteering){
+    if(movementControl != manuel){
         short sideSpeed = goalAngle * turnSpeed;
-        motors[0].speed = sideSpeed; 
-        motors[1].speed = sideSpeed;
-        motors[2].speed = -sideSpeed;
-        motors[3].speed = -sideSpeed;
+        motors[FrontLeft].speed = sideSpeed; 
+        motors[BackLeft].speed = sideSpeed;
+        motors[FrontRight].speed = -sideSpeed;
+        motors[BackRight].speed = -sideSpeed;
         if(abs(goalAngle) <= offsetTreshhold){ //Falls ungefähr richtige Richtung => fahre vorwährts
-            motors[0].speed += speed; 
-            motors[1].speed += speed;
-            motors[2].speed += speed;
-            motors[3].speed += speed;
+            motors[FrontLeft].speed += speed; 
+            motors[BackLeft].speed += speed;
+            motors[FrontRight].speed += speed;
+            motors[BackRight].speed += speed;
         }
         for(int i = 0;i<4; i++){
             motors[i].processOutput();

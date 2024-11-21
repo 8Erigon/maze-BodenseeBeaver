@@ -1,5 +1,5 @@
-**Changes may only be approved by Members of the Bodensee Milben** 
-_(Erik Bergmann, Thomas Neidhardt, Hannes Falke) ~10.10.24_
+**Changes may only be approved by Members of the Bodensee Beavers** 
+_(Erik Bergmann, Thomas Neidhardt, Hannes Falke) ~21.11.24_
 
 
-Contributers: Bodensee Milben, Bodensee Dogs, Adafruit
+Contributers: Bodensee Milben/Beaver, Bodensee Dogs, Adafruit

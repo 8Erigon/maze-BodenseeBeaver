@@ -1,17 +1,11 @@
 #include "General.h"
 
-void Robot::process(){
-    Serial.println("Start processing");        
+void Robot::process(){       
     processExpanderInputs(); 
-    Serial.println("expander");
     bno.getEvent(&orientation, Adafruit_BNO055::VECTOR_EULER);
-    Serial.println("bno orientation");
     bno.getEvent(&acceleration, Adafruit_BNO055::VECTOR_LINEARACCEL);
-    Serial.println("bno acceleration");
     deltaTime = computeDeltaTime();
-    Serial.println("delta time");
     move.process();
-    Serial.println("movement");
 }
 
 void Robot::setRunning(bool isRunning){
@@ -27,7 +21,7 @@ void Robot::setRunning(bool isRunning){
 }
 
 Robot::Robot() : //Member Initializer List
-    motors{Motor(MOTOR_FREQUENCY, MOTOR_FRONT_LEFT_IN1, MOTOR_FRONT_LEFT_IN2, MOTOR_FRONT_LEFT_PWM, &motorExpander, MOTOR_FRONT_LEFT_PWM),
+    motors{Motor(MOTOR_FREQUENCY, MOTOR_FRONT_LEFT_IN1, MOTOR_FRONT_LEFT_IN2, MOTOR_FRONT_LEFT_PWM, &motorExpander, MOTOR_FRONT_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander, MOTOR_BACK_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander, MOTOR_FRONT_RIGHT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander, MOTOR_BACK_RIGHT_FACTOR)},
@@ -47,6 +41,7 @@ Robot::Robot() : //Member Initializer List
     bottomExpander1.setDeviceAddress(0x23);
     bottomExpander2.setDeviceAddress(0x24);
 
+    Serial.println("Expander config start");
     topExpander1.config(TCA9534::Config::IN);
     topExpander2.config(TCA9534::Config::IN);
     topExpander2.config(5, TCA9534::Config::OUT); //Display Light
@@ -55,6 +50,7 @@ Robot::Robot() : //Member Initializer List
     bottomExpander1.config(0, TCA9534::Config::IN); //AUX_SW1
     bottomExpander1.config(1, TCA9534::Config::IN); //AUX_SW2
 //    bottomExpander2.config(TCA9534::Config::OUT);
+    Serial.println("expander config finished");
 
     topExpander1.polarity(TCA9534::Polarity::ORIGINAL);
     topExpander2.polarity(TCA9534::Polarity::ORIGINAL);

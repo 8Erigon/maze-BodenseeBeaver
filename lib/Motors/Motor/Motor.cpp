@@ -13,15 +13,15 @@ Motor::Motor(uint frequency, uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* 
 
 void Motor::processOutput(){
     //Speed
-    uint8_t pwmOut;
+    int8_t pwmOut;
     pwmOut = speed * pwmFactor;
     //Direction
     uint8_t stateIn1;
     uint8_t stateIn2;
-    if(this->speed > 0){
+    if(pwmOut > 0){
         stateIn1 = LOW;
         stateIn2 = HIGH;
-    } else if(this->speed <0){
+    } else if(pwmOut < 0){
         stateIn1 = HIGH;
         stateIn2 = LOW;
     } else {
@@ -32,5 +32,5 @@ void Motor::processOutput(){
     //Output
     this->motorExpander->output(this->IN1Pin, stateIn1);
     this->motorExpander->output(this->IN2Pin, stateIn2);
-    analogWrite(this->pwmPin, pwmOut);
+    analogWrite(this->pwmPin,(uint8_t) pwmOut);
 }

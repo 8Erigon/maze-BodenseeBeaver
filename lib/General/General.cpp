@@ -41,7 +41,6 @@ Robot::Robot() : //Member Initializer List
     bottomExpander1.setDeviceAddress(0x23);
     bottomExpander2.setDeviceAddress(0x24);
 
-    Serial.println("Expander config start");
     topExpander1.config(TCA9534::Config::IN);
     topExpander2.config(TCA9534::Config::IN);
     topExpander2.config(5, TCA9534::Config::OUT); //Display Light
@@ -50,7 +49,6 @@ Robot::Robot() : //Member Initializer List
     bottomExpander1.config(0, TCA9534::Config::IN); //AUX_SW1
     bottomExpander1.config(1, TCA9534::Config::IN); //AUX_SW2
 //    bottomExpander2.config(TCA9534::Config::OUT);
-    Serial.println("expander config finished");
 
     topExpander1.polarity(TCA9534::Polarity::ORIGINAL);
     topExpander2.polarity(TCA9534::Polarity::ORIGINAL);

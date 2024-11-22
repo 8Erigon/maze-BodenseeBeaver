@@ -11,7 +11,7 @@ public:
     /*
     @warning must be between -255 and 255 AFTER multiplied with pwmFactor
     */
-    short speed;
+    short speed = 0;
     /*
     @brief Call this function every loop. This processes what the motors should do
     */

@@ -13,7 +13,7 @@ Motor::Motor(uint frequency, uint8_t IN1, uint8_t IN2, uint8_t pwmPin, TCA9534* 
 
 void Motor::processOutput(){
     //Speed
-    int8_t pwmOut;
+    short pwmOut;
     pwmOut = speed * pwmFactor;
     //Direction
     uint8_t stateIn1;
@@ -32,5 +32,5 @@ void Motor::processOutput(){
     //Output
     this->motorExpander->output(this->IN1Pin, stateIn1);
     this->motorExpander->output(this->IN2Pin, stateIn2);
-    analogWrite(this->pwmPin,(uint8_t) pwmOut);
+    analogWrite(this->pwmPin, abs(pwmOut));
 }

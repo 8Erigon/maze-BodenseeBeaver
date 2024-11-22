@@ -4,10 +4,11 @@
 // put function declarations here:
 
 int main(){
+  Serial.begin(9600);
   Robot robo;
   robo.move.speed = 10;
   robo.move.goalAngle = 0;
-  robo.setRunning(true);
+  robo.setRunning(false);
   while(true){
     if(robo.readSwitch(SWITCH10)){
       for(int i = 0;i < 4; i++){

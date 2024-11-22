@@ -29,6 +29,8 @@ void Motor::processOutput(){
         stateIn2 = LOW;
         pwmOut = 255; //If pwmOut = 0: Free Running
     }
+    pwmOut = min(pwmOut, 255); //Limits pwmOut to 255 or lower
+    pwmOut = max(pwmOut, -255); //Limits pwmOut to -255 or higher
     //Output
     this->motorExpander->output(this->IN1Pin, stateIn1);
     this->motorExpander->output(this->IN2Pin, stateIn2);

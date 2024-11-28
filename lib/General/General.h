@@ -101,8 +101,8 @@ class Robot{
     //Adafruit_ILI9341 display = Adafruit_ILI9341(7, 8);
 
     Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
-    sensors_event_t orientation; //to process "bno.getEvent(&orientation, Adafruit_BNO055::VECTOR_EULER)"
-    sensors_event_t acceleration; //to process "bno.getEvent(&acceleration, Adafruit_BNO055::VECTOR_LINEARACCEL)"
+    sensors_event_t bnoData; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_EULER)"
+    //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_LINEARACCEL)"
 
     void processExpanderInputs();
     bool readSwitch(Switch sw);

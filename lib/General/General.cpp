@@ -2,8 +2,8 @@
 
 void Robot::process(){       
     processExpanderInputs(); 
-    bno.getEvent(&orientation, Adafruit_BNO055::VECTOR_EULER);
-    bno.getEvent(&acceleration, Adafruit_BNO055::VECTOR_LINEARACCEL);
+    bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_EULER);
+    bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_LINEARACCEL);
     deltaTime = computeDeltaTime();
     move.process();
 }
@@ -25,7 +25,7 @@ Robot::Robot() : //Member Initializer List
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander, MOTOR_BACK_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander, MOTOR_FRONT_RIGHT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander, MOTOR_BACK_RIGHT_FACTOR)},
-    move{Movement(motors[0], orientation)}
+    move{Movement(motors[0], bnoData)}
     {
     Serial.begin(9600);
     //Expander

@@ -1,11 +1,11 @@
 #include "Movement.h"
 
-Movement::Movement(Motor &motor, sensors_event_t &gyro): motors(&motor){ //Benutzt "Member Initializer List"-Technik ("motors = &motor")
-    orientation = &gyro;
+Movement::Movement(Motor &motor, sensors_event_t &bnoData): motors(&motor){ //Benutzt "Member Initializer List"-Technik ("motors = &motor")
+    this->bnoData = &bnoData;
 }
 
 void Movement::process(){
-    offGoal = goalAngle - orientation->orientation.heading;
+    offGoal = goalAngle - bnoData->orientation.heading;
 
     if(movementControl != manuel){
         short sideSpeed = goalAngle * turnSpeed;

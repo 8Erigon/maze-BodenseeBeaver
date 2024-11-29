@@ -14,6 +14,8 @@
 #include "../Adafruit_BNO055/Adafruit_BNO055.h"
 //TOF
 #include "../Adafruit_VL6180X-master/Adafruit_VL6180X.h"
+//Defines & Enums
+#include "DefineEnum.h"
 
 
 class Robot{

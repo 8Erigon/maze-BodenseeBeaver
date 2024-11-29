@@ -28,16 +28,9 @@
 #define MOTOR_FRONT_RIGHT_PWM 4
 #define MOTOR_FRONT_RIGHT_FACTOR 1
 
-//TOF
-#define TOF_FRONT_RIGHT_ADDR 
-#define TOF_FRONT_LEFT_ADDR
-#define TOF_BACK_RIGHT_ADDR
-#define TOF_BACK_LEFT_ADDR
-
-#define TOF_RIGHT_FRONT_ADDR
-#define TOF_RIGHT_BACK_ADDR
-#define TOF_LEFT_FRONT_ADDR
-#define TOF_LEFT_BACK_ADDR
+//Mux / Portexpander
+#define MUX1_ADDR
+#define MUX2_ADDR 
 
 //-------Enums---------
 

@@ -1,3 +1,6 @@
+#ifndef DefineEnum_h
+#define DefineEnum_h
+
 //Motors
 #define MOTOR_FREQUENCY 150
 
@@ -79,3 +82,5 @@ enum SkyDirection{
     South,
     West
 };
+
+#endif

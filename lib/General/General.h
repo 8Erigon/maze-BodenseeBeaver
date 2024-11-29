@@ -36,6 +36,8 @@ class Robot{
     @brief Time of Flight sensors for distance measurement. Use TOF-Enum to acces the right TOF.
     */
     Adafruit_VL6180X TOF[8];
+    uint8_t TOFdata[8];
+    uint8_t TOFstatus[8];
 
     //Adafruit_ILI9341 display = Adafruit_ILI9341(7, 8);
 

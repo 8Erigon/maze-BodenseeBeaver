@@ -6,6 +6,10 @@ void Robot::process(){
     bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_LINEARACCEL);
     deltaTime = computeDeltaTime();
     move.process();
+    for(int i = 0; i < 8; i++){
+        TOFstatus[i] = TOF[i].readRangeStatus();
+        TOFdata[i] = TOF[i].readRange();
+    }
 }
 
 void Robot::setRunning(bool isRunning){

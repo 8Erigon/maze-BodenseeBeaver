@@ -21,11 +21,21 @@ void Robot::setRunning(bool isRunning){
 }
 
 Robot::Robot() : //Member Initializer List
-    motors{Motor(MOTOR_FREQUENCY, MOTOR_FRONT_LEFT_IN1, MOTOR_FRONT_LEFT_IN2, MOTOR_FRONT_LEFT_PWM, &motorExpander, MOTOR_FRONT_LEFT_FACTOR),
+    motors
+        {Motor(MOTOR_FREQUENCY, MOTOR_FRONT_LEFT_IN1, MOTOR_FRONT_LEFT_IN2, MOTOR_FRONT_LEFT_PWM, &motorExpander, MOTOR_FRONT_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander, MOTOR_BACK_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander, MOTOR_FRONT_RIGHT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander, MOTOR_BACK_RIGHT_FACTOR)},
-    move{Movement(motors[0], bnoData)}
+    move{Movement(motors[0], bnoData)},
+    TOF
+        {Adafruit_VL6180X(TOF_FRONT_RIGHT_ADDR),
+        Adafruit_VL6180X(TOF_FRONT_LEFT_ADDR),
+        Adafruit_VL6180X(TOF_BACK_RIGHT_ADDR),
+        Adafruit_VL6180X(TOF_BACK_LEFT_ADDR),
+        Adafruit_VL6180X(TOF_RIGHT_FRONT_ADDR),
+        Adafruit_VL6180X(TOF_RIGHT_BACK_ADDR),
+        Adafruit_VL6180X(TOF_LEFT_FRONT_ADDR),
+        Adafruit_VL6180X(TOF_LEFT_BACK_ADDR)}
     {
     Serial.begin(9600);
     //Expander
@@ -62,6 +72,11 @@ Robot::Robot() : //Member Initializer List
     motorExpander.setDeviceAddress(0x22);
     motorExpander.config(TCA9534::Config::OUT);
     motorExpander.polarity(TCA9534::Polarity::ORIGINAL);
+
+    //TOF
+    for(int i = 0; i < 8; i++){
+        TOF[i].begin();
+    }
 
     //BNO
     if (!bno.begin()){

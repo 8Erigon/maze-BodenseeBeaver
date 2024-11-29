@@ -25,6 +25,17 @@
 #define MOTOR_FRONT_RIGHT_PWM 4
 #define MOTOR_FRONT_RIGHT_FACTOR 1
 
+//TOF
+#define TOF_FRONT_RIGHT_ADDR 
+#define TOF_FRONT_LEFT_ADDR
+#define TOF_BACK_RIGHT_ADDR
+#define TOF_BACK_LEFT_ADDR
+
+#define TOF_RIGHT_FRONT_ADDR
+#define TOF_RIGHT_BACK_ADDR
+#define TOF_LEFT_FRONT_ADDR
+#define TOF_LEFT_BACK_ADDR
+
 //-------Enums---------
 
 enum Buttons
@@ -52,14 +63,14 @@ enum Mutliplexer{
 };
 
 enum TOF{
-    FRONTRIGHT,
-    FRONTLEFT,
-    RIGHTFRONT,
-    RIGHTBACK,
-    LEFTFRONT,
-    LEFTBACK,
-    BACKRIGHT,
-    BACKLEFT
+    FRONTRIGHT = 0,
+    FRONTLEFT = 1,
+    BACKRIGHT = 2,
+    BACKLEFT = 3,
+    RIGHTFRONT = 4,
+    RIGHTBACK = 5,
+    LEFTFRONT = 6,
+    LEFTBACK = 7
 };
 
 enum SkyDirection{

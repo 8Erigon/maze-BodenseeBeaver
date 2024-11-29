@@ -2,9 +2,10 @@
 #define TOF_h
 
 #include "../Adafruit_VL6180X-master/Adafruit_VL6180X.h"
+#include ".../General/DefineEnum.h"
 
-class TOF{
-
+class TOFonMux{
+    TOFonMux();
 };
 
 #endif

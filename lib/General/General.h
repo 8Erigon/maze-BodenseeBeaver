@@ -12,8 +12,6 @@
 #include "../Motors/Movement/Movement.h"
 //BNO
 #include "../Adafruit_BNO055/Adafruit_BNO055.h"
-//Defines & Enums
-#include "DefineEnum.h"
 
 
 class Robot{

@@ -5,14 +5,16 @@
 #include "../General/DefineEnum.h" //Warum will VScode nur 2 "."? Es sollten 3 sein!
 #include "../Portexpander/src/SparkFun_I2C_Mux_Arduino_Library.h"
 
-class TOFonMux{
+class TOFonMux : public QWIICMUX, public Adafruit_VL6180X{
     public:
-    TOFonMux(QWIICMUX expander, uint8_t pin);
+    TOFonMux(uint8_t expanderAddress = QWIIC_MUX_DEFAULT_ADDRESS, TwoWire &wirePort = Wire) : Adafruit_VL6180X() {
+        QWIICMUX::begin(expanderAddress, wirePort);
+    };
 
 
     private:
-    QWIICMUX expander;
-    uint8_t pin;
+
+
 };
 
 #endif

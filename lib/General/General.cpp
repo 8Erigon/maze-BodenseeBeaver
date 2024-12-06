@@ -6,6 +6,9 @@ void Robot::process(){
     bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_LINEARACCEL);
     deltaTime = computeDeltaTime();
     move.process();
+    for(int i = 0; i<8; i++){
+        TOF[i].range = TOF[i].readRange();
+    }
 }
 
 void Robot::setRunning(bool isRunning){
@@ -28,17 +31,21 @@ Robot::Robot() : //Member Initializer List
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander, MOTOR_BACK_RIGHT_FACTOR)},
     move{Movement(motors[0], bnoData)},
     TOF{
-        TOFonMux(1),
-        TOFonMux(2),
-        TOFonMux(3),
-        TOFonMux(4),
-        TOFonMux(5),
-        TOFonMux(6),
-        TOFonMux(7),
-        TOFonMux(8),
+        TOFonMux(0, muxBack),
+        TOFonMux(1, muxBack),
+        TOFonMux(2, muxBack),
+        TOFonMux(3, muxBack),
+        TOFonMux(4, muxFront),
+        TOFonMux(5, muxFront),
+        TOFonMux(6, muxFront),
+        TOFonMux(7, muxFront)
     }
     {
     Serial.begin(9600);
+    //Mux
+    muxBack.begin(MUXBACK_ADDR);
+    muxFront.begin(MUXFRONT_ADDR);
+
     //Expander
     Wire.begin();
     Wire1.begin();

@@ -7,12 +7,12 @@
 
 class TOFonMux : public Adafruit_VL6180X{
     public:
-    TOFonMux(uint8_t pinOnMux, uint8_t expanderAddress = QWIIC_MUX_DEFAULT_ADDRESS, TwoWire &wirePort = Wire) : Adafruit_VL6180X() {
-        expander->begin(expanderAddress, wirePort);
+    TOFonMux(uint8_t pinOnMux, QWIICMUX &expander) : Adafruit_VL6180X() {
+        this->expander = &expander;
         this->pin = pinOnMux;
     };
 
-
+    uint8_t range;
     private:
     uint8_t pin;
     QWIICMUX *expander;

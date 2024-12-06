@@ -68,6 +68,10 @@ class Robot{
     uint8_t topExpander2Bits;
     uint8_t bottomExpander1Bits;
     uint8_t bottomExpander2Bits;
+
+    QWIICMUX muxFront;
+    QWIICMUX muxBack;
+
     bool getExpanderBit(Mutliplexer expander, uint8_t bit);
     /*
     @details Time since last using this function

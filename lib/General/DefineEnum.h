@@ -29,8 +29,8 @@
 #define MOTOR_FRONT_RIGHT_FACTOR 1
 
 //Mux / Portexpander
-#define MUX1_ADDR
-#define MUX2_ADDR 
+#define MUXBACK_ADDR 0x70
+#define MUXFRONT_ADDR 0x71
 
 //-------Enums---------
 

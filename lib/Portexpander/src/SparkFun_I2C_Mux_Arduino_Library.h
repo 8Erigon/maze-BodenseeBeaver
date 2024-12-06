@@ -35,7 +35,7 @@ public:
   bool enablePort(uint8_t portNumber);                                                     //Enable a single port without affecting other bits
   bool disablePort(uint8_t portNumber);                                                    //Disable a single port without affecting other bits
 
-  uint8_t activePin;
+  uint8_t activePort; //"activePort > 8" means (possibly) multiple enabled. 0 means none
 
 private:
   TwoWire *_i2cPort;                                  //This stores the user's requested i2c port

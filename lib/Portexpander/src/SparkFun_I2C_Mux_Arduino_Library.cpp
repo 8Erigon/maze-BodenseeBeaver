@@ -65,6 +65,7 @@ bool QWIICMUX::setPort(uint8_t portNumber)
   _i2cPort->write(portValue);
   if (_i2cPort->endTransmission() != 0)
     return (false); //Device did not ACK
+  this->activePort = portNumber;
   return (true);
 }
 
@@ -124,6 +125,7 @@ bool QWIICMUX::enablePort(uint8_t portNumber)
   //Set the wanted bit to enable the port
   settings |= (1 << portNumber);
 
+  this->activePort = 99; // "activePort > 8" means (possibly) multiple enabled
   return (setPortState(settings));
 }
 

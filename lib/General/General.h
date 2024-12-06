@@ -29,6 +29,7 @@ class Robot{
     Motor motors[4];
     Movement move;
 
+    TOFonMux TOF[8];
 
     //Adafruit_ILI9341 display = Adafruit_ILI9341(7, 8);
 

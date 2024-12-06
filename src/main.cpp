@@ -6,27 +6,14 @@
 int main(){
   Serial.begin(9600);
   Robot robo;
-  robo.move.speed = 10;
-  robo.move.goalAngle = 0;
+
   robo.setRunning(false);
   while(true){
-    if(robo.readSwitch(SWITCH10)){
-      for(int i = 0;i < 4; i++){
-      robo.motors[i].speed = 50;
-      }
-      Serial.println("Switch On");
-    } 
-    else {
-      for(int i = 0;i < 4; i++){
-      robo.motors[i].speed = 0;
-      }
-      Serial.println("Switch Off");
-    }
-
-    for(int i = 0; i <4; i++){
-      robo.motors[i].processOutput();
-    }
     robo.process();
+    Serial.println(robo.orientation.orientation.heading);
+    Serial.println(robo.orientation.orientation.pitch);
+    Serial.println(robo.orientation.orientation.roll);
+    Serial.println();
     delay(1000);
   }
 }

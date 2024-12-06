@@ -7,10 +7,8 @@
 
 class TOFonMux : public Adafruit_VL6180X{
     public:
-    TOFonMux(uint8_t pinOnMux, QWIICMUX &expander) : Adafruit_VL6180X() {
-        this->expander = &expander;
-        this->pin = pinOnMux;
-    };
+    TOFonMux(uint8_t pinOnMux, QWIICMUX *expander);
+    TOFonMux();
 
     uint8_t range;
     private:

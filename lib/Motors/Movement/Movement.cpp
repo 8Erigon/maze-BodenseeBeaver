@@ -24,3 +24,52 @@ void Movement::process(){
         }
     }
 }
+
+void Movement::TurnRight(int Speed){
+    motors[0].speed = Speed;
+    motors[1].speed = Speed;
+    motors[2].speed = - Speed;
+    motors[3].speed = - Speed;
+    motors[0].processOutput();
+    motors[1].processOutput();
+    motors[2].processOutput();
+    motors[3].processOutput();
+    delay(TurnDuration/Speed);
+}
+
+void Movement::TurnLeft(int Speed){
+    motors[0].speed = - Speed;
+    motors[1].speed = - Speed;
+    motors[2].speed = Speed;
+    motors[3].speed = Speed;
+    motors[0].processOutput();
+    motors[1].processOutput();
+    motors[2].processOutput();
+    motors[3].processOutput();
+    delay(TurnDuration/Speed);
+}
+
+void Movement::ForwardOneTile(int speed){
+    motors[0].speed = speed;
+    motors[1].speed = speed;
+    motors[2].speed = speed;
+    motors[3].speed = speed;
+    
+    motors[0].processOutput();
+    motors[1].processOutput();
+    motors[2].processOutput();
+    motors[3].processOutput();
+    delay(ForwardDuration/speed);
+}
+
+void Movement::Stop(int  time){
+    motors[0].speed = 0;
+    motors[1].speed = 0;
+    motors[2].speed = 0;
+    motors[3].speed = 0;
+    motors[0].processOutput();
+    motors[1].processOutput();
+    motors[2].processOutput();
+    motors[3].processOutput();
+    delay(time);
+}

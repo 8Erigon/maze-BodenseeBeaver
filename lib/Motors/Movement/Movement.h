@@ -4,9 +4,12 @@
 #include "../Motor/Motor.h"
 #include "../TCA9534-master/TCA9534.h"
 #include <Adafruit_BNO055.h>
+//#include "General.h"
 
 #define TurnDuration 11000
 #define ForwardDuration 11000
+
+//Adafruit_BNO055 bno(55);
 
 enum MotorPosition {
     FrontLeft = 0,

@@ -12,7 +12,7 @@
   https://www.sparkfun.com/products/14685
 */
 /*
-Erik Bergmann: Added "activePin"
+Erik Bergmann, Bodensee Beaver: Added "activePort"
 */
 
 #ifndef SparkFun_I2C_Mux_Arduino_Library_h

@@ -7,5 +7,5 @@ TOFonMux::TOFonMux(uint8_t pinOnMux, QWIICMUX *expander) : Adafruit_VL6180X() {
 
 TOFonMux::TOFonMux(){
     this->expander = NULL;
-    this->pin = 9;
+    this->pin = 9; //Expander/Mux only has ports from 0-7
 };

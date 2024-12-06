@@ -5,6 +5,9 @@
 #include "../TCA9534-master/TCA9534.h"
 #include <Adafruit_BNO055.h>
 
+#define TurnDuration 11000
+#define ForwardDuration 11000
+
 enum MotorPosition {
     FrontLeft = 0,
     BackLeft = 1,
@@ -28,6 +31,11 @@ public:
     */
     Movement(Motor &motor, sensors_event_t &bnoData);
     Movement();
+
+    void TurnRight (int Speed);
+    void TurnLeft (int Speed);
+    void ForwardOneTile(int speed);
+    void Stop(int time);
     /*
     @brief drive the roboter forward or backwards with a speed upto 255
     @param speed from -255 to 255; 
@@ -43,6 +51,7 @@ public:
     @brief degrees the robots of from the goalAngle
     */
     short offGoal;
+
     /*
     @brief true == turns Movement class doesn't control Motors
     */

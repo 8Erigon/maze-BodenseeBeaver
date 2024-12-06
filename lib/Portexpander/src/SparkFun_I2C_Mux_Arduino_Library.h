@@ -12,7 +12,7 @@
   https://www.sparkfun.com/products/14685
 */
 /*
-Erik Bergmann: Added "activePin"
+Erik Bergmann, Bodensee Beaver: Added "activePort"
 */
 
 #ifndef SparkFun_I2C_Mux_Arduino_Library_h
@@ -35,7 +35,7 @@ public:
   bool enablePort(uint8_t portNumber);                                                     //Enable a single port without affecting other bits
   bool disablePort(uint8_t portNumber);                                                    //Disable a single port without affecting other bits
 
-  uint8_t activePort; //"activePort > 8" means (possibly) multiple enabled. 0 means none
+  uint8_t activePort; //"activePort > 8" means (possibly) multiple enabled. 8 means none
 
 private:
   TwoWire *_i2cPort;                                  //This stores the user's requested i2c port

@@ -11,6 +11,9 @@
   source? Buy a board from SparkFun!
   https://www.sparkfun.com/products/14685
 */
+/*
+Erik Bergmann: Added "activePin"
+*/
 
 #ifndef SparkFun_I2C_Mux_Arduino_Library_h
 #define SparkFun_I2C_Mux_Arduino_Library_h
@@ -31,6 +34,8 @@ public:
   uint8_t getPortState();                                                                  //Returns current 8-bit wide state. May have multiple bits set in 8-bit field.
   bool enablePort(uint8_t portNumber);                                                     //Enable a single port without affecting other bits
   bool disablePort(uint8_t portNumber);                                                    //Disable a single port without affecting other bits
+
+  uint8_t activePin;
 
 private:
   TwoWire *_i2cPort;                                  //This stores the user's requested i2c port

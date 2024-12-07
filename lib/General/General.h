@@ -4,7 +4,7 @@
 //Defines & Enums
 #include "DefineEnum.h"
 //Display
-#include "../Adafruit_ILI9341-master/Adafruit_ILI9341.h"
+#include <Adafruit_ILI9341.h>
 //Expander
 #include "../Motors/TCA9534-master/TCA9534.h"
 //Motors

@@ -11,7 +11,7 @@
 #include "../Motors/Motor/Motor.h"
 #include "../Motors/Movement/Movement.h"
 //BNO
-#include "../Adafruit_BNO055/Adafruit_BNO055.h"
+#include <Adafruit_BNO055.h>
 //TOF
 #include "../TOF/TOF.h"
 

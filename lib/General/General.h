@@ -4,14 +4,14 @@
 //Defines & Enums
 #include "DefineEnum.h"
 //Display
-#include "../Adafruit_ILI9341-master/Adafruit_ILI9341.h"
+#include <Adafruit_ILI9341.h>
 //Expander
-#include "../Motors/TCA9534-master/TCA9534.h"
+#include <TCA9534.h>
 //Motors
 #include "../Motors/Motor/Motor.h"
 #include "../Motors/Movement/Movement.h"
 //BNO
-#include "../Adafruit_BNO055/Adafruit_BNO055.h"
+#include <Adafruit_BNO055.h>
 //TOF
 #include "../TOF/TOF.h"
 

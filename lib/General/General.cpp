@@ -48,10 +48,15 @@ Robot::Robot() : //Member Initializer List
 
     //Expander
     Wire.begin();
+    Serial.println("Wire begin");
     Wire1.begin();
+    Serial.println("Wire1 begin");
     topExpander1.attach(Wire);
+    Serial.println("top ex 1 begin");
     topExpander2.attach(Wire);
+    Serial.println("top ex 2 begin");
     bottomExpander1.attach(Wire1);
+    Serial.println("bottom ex 1 begin");
 //    bottomExpander2.attach(Wire1);
 
     topExpander1.setDeviceAddress(0x20);

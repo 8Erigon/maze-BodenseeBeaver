@@ -1,7 +1,7 @@
 #ifndef Motor_h
 #define Motor_h
 
-#include "../TCA9534-master/TCA9534.h"
+#include <TCA9534.h>
 #include "DefineEnum.h"
 
 class Motor{

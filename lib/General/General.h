@@ -4,7 +4,7 @@
 //Defines & Enums
 #include "DefineEnum.h"
 //Display
-#include "../Display/Adafruit_ILI9341-master/Adafruit_ILI9341.h"
+#include "../Adafruit_ILI9341-master/Adafruit_ILI9341.h"
 //Expander
 #include "../Motors/TCA9534-master/TCA9534.h"
 //Motors
@@ -31,7 +31,7 @@ class Robot{
 
     TOFonMux TOF[8];
 
-    //Adafruit_ILI9341 display = Adafruit_ILI9341(7, 8);
+    Adafruit_ILI9341 display = Adafruit_ILI9341(7, 8);
 
     Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
     sensors_event_t orientation; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_EULER)"

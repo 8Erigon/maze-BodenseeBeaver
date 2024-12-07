@@ -13,7 +13,7 @@
 //BNO
 #include "../Adafruit_BNO055/Adafruit_BNO055.h"
 //TOF
-#include "../TOF/TOF/TOF.h"
+#include "../TOF/TOF.h"
 
 class Robot{
     public:
@@ -29,7 +29,7 @@ class Robot{
     Motor motors[4];
     Movement move;
 
-    //TOFonMux TOF[8];
+    TOFonMux TOF[8];
 
     //Adafruit_ILI9341 display = Adafruit_ILI9341(7, 8);
 

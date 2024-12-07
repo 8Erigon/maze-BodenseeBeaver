@@ -6,9 +6,9 @@ void Robot::process(){
     bno.getEvent(&acceleration, Adafruit_BNO055::VECTOR_LINEARACCEL);
     deltaTime = computeDeltaTime();
     move.process();
-    /*for(int i = 0; i<8; i++){
+    for(int i = 0; i<8; i++){
         TOF[i].range = TOF[i].readRange();
-    }*/
+    }
 }
 
 void Robot::setRunning(bool isRunning){
@@ -29,17 +29,17 @@ Robot::Robot() : //Member Initializer List
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander, MOTOR_BACK_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander, MOTOR_FRONT_RIGHT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander, MOTOR_BACK_RIGHT_FACTOR)},
-    move{Movement(motors[0], orientation)}
-    /*TOF{
-        TOFonMux(0, muxBack),
-        TOFonMux(1, muxBack),
-        TOFonMux(2, muxBack),
-        TOFonMux(3, muxBack),
-        TOFonMux(4, muxFront),
-        TOFonMux(5, muxFront),
-        TOFonMux(6, muxFront),
-        TOFonMux(7, muxFront)
-    }*/
+    move{Movement(motors[0], orientation)},
+    TOF{
+        TOFonMux(0, &muxBack),
+        TOFonMux(1, &muxBack),
+        TOFonMux(2, &muxBack),
+        TOFonMux(3, &muxBack),
+        TOFonMux(4, &muxFront),
+        TOFonMux(5, &muxFront),
+        TOFonMux(6, &muxFront),
+        TOFonMux(7, &muxFront)
+    }
     {
     Serial.begin(9600);
     //Mux

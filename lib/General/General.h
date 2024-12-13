@@ -41,11 +41,11 @@ class Robot{
 
     Adafruit_NeoPixel led = Adafruit_NeoPixel(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
     void setLedColor(uint32_t color);  
-    
+
     void processExpanderInputs();
     bool readSwitch(Switch sw);
     bool readButton(Buttons button);
-    long deltaTime;
+    long getDeltaTime(){return deltaTime;};
     /*
     @brief Processes everything. Should be used at the start of each loop even when robot is paused
     */
@@ -82,6 +82,7 @@ class Robot{
     @details Time since last using this function
     */
     long computeDeltaTime();
+    long deltaTime;
     void computeCoordinates();
 };
 

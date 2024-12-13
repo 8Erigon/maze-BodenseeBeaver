@@ -80,4 +80,15 @@ enum SkyDirection{
     West
 };
 
+enum LedColor : uint32_t{
+    //0x opacity red green blue
+    RED = 0x00FF0000,
+    GREEN = 0x0000FF00,
+    BLUE = 0x000000FF,
+    YELLOW = 0x00FFFF00,
+    CYAN = 0x0000FFFF,
+    MAGENTA = 0x00FF00FF,
+    WHITE = 0x00FFFFFF
+};
+
 #endif

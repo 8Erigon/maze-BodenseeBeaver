@@ -54,6 +54,8 @@ bool QWIICMUX::isConnected()
 //If port number if out of range, disable all ports
 bool QWIICMUX::setPort(uint8_t portNumber)
 {
+  if(portNumber == activePort) 
+    return(true);
   uint8_t portValue = 0;
 
   if (portNumber > 7)

@@ -40,7 +40,8 @@ class Robot{
     sensors_event_t acceleration; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_LINEARACCEL)"
 
     Adafruit_NeoPixel led = Adafruit_NeoPixel(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
-
+    void setLedColor(uint32_t color);  
+    
     void processExpanderInputs();
     bool readSwitch(Switch sw);
     bool readButton(Buttons button);

@@ -92,6 +92,12 @@ Robot::Robot() : //Member Initializer List
     } 
 }
 
+void Robot::setLedColor(uint32_t color){
+    for(int i = 0; i < LED_COUNT; i++){
+        led.setPixelColor(i, color);
+    }
+}
+
 void Robot::processExpanderInputs(){
     topExpander1Bits = topExpander1.input();
     topExpander2Bits = topExpander2.input();

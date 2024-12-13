@@ -10,7 +10,7 @@ class TOFonMux : virtual public Adafruit_VL6180X{
     TOFonMux(uint8_t pinOnMux, QWIICMUX *expander);
     TOFonMux();
 
-    boolean begin(TwoWire *theWire = &Wire) override;
+    boolean begin(TwoWire *theWire = &Wire) override; //Override functions are just base function but also switch mux port before
     boolean setAddress(uint8_t newAddr) override;
     uint8_t getAddress(void) override;
 

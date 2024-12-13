@@ -32,6 +32,10 @@
 #define MUXBACK_ADDR 0x70
 #define MUXFRONT_ADDR 0x71
 
+//Led
+#define LED_COUNT 8
+#define LED_PIN 20
+
 //-------Enums---------
 
 enum Buttons

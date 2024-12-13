@@ -14,6 +14,8 @@
 #include <Adafruit_BNO055.h>
 //TOF
 #include "../TOF/TOF.h"
+//LED
+#include <Adafruit_NeoPixel.h>
 
 class Robot{
     public:
@@ -36,6 +38,8 @@ class Robot{
     Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
     sensors_event_t orientation; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_EULER)"
     sensors_event_t acceleration; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_LINEARACCEL)"
+
+    Adafruit_NeoPixel led = Adafruit_NeoPixel(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
     void processExpanderInputs();
     bool readSwitch(Switch sw);

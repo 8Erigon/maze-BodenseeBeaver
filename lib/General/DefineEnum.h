@@ -63,14 +63,14 @@ enum Mutliplexer{
 };
 
 enum TOF{
-    FRONTRIGHT = 0,
-    FRONTLEFT = 1,
-    BACKRIGHT = 2,
-    BACKLEFT = 3,
-    RIGHTFRONT = 4,
-    RIGHTBACK = 5,
-    LEFTFRONT = 6,
-    LEFTBACK = 7
+    TOF_FRONTRIGHT = 0,
+    TOF_FRONTLEFT = 1,
+    TOF_BACKRIGHT = 2,
+    TOF_BACKLEFT = 3,
+    TOF_RIGHTFRONT = 4,
+    TOF_RIGHTBACK = 5,
+    TOF_LEFTFRONT = 6,
+    TOF_LEFTBACK = 7
 };
 
 enum SkyDirection{

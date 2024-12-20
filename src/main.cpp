@@ -19,6 +19,7 @@ int main()
     Serial.println(robo.orientation.pitch);
     Serial.println(robo.orientation.roll);
     Serial.println();
+    robo.display.println(robo.TOF[TOF_FRONTRIGHT].range);
     // robo.move.TurnRight(20);
     // robo.move.TurnLeft(20);
     // robo.move.ForwardOneTile(15);

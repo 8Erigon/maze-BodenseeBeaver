@@ -39,7 +39,7 @@ class Robot{
 
     Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
     sensors_vec_t &orientation = BNOorientation.orientation;
-    sensors_vec_t &accelleration = BNOacceleration.acceleration;
+    sensors_vec_t &acceleration = BNOacceleration.acceleration;
 
     Adafruit_NeoPixel led = Adafruit_NeoPixel(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
     void setLedColor(uint32_t color);  

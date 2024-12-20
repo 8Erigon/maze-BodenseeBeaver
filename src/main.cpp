@@ -15,17 +15,17 @@ int main()
   while (true)
   {
     robo.process();
-    Serial.println(robo.orientation.orientation.heading);
-    Serial.println(robo.orientation.orientation.pitch);
-    Serial.println(robo.orientation.orientation.roll);
+    Serial.println(robo.orientation.heading);
+    Serial.println(robo.orientation.pitch);
+    Serial.println(robo.orientation.roll);
     Serial.println();
     // robo.move.TurnRight(20);
     // robo.move.TurnLeft(20);
     // robo.move.ForwardOneTile(15);
     if (robo.readSwitch(StartSwitch))
     {
-      float RoboHeading = robo.orientation.orientation.roll;
-      float RoboHeadingNew = robo.orientation.orientation.roll;
+      float RoboHeading = robo.orientation.roll;
+      float RoboHeadingNew = robo.orientation.roll;
       float RoboHeadingFinal = RoboHeading + 90;
 
       Serial.println(RoboHeading);
@@ -47,7 +47,7 @@ int main()
           delay(100);
           robo.move.Stop(10);
 
-          RoboHeadingNew = robo.orientation.orientation.roll;
+          RoboHeadingNew = robo.orientation.roll;
           Serial.println(RoboHeadingNew);
           // delay(TurnDuration/Speed);
         }
@@ -69,7 +69,7 @@ int main()
           delay(10);
           robo.move.Stop(1);
 
-          RoboHeadingNew = robo.orientation.orientation.roll;
+          RoboHeadingNew = robo.orientation.roll;
           Serial.println(RoboHeadingNew);
           // delay(TurnDuration/Speed);
         }

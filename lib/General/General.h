@@ -36,8 +36,8 @@ class Robot{
     ILI9341_t3n display = ILI9341_t3n(7, 8);
 
     Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
-    sensors_event_t orientation; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_EULER)"
-    sensors_event_t acceleration; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_LINEARACCEL)"
+    sensors_vec_t &orientation = BNOorientation.orientation;
+    sensors_vec_t &accelleration = BNOacceleration.acceleration;
 
     Adafruit_NeoPixel led = Adafruit_NeoPixel(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
     void setLedColor(uint32_t color);  
@@ -76,6 +76,9 @@ class Robot{
 
     QWIICMUX muxFront;
     QWIICMUX muxBack;
+
+    sensors_event_t BNOorientation; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_EULER)"
+    sensors_event_t BNOacceleration; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_LINEARACCEL)"
 
     bool getExpanderBit(Mutliplexer expander, uint8_t bit);
     /*

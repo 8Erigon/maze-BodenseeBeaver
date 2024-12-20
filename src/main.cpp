@@ -8,7 +8,7 @@
 int main()
 {
   Serial.begin(9600);
-  Robot robo;
+  Robot robo = Robot();
   // Motor motors[4] ;
 
   robo.setRunning(false);
@@ -24,6 +24,8 @@ int main()
     // robo.move.ForwardOneTile(15);
     if (robo.readSwitch(StartSwitch))
     {
+      robo.move.ForwardOneTile(20);
+
       float RoboHeading = robo.orientation.roll;
       float RoboHeadingNew = robo.orientation.roll;
       float RoboHeadingFinal = RoboHeading + 90;

@@ -4,11 +4,6 @@
 
 Servo myservo;
 
-int ServoPos = 0;
-int ServoResetPos = 90;
-int ServoSpeed = 15;
-
-
 void AuswurfR()     {
     myservo.write(ServoResetPos);
     for (ServoPos = ServoResetPos; ServoPos >= 10; ServoPos--)  {
@@ -19,7 +14,7 @@ void AuswurfR()     {
 
 void AuswurfL()     {
     myservo.write(ServoResetPos);
-    for (ServoPos = ServoResetPos; ServoPos >= 170; ServoPos++)  {
+    for (ServoPos = ServoResetPos; ServoPos <= 170; ServoPos++)  {
         myservo.write(ServoPos);
         delay(ServoSpeed);
     }

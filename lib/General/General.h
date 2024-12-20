@@ -64,7 +64,6 @@ class Robot{
     int ServoSpeed = 15;
     void AuswurfR();
     void AuswurfL();
-    void setupServo();
 
     ~Robot(){ //Destructor of the class
         

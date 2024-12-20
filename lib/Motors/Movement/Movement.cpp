@@ -1,8 +1,9 @@
 #include "Movement.h"
 
 
-Movement::Movement(Motor &motor, sensors_vec_t &orientation): motors(&motor){ //Benutzt "Member Initializer List"-Technik ("motors = &motor")
+Movement::Movement(Motor &motor, sensors_vec_t &orientation, sensors_vec_t &acceleration): motors(&motor){ //Benutzt "Member Initializer List"-Technik ("motors = &motor")
     this->orientation = &orientation;
+    this->acceleration = &acceleration;
 }
 
 void Movement::process(){

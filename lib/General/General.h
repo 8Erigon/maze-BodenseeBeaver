@@ -33,7 +33,7 @@ class Robot{
     Motor motors[4];
     Movement move;
 
-    TOFonMux TOF[8];
+    //TOFonMux TOF[8];
 
     ILI9341_t3n display = ILI9341_t3n(7, 8);
 

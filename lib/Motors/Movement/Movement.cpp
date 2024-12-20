@@ -1,12 +1,12 @@
 #include "Movement.h"
 
 
-Movement::Movement(Motor &motor, sensors_event_t &bnoData): motors(&motor){ //Benutzt "Member Initializer List"-Technik ("motors = &motor")
-    this->bnoData = &bnoData;
+Movement::Movement(Motor &motor, sensors_vec_t &orientation): motors(&motor){ //Benutzt "Member Initializer List"-Technik ("motors = &motor")
+    this->orientation = &orientation;
 }
 
 void Movement::process(){
-    offGoal = goalAngle - bnoData->orientation.heading;
+    offGoal = goalAngle - orientation->heading;
 
     if(movementControl != manuel){
         short sideSpeed = goalAngle * turnSpeed;
@@ -40,8 +40,8 @@ void Movement::Stop(int  time){
 
 void Movement::TurnRight(int Speed){
     //-> this bnoData = &bnoData;
-    float RoboHeading = bnoData->orientation.roll;
-    float RoboHeadingNew = bnoData->orientation.roll;
+    float RoboHeading = orientation->roll;
+    float RoboHeadingNew = orientation->roll;
     float RoboHeadingFinal = RoboHeading + 90;
     
     Serial.println(RoboHeading);
@@ -61,7 +61,7 @@ void Movement::TurnRight(int Speed){
             delay(10);
             Stop(1);
         
-            RoboHeadingNew = bnoData->orientation.roll;
+            RoboHeadingNew = orientation->roll;
             Serial.println(RoboHeadingNew);
             //delay(TurnDuration/Speed);
         }
@@ -79,7 +79,7 @@ void Movement::TurnRight(int Speed){
             delay(10);
             Stop(1);
 
-            RoboHeadingNew = bnoData->orientation.roll;
+            RoboHeadingNew = orientation->roll;
             Serial.println(RoboHeadingNew);
             //delay(TurnDuration/Speed);
         }

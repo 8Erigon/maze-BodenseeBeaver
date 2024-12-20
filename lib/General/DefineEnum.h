@@ -80,7 +80,7 @@ enum SkyDirection{
     West
 };
 
-enum LedColor {
+enum WRGB {  //uint32_t for colors
     //0x opacity red green blue
     RED = 0x00FF0000,
     GREEN = 0x0000FF00,

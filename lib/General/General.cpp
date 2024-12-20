@@ -2,8 +2,8 @@
 
 void Robot::process(){       
     processExpanderInputs(); 
-    bno.getEvent(&orientation, Adafruit_BNO055::VECTOR_EULER);
-    bno.getEvent(&acceleration, Adafruit_BNO055::VECTOR_LINEARACCEL);
+    bno.getEvent(&BNOorientation, Adafruit_BNO055::VECTOR_EULER);
+    bno.getEvent(&BNOacceleration, Adafruit_BNO055::VECTOR_LINEARACCEL);
     deltaTime = computeDeltaTime();
     move.process();
     for(int i = 0; i<8; i++){

@@ -29,8 +29,8 @@
 #define MOTOR_BACK_LEFT_FACTOR -8
 
 //Mux / Portexpander
-#define MUXBACK_ADDR 0x70
-#define MUXFRONT_ADDR 0x71
+#define MUXBACK_ADDR 0x71 //Jumper 0 gelötet
+#define MUXFRONT_ADDR 0x73 //Jumper 0 & 1 gelötet
 
 //Led
 #define LED_COUNT 8

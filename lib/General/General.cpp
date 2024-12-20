@@ -86,6 +86,9 @@ Robot::Robot() : //Member Initializer List
     motorExpander.config(TCA9534::Config::OUT);
     motorExpander.polarity(TCA9534::Polarity::ORIGINAL);
 
+    //Servo
+    myservo.attach(9); 
+
     //BNO
     if (!bno.begin()){
         Serial.print("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
@@ -144,6 +147,24 @@ bool Robot::readButton(Buttons button) {
         return !getExpanderBit(MULTIPLEXER_TOP_2, button + 1); // Frag die Dogs warum "+1" und "+3"
     default:
         return !getExpanderBit(MULTIPLEXER_TOP_1, button + 3); // Invertierung damit gedrückt = true und nicht gedrückt = false
+    }
+}
+
+void Robot::AuswurfR()     {
+    move.Stop(0);
+    myservo.write(ServoResetPos);
+    for (ServoPos = ServoResetPos; ServoPos >= 10; ServoPos--)  {
+        myservo.write(ServoPos);
+        delay(ServoSpeed);
+    }
+}
+
+void Robot::AuswurfL()     {
+    move.Stop(0);
+    myservo.write(ServoResetPos);
+    for (ServoPos = ServoResetPos; ServoPos <= 170; ServoPos++)  {
+        myservo.write(ServoPos);
+        delay(ServoSpeed);
     }
 }
 

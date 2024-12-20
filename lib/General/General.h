@@ -16,6 +16,8 @@
 #include "../TOF/TOF.h"
 //LED
 #include <Adafruit_NeoPixel.h>
+//Servo
+#include <Servo.h>
 
 class Robot{
     public:
@@ -55,6 +57,14 @@ class Robot{
     @param isRunning true = Robot will run & move; false = Robot is paused
     */
     void setRunning(bool isRunning);
+
+    Servo myservo;
+    int ServoPos = 0;
+    int ServoResetPos = 90;
+    int ServoSpeed = 15;
+    void AuswurfR();
+    void AuswurfL();
+    void setupServo();
 
     ~Robot(){ //Destructor of the class
         

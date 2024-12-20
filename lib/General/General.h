@@ -59,8 +59,6 @@ class Robot{
     void setRunning(bool isRunning);
 
     Servo myservo;
-    int ServoPos = 0;
-    int ServoResetPos = 90;
     int ServoSpeed = 15;
     void AuswurfR();
     void AuswurfL();
@@ -90,6 +88,10 @@ class Robot{
     sensors_event_t BNOacceleration; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_LINEARACCEL)"
 
     bool getExpanderBit(Mutliplexer expander, uint8_t bit);
+
+    int ServoPos = 0;
+    int ServoResetPos = 90;
+
     /*
     @details Time since last using this function
     */

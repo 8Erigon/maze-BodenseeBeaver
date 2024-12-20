@@ -36,6 +36,9 @@
 #define LED_COUNT 8
 #define LED_PIN 20
 
+//BNO
+#define BNO_ADDR 0x28
+
 //-------Enums---------
 
 enum Buttons

@@ -37,7 +37,7 @@ class Robot{
 
     ILI9341_t3n display = ILI9341_t3n(7, 8);
 
-    Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
+    Adafruit_BNO055 bno = Adafruit_BNO055(55, BNO_ADDR, &Wire);
     sensors_vec_t &orientation = BNOorientation.orientation;
     sensors_vec_t &acceleration = BNOacceleration.acceleration;
 

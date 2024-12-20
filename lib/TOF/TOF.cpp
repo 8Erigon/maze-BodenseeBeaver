@@ -11,7 +11,7 @@ TOFonMux::TOFonMux(){
     this->pin = 9; //Expander/Mux only has ports from 0-7
 };
 
-boolean TOFonMux::begin(TwoWire *theWire = &Wire) {
+boolean TOFonMux::begin(TwoWire *theWire) {
     if(this->expander == NULL) {
         return false;
     }

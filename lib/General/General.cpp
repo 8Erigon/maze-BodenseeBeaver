@@ -42,9 +42,8 @@ Robot::Robot() : //Member Initializer List
     }
     {
     Serial.begin(9600);
-    //Mux
-    muxBack.begin(MUXBACK_ADDR);
-    muxFront.begin(MUXFRONT_ADDR);
+    
+    
 
     //Expander
     Wire.begin();
@@ -93,6 +92,12 @@ Robot::Robot() : //Member Initializer List
     if (!bno.begin()){
         Serial.print("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
     } 
+
+    //Mux
+    Serial.println("Mux begin");
+    muxBack.begin(MUXBACK_ADDR);
+    muxFront.begin(MUXFRONT_ADDR);
+    
 }
 
 void Robot::setLedColor(uint32_t color){

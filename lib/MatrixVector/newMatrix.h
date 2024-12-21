@@ -8,7 +8,21 @@ template <typename type, int hight, int width> class Matrix{
     public: 
     type content[hight][width];
 
-    Matrix<type, hight, width> operator*(const int &other){ //function for when you do "matrix * int"
+    Matrix<type, hight, width> operator=(const type other[hight][width]){ //function for when you do "matrix = 2dArray[][]"
+        for(int i; i<hight; i++){
+            for(int j; j<width; j++){
+                this->content[i][j] = other[i][j];
+            }
+        }
+        return *this;
+    }
+    Matrix<type, hight, width> operator=(const Matrix<type, hight, width> other){ //function for when you do "matrix = Matrix"
+        *this = other.content;
+        return *this;
+    }
+
+
+    Matrix<type, hight, width> operator*(const double &other){ //function for when you do "matrix * int"
         Matrix<type, hight, width> result;
         for(int i; i<hight; i++){
             for(int j; j<width; j++){
@@ -17,7 +31,7 @@ template <typename type, int hight, int width> class Matrix{
         }
         return result;
     }
-    Matrix<type, hight, width> operator/(const int &other){ //function for when you do "matrix / int"
+    Matrix<type, hight, width> operator/(const double &other){ //function for when you do "matrix / int"
         Matrix<type, hight, width> result;
         for(int i; i<hight; i++){
             for(int j; j<width; j++){
@@ -27,7 +41,7 @@ template <typename type, int hight, int width> class Matrix{
         return result;
     }
 
-    Matrix<type, hight, width> operator+(const Matrix &other){ //function for when you do "matrix + matrix"
+    Matrix<type, hight, width> operator+(const Matrix<type, hight, width> &other){ //function for when you do "matrix + matrix"
         Matrix<type, hight, width> result;
         for(int i; i<hight; i++){
             for(int j; j<width; j++){
@@ -36,7 +50,7 @@ template <typename type, int hight, int width> class Matrix{
         }
         return result;
     }
-    Matrix<type, hight, width> operator-(const Matrix &other){ //function for when you do "matrix - matrix"
+    Matrix<type, hight, width> operator-(const Matrix<type, hight, width> &other){ //function for when you do "matrix - matrix"
         Matrix<type, hight, width> result;
         for(int i; i<hight; i++){
             for(int j; j<width; j++){

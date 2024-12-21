@@ -169,7 +169,7 @@ void Robot::AuswurfL()     {
     myservo.write(ServoResetPos);
     for (ServoPos = ServoResetPos; ServoPos <= 170; ServoPos++)  {
         myservo.write(ServoPos);
-        delay(ServoSpeed);
+        delay(ServoSpeed);  // durch den delay und allgemein durch die for schleife kann man die Geschwindigkeit des Servos regulieren
     }
 }
 

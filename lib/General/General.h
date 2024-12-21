@@ -90,7 +90,7 @@ class Robot{
     bool getExpanderBit(Mutliplexer expander, uint8_t bit);
 
     int ServoPos = 0;
-    int ServoResetPos = 90;
+    int ServoResetPos = 90; // wird jedesmal auf diesen Wert zurüchgesetzt und von hier aus wird die Auswerfbewegung ausgeführt
 
     /*
     @details Time since last using this function

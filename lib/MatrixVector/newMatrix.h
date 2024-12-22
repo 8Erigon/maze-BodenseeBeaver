@@ -59,6 +59,28 @@ template <typename type, int height, int width> class Matrix{
         }
         return result;
     }
+
+/*    Matrix<type, height, width> operator*(const Matrix &other){ //function for when you do "matrix * matrix"
+        int otherWidth = sizeof(other.content[0]) / sizeof(other.content[0][0]); //otherWidth = Byteanzahl einer Reihe / Byteanzahl eines Elements
+        int otherHeight = sizeof(other.content) / sizeof(other.content[0]); //otherHeight = Byteanzahl der Matrix / Byteanzahl einer Reihe
+        if(width != otherHeight){
+            return NULL;
+        }
+        Matrix<type, height, otherWidth> result; 
+        type rowPreresult[width];
+        for(int i = 0; i < height; i++){
+            for(int j = 0; j < otherWidth; j++){
+                
+                for(int k = 0; k < width; k++){
+                    rowPreresult[k] = content[i][k] * other.content[k][j];
+                    for(int l = 0; l < width; l++){
+                        result.content[i][j] += rowPreresult[k];
+                    }
+                }
+            }
+        }
+    return result; //Matrix guide: https://studyflix.de/mathematik/matrizen-multiplizieren-1521
+    }*/ //Would function if otherWidth was calculated at compile time because templates (like the Matrix class is) need their parameters at compile time.
 };
 
 

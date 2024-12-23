@@ -1,17 +1,20 @@
 #ifndef newerMatrix_h
 #define newerMatrix_h
 
-//Doesn't work yet
+
 
 template <typename type> class newerMatrix{ //German matrix guide: https://studyflix.de/mathematik/matrizen-multiplizieren-1521
     #if (type != int && type != long && type != float && type != double) //throw error if type is not a number when compiling
     #error "The class 'newerMatrix' only allows a number type like int."
     #endif
+    private: 
+    int Array2d_Index(int Yheight, int Xwidth){return Yheight*width + Xwidth;} 
     public: 
-    newerMatrix(int Height, int Width){ //Constructor
+    newerMatrix(int Width, int Height){ //Constructor
         height = Height;
         width = Width;
-        content = new type[Height][Width];
+        content = new type[Height * Width]; //can't use 2d array because it wouldn't compile (just pretend it is 2d)
+        //sometimes you can stil use "content[i][j]" but sometimes only "content[i]" (in that case, use "content[Array2d_Index(i, j)]")
     }
     ~newerMatrix(){ //Destructor
         delete[] content;
@@ -21,14 +24,27 @@ template <typename type> class newerMatrix{ //German matrix guide: https://study
     int height;
     int width;
     type *content;
+    /* Order of Elements in the array (2x4 as example):
+           width
+          ________
+       h | 1 2 
+       e | 3 4
+       i | 5 6
+       g | 7 8
+       h |
+       t |
+
+       When using content[i][j] or Array2d_Index(i, j): 
+       -First Parameter (i) = height/row/Y 
+       -Second Parameter (j) = width/column/X
+    */
 
 //-----------------------------------------------------
 
-/* throws compile error because 2darray lenght must be known (width doesn't need to be known)
-    newerMatrix<type> operator=(const type other[][]){ //function for when you do "newerMatrix = 2dArray[][]"
-        for(int i; i<height; i++){
-            for(int j; j<width; j++){
-                this->content[i][j] = other[i][j];
+    newerMatrix<type> operator=(const type other[]){ //function for when you do "newerMatrix = 2dArray[]" (can't really use 2darray because it needs the 2nd-dimension-lenght at compile time)
+        for(int i = 0; i<height; i++){
+            for(int j = 0; j<width; j++){
+                this->content[Array2d_Index(i, j)] = other[Array2d_Index(i, j)];
             }
         }
         return *this;
@@ -36,7 +52,7 @@ template <typename type> class newerMatrix{ //German matrix guide: https://study
     newerMatrix<type> operator=(const newerMatrix<type> other){ //function for when you do "newerMatrix = newerMatrix"
         *this = other.content;
         return *this;
-    }*/
+    }
 
 
     newerMatrix<type> operator*(const double &other){ //function for when you do "newerMatrix * int"
@@ -58,11 +74,11 @@ template <typename type> class newerMatrix{ //German matrix guide: https://study
         return result;
     }
 
-    newerMatrix<type> operator+(const newerMatrix &other){ //function for when you do "newerMatrix + newerMatrix"
+    newerMatrix<type> operator+(const newerMatrix<type> &other){ //function for when you do "newerMatrix + newerMatrix"
         newerMatrix<type> result(height, width);
-        for(int i; i<height; i++){
-            for(int j; j<width; j++){
-                *result.content[i][j] = *content[i][j] + *other.content[i][j];
+        for(int i = 0; i<height; i++){
+            for(int j = 0; j<width; j++){
+                result.content[Array2d_Index(i, j)] = content[Array2d_Index(i, j)] + other.content[Array2d_Index(i, j)];
             }
         }
         return result;

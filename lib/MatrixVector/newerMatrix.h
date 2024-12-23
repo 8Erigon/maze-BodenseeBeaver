@@ -1,6 +1,8 @@
 #ifndef newerMatrix_h
 #define newerMatrix_h
 
+//Doesn't work yet
+
 template <typename type> class newerMatrix{ //German matrix guide: https://studyflix.de/mathematik/matrizen-multiplizieren-1521
     #if (type != int && type != long && type != float && type != double) //throw error if type is not a number when compiling
     #error "The class 'newerMatrix' only allows a number type like int."

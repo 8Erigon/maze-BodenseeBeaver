@@ -4,6 +4,7 @@
 
 **To create a vector:** vektors<int, 3> vektorName; (= vektors<numberType, lenght> vektorName;)
 **To create a matrix:** matrix<int, 3, 3> matrixName; (= matrix<numberType, height, width> matrixName;)
+
 -------------------------------------------------------------------------------
 
 ***newMatrix.h:*** 2. Version 
@@ -12,6 +13,7 @@
 
 **To create a vector:** matrix<int, 3, 1> vektorName; (= matrix<numberType, lenght, 1> vektorName;)
 **To create a matrix:** matrix<int, 3, 3> matrixName; (= matrix<numberType, height, width> matrixName;)
+
 -------------------------------------------------------------------------------
 
 ***newerMatrix.h:*** 3. Version 

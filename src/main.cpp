@@ -1,17 +1,24 @@
 #include <Arduino.h>
 #include "../lib/General/General.h"
 #include "../lib/MatrixVector/vektors.h"
-// #include "../Movement/Movement.h"
-//  put function declarations here:
-#define Speed 15
+
+
+float RoboHeading = 0;
+float RoboHeadingNew = 0;
+float RoboHeadingFinal = 0;
 
 int main()
 {
   Serial.begin(9600);
+  Serial.println("Hello World");
   Robot robo = Robot();
   // Motor motors[4] ;
 
   robo.setRunning(false);
+  RoboHeading = 0;
+    RoboHeadingNew = 0;
+    RoboHeadingFinal = 0;
+
   while (true)
   {
     robo.process();
@@ -19,71 +26,71 @@ int main()
     Serial.println(robo.orientation.pitch);
     Serial.println(robo.orientation.roll);
     Serial.println();
-    robo.display.println(robo.TOF[TOF_FRONTRIGHT].range);
+    
+    //robo.display.println(robo.TOF[TOF_FRONTRIGHT].range);
     // robo.move.TurnRight(20);
     // robo.move.TurnLeft(20);
     // robo.move.ForwardOneTile(15);
-    if (robo.readSwitch(StartSwitch))
-    {
+    switch(int step=0){
+      case 0:
+      if(robo.readSwitch(StartSwitch)){
+        step =1;
+        break;
+      }else{
+        step=0;
+        break;
+      }
+
+      case 1:
       robo.move.ForwardOneTile(20);
+      step =2;
+      break;
 
-      float RoboHeading = robo.orientation.roll;
-      float RoboHeadingNew = robo.orientation.roll;
-      float RoboHeadingFinal = RoboHeading + 90;
-
-      Serial.println(RoboHeading);
-
-      if (RoboHeadingFinal < 360)
-      {
-
-        while (RoboHeadingNew < RoboHeadingFinal)
-        {
-          robo.process();
-          robo.motors[0].speed = Speed;
-          robo.motors[1].speed = Speed;
-          robo.motors[2].speed = -Speed;
-          robo.motors[3].speed = -Speed;
-          robo.motors[0].processOutput();
-          robo.motors[1].processOutput();
-          robo.motors[2].processOutput();
-          robo.motors[3].processOutput();
-          delay(100);
-          robo.move.Stop(10);
-
-          RoboHeadingNew = robo.orientation.roll;
-          Serial.println(RoboHeadingNew);
-          // delay(TurnDuration/Speed);
-        }
-      }
-      else
-      {
+      case 2:
+      robo.process();
+      RoboHeading = robo.orientation.roll;
+      RoboHeadingNew = robo.orientation.roll;
+      RoboHeadingFinal = RoboHeading + 90;
+      if(RoboHeadingFinal < 360){
         RoboHeadingFinal = RoboHeadingFinal - 360;
-        while (RoboHeadingNew > RoboHeadingFinal)
-        {
-          robo.process();
-          robo.motors[0].speed = Speed;
-          robo.motors[1].speed = Speed;
-          robo.motors[2].speed = -Speed;
-          robo.motors[3].speed = -Speed;
-          robo.motors[0].processOutput();
-          robo.motors[1].processOutput();
-          robo.motors[2].processOutput();
-          robo.motors[3].processOutput();
-          delay(10);
-          robo.move.Stop(1);
+      }
+      step = 3;
+      break;
 
-          RoboHeadingNew = robo.orientation.roll;
-          Serial.println(RoboHeadingNew);
-          // delay(TurnDuration/Speed);
+      case 3:
+      robo.move.TurnRight(10);
+      if(RoboHeadingFinal < 90){
+      if(RoboHeadingNew >= RoboHeadingFinal){
+        step = 4;
+        break;
+      }else{
+        step = 3;
+        break;
+      }
+      }else{
+        if(RoboHeadingNew >= RoboHeadingFinal && RoboHeadingFinal < 180){
+          step = 4;
+          break;
+        }else{
+          step = 3;
+          break;
         }
       }
-      robo.move.Stop(200);
+      Serial.println(RoboHeading);
+      delay(10);
+      break;
+
+      case 4: 
+      robo.move.Stop(1);
+      step = 1;
+      break;
+
+
+    
+      
     }
-    // robo.move.TurnRight(10);
-    // motors[0].speed = 20;
-    // delay(1000);
-    robo.move.Stop(1000);
-  }
+ }   
 }
+
 
 // put function definitions here:

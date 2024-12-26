@@ -1,14 +1,16 @@
 #include "General.h"
 
+ 
+
 void Robot::process(){       
     processExpanderInputs(); 
     bno.getEvent(&BNOorientation, Adafruit_BNO055::VECTOR_EULER);
     bno.getEvent(&BNOacceleration, Adafruit_BNO055::VECTOR_LINEARACCEL);
     deltaTime = computeDeltaTime();
     move.process();
-    for(int i = 0; i<8; i++){
+    /*for(int i = 0; i<8; i++){
         TOF[i].range = TOF[i].readRange();
-    }
+    }*/
 }
 
 void Robot::setRunning(bool isRunning){
@@ -24,13 +26,14 @@ void Robot::setRunning(bool isRunning){
 }
 
 Robot::Robot() : //Member Initializer List
+
     motors{
         Motor(MOTOR_FREQUENCY, MOTOR_FRONT_LEFT_IN1, MOTOR_FRONT_LEFT_IN2, MOTOR_FRONT_LEFT_PWM, &motorExpander, MOTOR_FRONT_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander, MOTOR_BACK_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander, MOTOR_FRONT_RIGHT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander, MOTOR_BACK_RIGHT_FACTOR)},
-    move{Movement(motors[0], orientation, acceleration)},
-    TOF{
+    move{Movement(motors[0], orientation, acceleration)}
+    /*TOF{
         TOFonMux(0, &muxBack),
         TOFonMux(1, &muxBack),
         TOFonMux(2, &muxBack),
@@ -39,23 +42,24 @@ Robot::Robot() : //Member Initializer List
         TOFonMux(5, &muxFront),
         TOFonMux(6, &muxFront),
         TOFonMux(7, &muxFront)
-    }
+    }*/
     {
-    Serial.begin(9600);
+    //Serial.begin(9600);
     
     
 
     //Expander
-    Wire.begin();
     Serial.println("Wire begin");
-    Wire1.begin();
+    Wire.begin();
     Serial.println("Wire1 begin");
-    topExpander1.attach(Wire);
+    Wire1.begin();
     Serial.println("top ex 1 begin");
-    topExpander2.attach(Wire);
+    topExpander1.attach(Wire);
     Serial.println("top ex 2 begin");
-    bottomExpander1.attach(Wire1);
+    topExpander2.attach(Wire);
     Serial.println("bottom ex 1 begin");
+    bottomExpander1.attach(Wire1);
+    
 //    bottomExpander2.attach(Wire1);
 
     topExpander1.setDeviceAddress(0x20);
@@ -95,9 +99,9 @@ Robot::Robot() : //Member Initializer List
 
     //Mux
     Serial.println("Mux begin");
-    muxBack.begin(MUXBACK_ADDR);
-    muxFront.begin(MUXFRONT_ADDR);
-    
+    //muxBack.begin(MUXBACK_ADDR);
+    //muxFront.begin(MUXFRONT_ADDR);
+
 }
 
 void Robot::setLedColor(uint32_t color){

@@ -41,6 +41,25 @@ void Movement::Stop(int  time){
 
 void Movement::TurnRight(int Speed){
     //-> this bnoData = &bnoData;
+
+    float RoboHeading = orientation->roll;
+    
+            motors[0].speed = Speed;
+            motors[1].speed = Speed;
+            motors[2].speed = - Speed;
+            motors[3].speed = - Speed;
+            motors[0].processOutput();
+            motors[1].processOutput();
+            motors[2].processOutput();
+            motors[3].processOutput();
+            delay(10);
+            //Stop(1);
+
+    
+    
+}
+void Movement::TurnLeft(int Speed){
+    process();
     float RoboHeading = orientation->roll;
     float RoboHeadingNew = orientation->roll;
     float RoboHeadingFinal = RoboHeading + 90;
@@ -86,17 +105,6 @@ void Movement::TurnRight(int Speed){
         }
     }
     Stop(200);
-}
-void Movement::TurnLeft(int Speed){
-    motors[0].speed = - Speed;
-    motors[1].speed = - Speed;
-    motors[2].speed = Speed;
-    motors[3].speed = Speed;
-    motors[0].processOutput();
-    motors[1].processOutput();
-    motors[2].processOutput();
-    motors[3].processOutput();
-    delay(TurnDuration/Speed);
 }
 
 void Movement::ForwardOneTile(int speed){

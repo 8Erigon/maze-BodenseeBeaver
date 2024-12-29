@@ -56,7 +56,7 @@ template <typename type> class newerMatrix{ //German matrix guide: https://study
 
 
     newerMatrix<type> operator*(const double &other){ //function for when you do "newerMatrix * int"
-        newerMatrix<type> result(height, width);
+        newerMatrix<type> result(width, height);
         for(int i; i<height; i++){
             for(int j; j<width; j++){
                 result.content[i][j] = content[i][j] * other;
@@ -65,7 +65,7 @@ template <typename type> class newerMatrix{ //German matrix guide: https://study
         return result;
     }
     newerMatrix<type> operator/(const double &other){ //function for when you do "newerMatrix / int"
-        newerMatrix<type> result(height, width);
+        newerMatrix<type> result(width, height);
         for(int i; i<height; i++){
             for(int j; j<width; j++){
                 result.content[i][j] = content[i][j] / other;
@@ -75,7 +75,7 @@ template <typename type> class newerMatrix{ //German matrix guide: https://study
     }
 
     newerMatrix<type> operator+(const newerMatrix<type> &other){ //function for when you do "newerMatrix + newerMatrix"
-        newerMatrix<type> result(height, width);
+        newerMatrix<type> result(width, height);
         for(int i = 0; i<height; i++){
             for(int j = 0; j<width; j++){
                 result.content[Array2d_Index(i, j)] = content[Array2d_Index(i, j)] + other.content[Array2d_Index(i, j)];
@@ -84,7 +84,7 @@ template <typename type> class newerMatrix{ //German matrix guide: https://study
         return result;
     }
     newerMatrix<type> operator-(const newerMatrix &other){ //function for when you do "newerMatrix - newerMatrix"
-        newerMatrix<type> result(height, width);
+        newerMatrix<type> result(width, height);
         for(int i; i<height; i++){
             for(int j; j<width; j++){
                 result.content[i][j] = content[i][j] - other.content[i][j];

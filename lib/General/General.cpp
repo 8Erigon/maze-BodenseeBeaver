@@ -30,17 +30,17 @@ Robot::Robot() : //Member Initializer List
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander, MOTOR_BACK_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander, MOTOR_FRONT_RIGHT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander, MOTOR_BACK_RIGHT_FACTOR)},
-    move{Movement(motors[0], orientation, acceleration)}/*,
+    move{Movement(motors[0], orientation, acceleration)},
     TOF{
-        TOFonMux(0, &muxBack),
-        TOFonMux(1, &muxBack),
-        TOFonMux(2, &muxBack),
-        TOFonMux(3, &muxBack),
-        TOFonMux(4, &muxFront),
-        TOFonMux(5, &muxFront),
-        TOFonMux(6, &muxFront),
-        TOFonMux(7, &muxFront)
-    }*/
+        TOFonMux(4, &muxBack), //FRONT RIGHT
+        TOFonMux(7, &muxBack), //FRONT LEFT
+        TOFonMux(2, &muxBack), //BACK RIGHT
+        TOFonMux(1, &muxBack), //BACK LEFT
+        TOFonMux(5, &muxFront), //RIGHT FRONT
+        TOFonMux(3, &muxFront), //RIGHT BACK
+        TOFonMux(6, &muxFront), //LEFT FRONT
+        TOFonMux(0, &muxFront) //LEFT BACK 
+    }
     {
     Serial.begin(9600);
     

@@ -9,6 +9,7 @@ void Robot::process(){
     /*for(int i = 0; i<8; i++){
         TOF[i].range = TOF[i].readRange();
     }*/
+    led.show();
 }
 
 void Robot::setRunning(bool isRunning){
@@ -43,7 +44,8 @@ Robot::Robot() : //Member Initializer List
     {
     Serial.begin(9600);
     
-    
+    //LED
+    led.begin();
 
     //Expander
     Wire.begin();

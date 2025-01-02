@@ -87,18 +87,18 @@ Robot::Robot() : //Member Initializer List
 
     //Mux
     Serial.println("Mux begin");
-    muxBack.begin(MUXBACK_ADDR);
-    muxFront.begin(MUXFRONT_ADDR);
+    muxBack.begin(MUXBACK_ADDR, Wire1);
+    muxFront.begin(MUXFRONT_ADDR, Wire1);
     
     //TOF
-    TOF[0] = TOFonMux(4, &muxBack); //FRONT RIGHT
-    TOF[1] = TOFonMux(7, &muxBack); //FRONT LEFT
+    TOF[0] = TOFonMux(4, &muxFront); //FRONT RIGHT
+    TOF[1] = TOFonMux(7, &muxFront); //FRONT LEFT
     TOF[2] = TOFonMux(2, &muxBack); //BACK RIGHT
     TOF[3] = TOFonMux(1, &muxBack); //BACK LEFT
     TOF[4] = TOFonMux(5, &muxFront); //RIGHT FRONT
-    TOF[5] = TOFonMux(3, &muxFront); //RIGHT BACK
+    TOF[5] = TOFonMux(3, &muxBack); //RIGHT BACK
     TOF[6] = TOFonMux(6, &muxFront); //LEFT FRONT
-    TOF[7] = TOFonMux(0, &muxFront); //LEFT BACK 
+    TOF[7] = TOFonMux(0, &muxBack); //LEFT BACK 
 }
 
 void Robot::setLedColor(uint32_t color){

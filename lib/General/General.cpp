@@ -30,17 +30,7 @@ Robot::Robot() : //Member Initializer List
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander, MOTOR_BACK_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander, MOTOR_FRONT_RIGHT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander, MOTOR_BACK_RIGHT_FACTOR)},
-    move{Movement(motors[0], orientation, acceleration)},
-    TOF{
-        TOFonMux(4, &muxBack), //FRONT RIGHT
-        TOFonMux(7, &muxBack), //FRONT LEFT
-        TOFonMux(2, &muxBack), //BACK RIGHT
-        TOFonMux(1, &muxBack), //BACK LEFT
-        TOFonMux(5, &muxFront), //RIGHT FRONT
-        TOFonMux(3, &muxFront), //RIGHT BACK
-        TOFonMux(6, &muxFront), //LEFT FRONT
-        TOFonMux(0, &muxFront) //LEFT BACK 
-    }
+    move{Movement(motors[0], orientation, acceleration)}
     {
     Serial.begin(9600);
     
@@ -100,6 +90,15 @@ Robot::Robot() : //Member Initializer List
     muxBack.begin(MUXBACK_ADDR);
     muxFront.begin(MUXFRONT_ADDR);
     
+    //TOF
+    TOF[0] = TOFonMux(4, &muxBack); //FRONT RIGHT
+    TOF[1] = TOFonMux(7, &muxBack); //FRONT LEFT
+    TOF[2] = TOFonMux(2, &muxBack); //BACK RIGHT
+    TOF[3] = TOFonMux(1, &muxBack); //BACK LEFT
+    TOF[4] = TOFonMux(5, &muxFront); //RIGHT FRONT
+    TOF[5] = TOFonMux(3, &muxFront); //RIGHT BACK
+    TOF[6] = TOFonMux(6, &muxFront); //LEFT FRONT
+    TOF[7] = TOFonMux(0, &muxFront); //LEFT BACK 
 }
 
 void Robot::setLedColor(uint32_t color){

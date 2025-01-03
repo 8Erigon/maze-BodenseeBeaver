@@ -3,7 +3,7 @@
 TOFonMux::TOFonMux(uint8_t pinOnMux, QWIICMUX *expander) : Adafruit_VL6180X() {
     this->expander = expander;
     this->pin = pinOnMux;
-    begin();
+    begin(&Wire1);
 };
 
 TOFonMux::TOFonMux(){

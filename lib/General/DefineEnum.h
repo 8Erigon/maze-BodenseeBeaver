@@ -30,7 +30,7 @@
 
 //Mux / Portexpander
 #define MUXBACK_ADDR 0x71 //Jumper 0 gelötet
-#define MUXFRONT_ADDR 0x70 //Jumper 0 & 1 gelötet
+#define MUXFRONT_ADDR 0x70
 
 //Led
 #define LED_COUNT 8
@@ -65,7 +65,7 @@ enum Mutliplexer{
     MULTIPLEXER_BOTTOM_2,
 };
 
-enum TOF{
+enum TOF_POSITION{
     TOF_FRONTRIGHT = 0,
     TOF_FRONTLEFT = 1,
     TOF_BACKRIGHT = 2,

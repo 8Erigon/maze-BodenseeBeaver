@@ -1,9 +1,9 @@
 #include "TOF.h"
 
-TOFonMux::TOFonMux(uint8_t pinOnMux, QWIICMUX *expander) : Adafruit_VL6180X() {
-    this->expander = expander;
+TOFonMux::TOFonMux(uint8_t pinOnMux, QWIICMUX &expander, TwoWire &I2C_bus) : Adafruit_VL6180X() {
+    this->expander = &expander;
     this->pin = pinOnMux;
-    begin(&Wire1);
+    begin(&I2C_bus);
 };
 
 TOFonMux::TOFonMux(){

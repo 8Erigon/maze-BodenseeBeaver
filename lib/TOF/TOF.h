@@ -31,6 +31,7 @@ class TOFonMux : virtual public Adafruit_VL6180X{
     void getID(uint8_t *id_ptr) override;
 
     uint8_t range;
+    uint8_t status;
     private:
     uint8_t pin;
     QWIICMUX *expander;

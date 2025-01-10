@@ -42,7 +42,7 @@ void Movement::Stop(int  time){
 void Movement::TurnRight(int Speed){
     //-> this bnoData = &bnoData;
 
-    float RoboHeading = orientation->roll;
+    //float RoboHeading = orientation->roll;
     
             motors[0].speed = Speed;
             motors[1].speed = Speed;

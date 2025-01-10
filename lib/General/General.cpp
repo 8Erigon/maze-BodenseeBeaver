@@ -32,8 +32,8 @@ Robot::Robot() : //Member Initializer List
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander, MOTOR_BACK_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_FRONT_RIGHT_IN1, MOTOR_FRONT_RIGHT_IN2, MOTOR_FRONT_RIGHT_PWM, &motorExpander, MOTOR_FRONT_RIGHT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander, MOTOR_BACK_RIGHT_FACTOR)},
-    move{Movement(motors[0], orientation, acceleration)},
-    TOF{
+    move{Movement(motors[0], orientation, acceleration)}
+    /*TOF{
         TOFonMux(0, &muxBack),
         TOFonMux(1, &muxBack),
         TOFonMux(2, &muxBack),
@@ -90,7 +90,7 @@ Robot::Robot() : //Member Initializer List
     motorExpander.polarity(TCA9534::Polarity::ORIGINAL);
 
     //Servo
-    myservo.attach(9); 
+    //myservo.attach(9); 
 
     //BNO
     if (!bno.begin()){
@@ -159,7 +159,7 @@ bool Robot::readButton(Buttons button) {
     }
 }
 
-void Robot::AuswurfR()     {
+/*void Robot::AuswurfR()     {
     move.Stop(0);
     myservo.write(ServoResetPos);
     for (ServoPos = ServoResetPos; ServoPos >= 10; ServoPos--)  {
@@ -175,7 +175,7 @@ void Robot::AuswurfL()     {
         myservo.write(ServoPos);
         delay(ServoSpeed);  // durch den delay und allgemein durch die for schleife kann man die Geschwindigkeit des Servos regulieren
     }
-}
+}*/
 
 void Robot::computeCoordinates(){
     

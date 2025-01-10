@@ -30,7 +30,7 @@
 
 //Mux / Portexpander
 #define MUXBACK_ADDR 0x71 //Jumper 0 gelötet
-#define MUXFRONT_ADDR 0x73 //Jumper 0 & 1 gelötet
+#define MUXFRONT_ADDR 0x70 //Jumper 0 & 1 gelötet
 
 //Led
 #define LED_COUNT 8
@@ -43,12 +43,12 @@
 
 enum Buttons
 {
-    BUTTON1 = 4,
-    BUTTON2 = 5,
-    BUTTON3 = 6,
-    BUTTON4 = 7,
-    BUTTON5 = 8,
-    BUTTON6 = 9
+    BUTTON1 = 1,
+    BUTTON2 = 2,
+    BUTTON3 = 3,
+    BUTTON4 = 4,
+    BUTTON5 = 5,
+    BUTTON6 = 6
 };
 enum Switch{
     SWITCH9 = 0,
@@ -91,7 +91,8 @@ enum WRGB {  //uint32_t for colors
     YELLOW = 0x00FFFF00,
     CYAN = 0x0000FFFF,
     MAGENTA = 0x00FF00FF,
-    WHITE = 0x00FFFFFF
+    WHITE = 0x00FFFFFF,
+    OFF = 0xFF000000
 };
 
 #endif

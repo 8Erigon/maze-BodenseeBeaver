@@ -33,11 +33,11 @@ class Robot{
     Motor motors[4];
     Movement move;
 
-    TOFonMux TOF[8];
+    //TOFonMux TOF[8];
 
     ILI9341_t3n display = ILI9341_t3n(7, 8);
 
-    Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
+    Adafruit_BNO055 bno = Adafruit_BNO055(55, BNO_ADDR, &Wire);
     sensors_vec_t &orientation = BNOorientation.orientation;
     sensors_vec_t &acceleration = BNOacceleration.acceleration;
 
@@ -90,7 +90,7 @@ class Robot{
     bool getExpanderBit(Mutliplexer expander, uint8_t bit);
 
     int ServoPos = 0;
-    int ServoResetPos = 90;
+    int ServoResetPos = 90; // wird jedesmal auf diesen Wert zurüchgesetzt und von hier aus wird die Auswerfbewegung ausgeführt
 
     /*
     @details Time since last using this function

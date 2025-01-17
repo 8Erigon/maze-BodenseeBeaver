@@ -4,7 +4,7 @@
 //Defines & Enums
 #include "DefineEnum.h"
 //Display
-#include "C:\Users\thoma\Beaver repository\maze-milbe-test-1\lib\ILI9341_t3n\ILI9341_t3n.h"
+#include "../ILI9341_t3n/ILI9341_t3n.h"
 //Expander
 #include <TCA9534.h>
 //Motors
@@ -15,7 +15,7 @@
 //TOF
 #include "../TOF/TOF.h"
 //LED
-#include "C:\Users\thoma\Beaver repository\maze-milbe-test-1\.pio\libdeps\teensy40\Adafruit NeoPixel\Adafruit_NeoPixel.h"
+#include <Adafruit_NeoPixel.h>
 //Servo
 #include <Servo.h>
 //Colorsensor

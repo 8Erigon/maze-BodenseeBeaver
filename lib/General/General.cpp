@@ -105,7 +105,10 @@ Robot::Robot() : //Member Initializer List
     TOF[5] = TOFonMux(3, muxBack, Wire1); //RIGHT BACK
     TOF[6] = TOFonMux(7, muxFront, Wire1); //LEFT FRONT
     TOF[7] = TOFonMux(0, muxBack, Wire1); //LEFT BACK 
-    
+
+    //Colorsensor
+    colorSensor.begin(COLORSENSOR_ADDR, &Wire1);
+    colorSensor.setInterrupt(false);
 }
 
 void Robot::setLedColor(uint32_t color){

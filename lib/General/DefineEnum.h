@@ -39,6 +39,9 @@
 //BNO
 #define BNO_ADDR 0x28
 
+//Colorsensor
+#define COLORSENSOR_ADDR 0x29
+
 //-------Enums---------
 
 enum Buttons

@@ -41,16 +41,9 @@ void Movement::Stop(int  time){
 
 void Movement::TurnRight(int Speed){
     //-> this bnoData = &bnoData;
-    float RoboHeading = orientation->roll;
-    float RoboHeadingNew = orientation->roll;
-    float RoboHeadingFinal = RoboHeading + 90;
+
+    //float RoboHeading = orientation->roll;
     
-    Serial.println(RoboHeading);
-
-
-    if(RoboHeadingFinal < 360){
-        
-        while(RoboHeadingNew < RoboHeadingFinal){
             motors[0].speed = Speed;
             motors[1].speed = Speed;
             motors[2].speed = - Speed;
@@ -60,43 +53,22 @@ void Movement::TurnRight(int Speed){
             motors[2].processOutput();
             motors[3].processOutput();
             delay(10);
-            Stop(1);
-        
-            RoboHeadingNew = orientation->roll;
-            Serial.println(RoboHeadingNew);
-            //delay(TurnDuration/Speed);
-        }
-    }else{
-        RoboHeadingFinal = RoboHeadingFinal - 360;
-        while(RoboHeadingNew > RoboHeadingFinal){
-            motors[0].speed = Speed;
-            motors[1].speed = Speed;
-            motors[2].speed = - Speed;
-            motors[3].speed = - Speed;
-            motors[0].processOutput();
-            motors[1].processOutput();
-            motors[2].processOutput();
-            motors[3].processOutput();
-            delay(10);
-            Stop(1);
+            //Stop(1);
 
-            RoboHeadingNew = orientation->roll;
-            Serial.println(RoboHeadingNew);
-            //delay(TurnDuration/Speed);
-        }
-    }
-    Stop(200);
+    
+    
 }
 void Movement::TurnLeft(int Speed){
-    motors[0].speed = - Speed;
-    motors[1].speed = - Speed;
-    motors[2].speed = Speed;
-    motors[3].speed = Speed;
-    motors[0].processOutput();
-    motors[1].processOutput();
-    motors[2].processOutput();
-    motors[3].processOutput();
-    delay(TurnDuration/Speed);
+
+            motors[0].speed = -Speed;
+            motors[1].speed = -Speed;
+            motors[2].speed =  Speed;
+            motors[3].speed =  Speed;
+            motors[0].processOutput();
+            motors[1].processOutput();
+            motors[2].processOutput();
+            motors[3].processOutput();
+
 }
 
 void Movement::ForwardOneTile(int speed){

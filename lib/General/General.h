@@ -4,18 +4,18 @@
 //Defines & Enums
 #include "DefineEnum.h"
 //Display
-#include <ILI9341_t3n.h>
+#include "C:\Users\thoma\Beaver repository\maze-milbe-test-1\lib\ILI9341_t3n\ILI9341_t3n.h"
 //Expander
 #include <TCA9534.h>
 //Motors
-#include "../Motors/Motor/Motor.h"
-#include "../Motors/Movement/Movement.h"
+#include "..\Motors\Motor\Motor.h"
+#include "..\Motors\Movement\Movement.h"
 //BNO
 #include <Adafruit_BNO055.h>
 //TOF
 #include "../TOF/TOF.h"
 //LED
-#include <Adafruit_NeoPixel.h>
+#include "C:\Users\thoma\Beaver repository\maze-milbe-test-1\.pio\libdeps\teensy40\Adafruit NeoPixel\Adafruit_NeoPixel.h"
 //Servo
 #include <Servo.h>
 //Colorsensor
@@ -65,7 +65,7 @@ class Robot{
     */
     void setRunning(bool isRunning);
 
-    Servo myservo;
+    Servo ourServo;
     int ServoSpeed = 15;
     void AuswurfR();
     void AuswurfL();

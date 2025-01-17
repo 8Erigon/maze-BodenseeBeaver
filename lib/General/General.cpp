@@ -1,5 +1,7 @@
 #include "General.h"
 
+ 
+
 void Robot::process(){       
     processExpanderInputs(); 
     bno.getEvent(&BNOorientation, Adafruit_BNO055::VECTOR_EULER);
@@ -25,6 +27,7 @@ void Robot::setRunning(bool isRunning){
 }
 
 Robot::Robot() : //Member Initializer List
+
     motors{
         Motor(MOTOR_FREQUENCY, MOTOR_FRONT_LEFT_IN1, MOTOR_FRONT_LEFT_IN2, MOTOR_FRONT_LEFT_PWM, &motorExpander, MOTOR_FRONT_LEFT_FACTOR),
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_LEFT_IN1, MOTOR_BACK_LEFT_IN2, MOTOR_BACK_LEFT_PWM, &motorExpander, MOTOR_BACK_LEFT_FACTOR),
@@ -32,7 +35,9 @@ Robot::Robot() : //Member Initializer List
         Motor(MOTOR_FREQUENCY, MOTOR_BACK_RIGHT_IN1, MOTOR_BACK_RIGHT_IN2, MOTOR_BACK_RIGHT_PWM, &motorExpander, MOTOR_BACK_RIGHT_FACTOR)},
     move{Movement(motors[0], orientation, acceleration)}
     {
+
     Serial.begin(9600);
+
     
     //LED
     led.begin();
@@ -83,7 +88,7 @@ Robot::Robot() : //Member Initializer List
     motorExpander.polarity(TCA9534::Polarity::ORIGINAL);
 
     //Servo
-    myservo.attach(9); 
+    ourServo.attach(9); 
 
     //BNO
     if (!bno.begin()){
@@ -169,18 +174,18 @@ bool Robot::readButton(Buttons button) {
 
 void Robot::AuswurfR()     {
     move.Stop(0);
-    myservo.write(ServoResetPos);
+    ourServo.write(ServoResetPos);
     for (ServoPos = ServoResetPos; ServoPos >= 10; ServoPos--)  {
-        myservo.write(ServoPos);
+        ourServo.write(ServoPos);
         delay(ServoSpeed);
     }
 }
 
 void Robot::AuswurfL()     {
     move.Stop(0);
-    myservo.write(ServoResetPos);
+ourServo.write(ServoResetPos);
     for (ServoPos = ServoResetPos; ServoPos <= 170; ServoPos++)  {
-        myservo.write(ServoPos);
+        ourServo.write(ServoPos);
         delay(ServoSpeed);  // durch den delay und allgemein durch die for schleife kann man die Geschwindigkeit des Servos regulieren
     }
 }

@@ -33,17 +33,17 @@ class Robot{
     int y;
 
     Motor motors[4];
-    Movement move;
+    Movement move; //Movement libary
 
-    TOFonMux TOF[8];
+    TOFonMux TOF[8]; //Time of flight sensors on the mux
 
     ILI9341_t3n display = ILI9341_t3n(7, 8);
 
-    Adafruit_BNO055 bno = Adafruit_BNO055(55, BNO_ADDR, &Wire);
+    Adafruit_BNO055 bno = Adafruit_BNO055(55, BNO_ADDR, &Wire); //Compass
     sensors_vec_t &orientation = BNOorientation.orientation;
     sensors_vec_t &acceleration = BNOacceleration.acceleration;
 
-    Adafruit_TCS34725 colorSensor = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
+    Adafruit_TCS34725 colorSensor = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_1X);
 
     Adafruit_NeoPixel led = Adafruit_NeoPixel(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
     void setLedColor(uint32_t color);  
@@ -51,6 +51,9 @@ class Robot{
     void processExpanderInputs();
     bool readSwitch(Switch sw);
     bool readButton(Buttons button);
+    /*
+    @return Returns time in microsseconds since last calling process()/computeDeltaTime()
+    */
     long getDeltaTime(){return deltaTime;};
     /*
     @brief Processes everything. Should be used at the start of each loop even when robot is paused

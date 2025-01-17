@@ -107,7 +107,8 @@ Robot::Robot() : //Member Initializer List
     TOF[7] = TOFonMux(0, muxBack, Wire1); //LEFT BACK 
 
     //Colorsensor
-    colorSensor.begin(COLORSENSOR_ADDR, &Wire1);
+    Serial.println("ColorSensor begin");
+    Serial.println( colorSensor.begin(COLORSENSOR_ADDR, &Wire1) );
     colorSensor.setInterrupt(false);
 }
 

@@ -58,10 +58,10 @@ class Robot{
     */
     void setRunning(bool isRunning);
 
-    /*Servo myservo;
+    Servo ourServo;
     int ServoSpeed = 15;
     void AuswurfR();
-    void AuswurfL();*/
+    void AuswurfL();
 
     ~Robot(){ //Destructor of the class
         

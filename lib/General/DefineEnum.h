@@ -89,6 +89,7 @@ enum WRGB {  //uint32_t for colors
     GREEN = 0x0000FF00,
     BLUE = 0x000000FF,
     YELLOW = 0x00FFFF00,
+    ORANGE = 0x00FFA500,
     CYAN = 0x0000FFFF,
     MAGENTA = 0x00FF00FF,
     WHITE = 0x00FFFFFF,

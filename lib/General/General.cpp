@@ -43,33 +43,36 @@ Robot::Robot() : //Member Initializer List
     led.begin();
 
     //Expander
-    Serial.println("Wire begin");
     Wire.begin();
-    Serial.println("Wire1 begin");
+    Serial.println("Wire begun");
     Wire1.begin();
-    Serial.println("top ex 1 begin");
+    Serial.println("Wire1 begun");
     topExpander1.attach(Wire);
-    Serial.println("top ex 2 begin");
+    Serial.println("top ex 1 begun");
     topExpander2.attach(Wire);
-    Serial.println("bottom ex 1 begin");
+    Serial.println("top ex 2 begun");
     bottomExpander1.attach(Wire1);
-    
+    Serial.println("bottom ex 1 begun");
 //    bottomExpander2.attach(Wire1);
 
+    Serial.println("SetAdress");
     topExpander1.setDeviceAddress(0x20);
     topExpander2.setDeviceAddress(0x21);
     bottomExpander1.setDeviceAddress(0x23);
     bottomExpander2.setDeviceAddress(0x24);
 
+    Serial.println("config");
     topExpander1.config(TCA9534::Config::IN);
     topExpander2.config(TCA9534::Config::IN);
     topExpander2.config(5, TCA9534::Config::OUT); //Display Light
 //    topExpander2.config(4, TCA9534::Config::OUT); //Bluetooth
+    Serial.println("config bottom");
     bottomExpander1.config(TCA9534::Config::OUT);
     bottomExpander1.config(0, TCA9534::Config::IN); //AUX_SW1
     bottomExpander1.config(1, TCA9534::Config::IN); //AUX_SW2
 //    bottomExpander2.config(TCA9534::Config::OUT);
 
+    Serial.println("polarity");
     topExpander1.polarity(TCA9534::Polarity::ORIGINAL);
     topExpander2.polarity(TCA9534::Polarity::ORIGINAL);
     bottomExpander1.polarity(TCA9534::Polarity::ORIGINAL);
@@ -78,6 +81,7 @@ Robot::Robot() : //Member Initializer List
     pinMode(10, OUTPUT); //ADC pin
 
     //Motors & Movement
+    Serial.println("Motors");
     motorExpander.attach(Wire1);
     motorExpander.setDeviceAddress(0x22);
     motorExpander.config(TCA9534::Config::OUT);
@@ -93,18 +97,20 @@ Robot::Robot() : //Member Initializer List
 
     //Mux
     Serial.println("Mux begin");
-    muxBack.begin(MUXBACK_ADDR, Wire1);
-    muxFront.begin(MUXFRONT_ADDR, Wire1);
+    Serial.println(muxBack.begin(MUXBACK_ADDR, Wire1));
+    Serial.println(muxFront.begin(MUXFRONT_ADDR, Wire1));
     
     //TOF
-    TOF[0] = TOFonMux(4, &muxFront); //FRONT RIGHT
-    TOF[1] = TOFonMux(7, &muxFront); //FRONT LEFT
-    TOF[2] = TOFonMux(2, &muxBack); //BACK RIGHT
-    TOF[3] = TOFonMux(1, &muxBack); //BACK LEFT
-    TOF[4] = TOFonMux(5, &muxFront); //RIGHT FRONT
-    TOF[5] = TOFonMux(3, &muxBack); //RIGHT BACK
-    TOF[6] = TOFonMux(6, &muxFront); //LEFT FRONT
-    TOF[7] = TOFonMux(0, &muxBack); //LEFT BACK 
+    Serial.println("TOF begin");
+    TOF[0] = TOFonMux(5, muxFront, Wire1); //FRONT RIGHT
+    TOF[1] = TOFonMux(6, muxFront, Wire1); //FRONT LEFT
+    TOF[2] = TOFonMux(2, muxBack, Wire1); //BACK RIGHT
+    TOF[3] = TOFonMux(1, muxBack, Wire1); //BACK LEFT
+    TOF[4] = TOFonMux(4, muxFront, Wire1); //RIGHT FRONT
+    TOF[5] = TOFonMux(3, muxBack, Wire1); //RIGHT BACK
+    TOF[6] = TOFonMux(7, muxFront, Wire1); //LEFT FRONT
+    TOF[7] = TOFonMux(0, muxBack, Wire1); //LEFT BACK 
+    
 }
 
 void Robot::setLedColor(uint32_t color){

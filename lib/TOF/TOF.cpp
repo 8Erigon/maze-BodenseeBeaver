@@ -1,9 +1,9 @@
 #include "TOF.h"
 
-TOFonMux::TOFonMux(uint8_t pinOnMux, QWIICMUX *expander) : Adafruit_VL6180X() {
-    this->expander = expander;
+TOFonMux::TOFonMux(uint8_t pinOnMux, QWIICMUX &expander, TwoWire &I2C_bus) : Adafruit_VL6180X() {
+    this->expander = &expander;
     this->pin = pinOnMux;
-    begin(&Wire1);
+    Serial.println(begin(&I2C_bus));
 };
 
 TOFonMux::TOFonMux(){
@@ -40,7 +40,8 @@ uint8_t TOFonMux::readRange(void) {
         return 0;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::readRange();
+    range = Adafruit_VL6180X::readRange();
+    return range;
 }
 
 float TOFonMux::readLux(uint8_t gain) {
@@ -56,7 +57,8 @@ uint8_t TOFonMux::readRangeStatus(void) {
         return 0;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::readRangeStatus();
+    status = Adafruit_VL6180X::readRangeStatus();
+    return status;
 }
 
 boolean TOFonMux::startRange(void) {

@@ -23,6 +23,7 @@ int main()
   // Power On
   // Initialize
   Serial.begin(9600);
+  Serial.println("---Begin programm---");
   Robot robo = Robot();
 
   while (true)

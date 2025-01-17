@@ -7,7 +7,7 @@
 
 class TOFonMux : virtual public Adafruit_VL6180X{
     public:
-    TOFonMux(uint8_t pinOnMux, QWIICMUX *expander);
+    TOFonMux(uint8_t pinOnMux, QWIICMUX &expander, TwoWire &I2C_bus = Wire);
     TOFonMux();
 
     boolean begin(TwoWire *theWire = &Wire) override; //Override functions are just base function but also switch mux port before
@@ -31,6 +31,7 @@ class TOFonMux : virtual public Adafruit_VL6180X{
     void getID(uint8_t *id_ptr) override;
 
     uint8_t range;
+    uint8_t status;
     private:
     uint8_t pin;
     QWIICMUX *expander;

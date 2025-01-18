@@ -75,9 +75,10 @@ class Robot{
     };
     Robot();
 
-    private:
-
-    long lastMicros;
+/*
+    Should be private but is public for testing (& because of the dogs main.cpp being implemented)
+*/
+    bool getExpanderBit(Mutliplexer expander, uint8_t bit);
     TCA9534 topExpander1;
     TCA9534 topExpander2;
     TCA9534 bottomExpander1;
@@ -91,10 +92,10 @@ class Robot{
     QWIICMUX muxFront;
     QWIICMUX muxBack;
 
+    private:
+
     sensors_event_t BNOorientation; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_EULER)"
     sensors_event_t BNOacceleration; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_LINEARACCEL)"
-
-    bool getExpanderBit(Mutliplexer expander, uint8_t bit);
 
     int ServoPos = 0;
     int ServoResetPos = 90; // wird jedesmal auf diesen Wert zurüchgesetzt und von hier aus wird die Auswerfbewegung ausgeführt
@@ -103,6 +104,7 @@ class Robot{
     @details Time since last using this function
     */
     long computeDeltaTime();
+    long lastMicros;
     long deltaTime;
     void computeCoordinates();
 };

@@ -66,9 +66,9 @@ class Robot{
     void setRunning(bool isRunning);
 
     Servo ourServo;
-    int ServoSpeed = 15;
     void AuswurfR();
     void AuswurfL();
+    void ServoPosReset();
 
     ~Robot(){ //Destructor of the class
         
@@ -97,8 +97,10 @@ class Robot{
     sensors_event_t BNOorientation; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_EULER)"
     sensors_event_t BNOacceleration; //to process "bno.getEvent(&bnoData, Adafruit_BNO055::VECTOR_LINEARACCEL)"
 
+    int ServoPosMid = 90;
+    int ServoPosRight = 151;
+    int ServoPosLeft = 10;
     int ServoPos = 0;
-    int ServoResetPos = 90; // wird jedesmal auf diesen Wert zurüchgesetzt und von hier aus wird die Auswerfbewegung ausgeführt
 
     /*
     @details Time since last using this function

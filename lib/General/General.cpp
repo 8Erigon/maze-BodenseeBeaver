@@ -174,20 +174,24 @@ bool Robot::readButton(Buttons button) {
 
 void Robot::AuswurfR()     {
     move.Stop(0);
-    ourServo.write(ServoResetPos);
-    for (ServoPos = ServoResetPos; ServoPos >= 10; ServoPos--)  {
+    ourServo.write(ServoPosMid);
+    for (ServoPos = ServoPosMid; ServoPos <= ServoPosRight; ServoPos++)  {
         ourServo.write(ServoPos);
-        delay(ServoSpeed);
+        delay(10);
     }
 }
 
 void Robot::AuswurfL()     {
     move.Stop(0);
-ourServo.write(ServoResetPos);
-    for (ServoPos = ServoResetPos; ServoPos <= 170; ServoPos++)  {
+    ourServo.write(ServoPosMid);
+    for (ServoPos = ServoPosMid; ServoPos >= ServoPosLeft; ServoPos--)  {
         ourServo.write(ServoPos);
-        delay(ServoSpeed);  // durch den delay und allgemein durch die for schleife kann man die Geschwindigkeit des Servos regulieren
+        delay(10);
     }
+}
+
+void Robot::ServoPos_Mid()  {
+    ourServo.write(ServoPos_Mid);
 }
 
 void Robot::computeCoordinates(){

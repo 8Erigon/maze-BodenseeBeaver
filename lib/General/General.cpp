@@ -88,7 +88,7 @@ Robot::Robot() : //Member Initializer List
     motorExpander.polarity(TCA9534::Polarity::ORIGINAL);
 
     //Servo
-    ourServo.attach(9); 
+    ourServo.attach(22); 
 
     //BNO
     if (!bno.begin()){

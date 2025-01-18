@@ -122,11 +122,11 @@ int main()
 
     case 40:
       // Reset Anzeigen
-      utils.ledOff();
-      utils.setStatusLed(LED5, OFF);
-      utils.setStatusLed(LED6, OFF);
-      utils.setStatusLed(LED7, OFF);
-      utils.setStatusLed(LED8, OFF);
+      robo.setLedColor(WRGB::NONE);
+      robo.bottomExpander1.output(LED5, !OFF); // invertierung damit true = an und false = aus
+      robo.bottomExpander1.output(LED6, !OFF); // invertierung damit true = an und false = aus
+      robo.bottomExpander1.output(LED7, !OFF); // invertierung damit true = an und false = aus
+      robo.bottomExpander1.output(LED8, !OFF); // invertierung damit true = an und false = aus
       step = 45; // Später zu 50 ändern
       break;
     case 45:
@@ -171,7 +171,7 @@ int main()
     case 100:
       // Warte auf Starttaster
       startLedMode = true;
-      if (startSwitchIsOn) {
+      if (robo.readSwitch(StartSwitch)) {
         startLedMode = false;
         processIsRunning = true;
         step = 110;
@@ -812,7 +812,7 @@ int main()
     case 1100:
       // Warte auf Starttaster
       startLedMode = timerFunction(TFLASH, TCHAIN1, !stepHasChanged, 250000);
-      if (startSwitchIsOn) {
+      if (robo.readSwitch(StartSwitch)) {
         startLedMode = OFF;
         processIsRunning = true;
         step = 1110;

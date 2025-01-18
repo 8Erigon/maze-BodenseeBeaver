@@ -99,4 +99,12 @@ enum WRGB {  //uint32_t for colors
     NONE = 0xFF000000
 };
 
+enum ExpanderLeds
+{
+    LED5 = 2,
+    LED6 = 3,
+    LED7 = 4,
+    LED8 = 5
+};
+
 #endif

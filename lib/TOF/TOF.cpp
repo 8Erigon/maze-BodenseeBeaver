@@ -1,9 +1,9 @@
 #include "TOF.h"
 
-TOFonMux::TOFonMux(uint8_t pinOnMux, QWIICMUX &expander, TwoWire &I2C_bus){
+TOFonMux::TOFonMux(uint8_t pinOnMux, QWIICMUX &expander, TwoWire &theWire, uint8_t addr) {
     this->expander = &expander;
     this->pin = pinOnMux;
-    Serial.println(begin(&I2C_bus));
+    Serial.println(begin(&theWire));
 };
 
 TOFonMux::TOFonMux(){

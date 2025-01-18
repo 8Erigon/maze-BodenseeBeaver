@@ -113,7 +113,7 @@ Robot::Robot() : //Member Initializer List
 
     //Colorsensor
     Serial.println("ColorSensor begin");
-    Serial.println( colorSensor.begin(COLORSENSOR_ADDR, &Wire1) );
+    colorSensor = ColorSensorOnMux(0, muxFront, Wire1);
     colorSensor.setInterrupt(false);
 }
 

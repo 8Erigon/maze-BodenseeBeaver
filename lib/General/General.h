@@ -19,7 +19,7 @@
 //Servo
 #include <Servo.h>
 //Colorsensor
-#include <Adafruit_TCS34725.h>
+#include "../ColorSensor/ColorSensor.h"
 
 class Robot{
     public:
@@ -43,7 +43,7 @@ class Robot{
     sensors_vec_t &orientation = BNOorientation.orientation;
     sensors_vec_t &acceleration = BNOacceleration.acceleration;
 
-    Adafruit_TCS34725 colorSensor = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_1X);
+    ColorSensorOnMux colorSensor;
 
     Adafruit_NeoPixel led = Adafruit_NeoPixel(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
     void setLedColor(uint32_t color);  

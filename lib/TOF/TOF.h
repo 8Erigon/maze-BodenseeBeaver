@@ -7,7 +7,7 @@
 
 class TOFonMux{
     public:
-    TOFonMux(uint8_t pinOnMux, QWIICMUX &expander, TwoWire &I2C_bus = Wire);
+    TOFonMux(uint8_t pinOnMux, QWIICMUX &expander, TwoWire &theWire = Wire, uint8_t addr = VL6180X_DEFAULT_I2C_ADDR);
     TOFonMux();
 
     boolean begin(TwoWire *theWire = &Wire); //Override functions are just base function but also switch mux port before

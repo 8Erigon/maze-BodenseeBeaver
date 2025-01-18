@@ -53,13 +53,13 @@ Robot::Robot() : //Member Initializer List
     Serial.println("top ex 2 begun");
     bottomExpander1.attach(Wire1);
     Serial.println("bottom ex 1 begun");
-    bottomExpander2.attach(Wire1);
+//    bottomExpander2.attach(Wire1);
 
     Serial.println("SetAdress");
     topExpander1.setDeviceAddress(0x20);
     topExpander2.setDeviceAddress(0x21);
     bottomExpander1.setDeviceAddress(0x23);
-    bottomExpander2.setDeviceAddress(0x24);
+//    bottomExpander2.setDeviceAddress(0x24);
 
     Serial.println("config");
     topExpander1.config(TCA9534::Config::IN);
@@ -70,13 +70,13 @@ Robot::Robot() : //Member Initializer List
     bottomExpander1.config(TCA9534::Config::OUT);
     bottomExpander1.config(0, TCA9534::Config::IN); //AUX_SW1
     bottomExpander1.config(1, TCA9534::Config::IN); //AUX_SW2
-    bottomExpander2.config(TCA9534::Config::OUT);
+//    bottomExpander2.config(TCA9534::Config::OUT);
 
     Serial.println("polarity");
     topExpander1.polarity(TCA9534::Polarity::ORIGINAL);
     topExpander2.polarity(TCA9534::Polarity::ORIGINAL);
-    bottomExpander1.polarity(TCA9534::Polarity::ORIGINAL);
-    bottomExpander2.polarity(TCA9534::Polarity::ORIGINAL);
+//    bottomExpander1.polarity(TCA9534::Polarity::ORIGINAL);
+//    bottomExpander2.polarity(TCA9534::Polarity::ORIGINAL);
     pinMode(3, INPUT); //Startswitchpin = 3
     pinMode(10, OUTPUT); //ADC pin
 

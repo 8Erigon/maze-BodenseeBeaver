@@ -11,6 +11,7 @@ float RoboHeadingFinal = 0;
 
 bool isfirstRun = true;
 
+victimTypes victimType;
 // Defines
 
 // Geschwindichkeiten
@@ -93,200 +94,6 @@ enum victimTypes : uint8_t
     YELLOW_VICTIM,
     RED_VICTIM
 };
-
-// Switches
-extern bool startSwitchIsOn;
-
-extern bool SingleStepModeSwitchIsOn;
-extern bool debugWindowSwitchIsOn;
-extern bool SW11;
-extern bool SW12;
-
-// Buttons
-extern bool resetCycleTimeButtonIsPressed;
-extern bool resetChainButtonIsPressed;
-extern bool singleStepButtonIsPressed;
-extern bool cycleDebugWindowButtonIsPressed;
-extern bool BTN5;
-extern bool mazeMapPrintButtonIsPressed;
-
-// VL Tofs
-extern uint8_t distanceFrontRightSide;
-extern uint8_t distanceFrontLeftSide;
-extern uint8_t averageDistanceFront;
-
-extern uint8_t distanceRightFrontSide;
-extern uint8_t distanceRightBackSide;
-extern uint8_t averageDistanceRight;
-
-extern uint8_t distanceBackRightSide;
-extern uint8_t distanceBackLeftSide;
-extern uint8_t averageDistanceBack;
-
-extern uint8_t distanceLeftFrontSide;
-extern uint8_t distanceLeftBackSide;
-extern uint8_t averageDistanceLeft;
-
-extern bool disableVlTofs;
-
-//Lanbao Tofs
-extern uint16_t distanceFrontMiddle;
-extern uint16_t distanceRightMiddle;
-extern uint16_t distanceBackMiddle;
-extern uint16_t distanceLeftMiddle;
-extern bool disableLanbaoTofs;
-
-// Colorsenor
-extern uint16_t red;
-extern uint16_t blue;
-extern uint16_t green;
-extern uint16_t clear;
-extern bool disableColorSensor;
-
-// Walls
-extern bool hasWallFront;
-extern bool hasWallBack;
-extern bool hasWallRight;
-extern bool hasWallLeft;
-
-// Ramps, stairs and bumper
-extern bool hasStairUp;
-extern bool hasBumper;
-extern unsigned long rampTime;
-extern unsigned long stairTime;
-
-//Display
-extern bool disableDisplay;
-
-// Bno
-extern float robotHeading;
-extern float robotPitch;
-extern float robotRoll;
-extern float robotAccX;
-extern float robotAccY;
-extern float robotAccZ;
-
-extern float bnoOffsetCalbHeading;
-extern float bnoOffsetCalbPitch;
-extern float bnoOffsetCalbRoll;
-
-extern float bnoCalbHeading;
-extern float bnoCalbPitch;
-extern float bnoCalbRoll;
-extern float angleTarget;
-extern float bnoCalbAccX;
-extern float bnoCalbAccY;
-extern float bnoCalbAccZ;
-
-extern float last100PitchValues[100];
-extern int currentLastPitchValue;
-
-
-// Color Sensor
-extern bool isOnBlackTile;
-extern bool isOnBlueTile;
-extern bool isOnControllTile;
-extern plateTypes currentTileType;
-
-// Leds
-extern bool victimLedMode;
-extern bool startLedMode;
-
-extern bool LifeClockLEDIsOn;
-
-// Victims
-extern bool victimHarm;
-extern bool victimStable;
-extern bool victimRed;
-extern bool victimYellow;
-extern bool hasVictim;
-extern char leftCameraResponse;
-extern char rightCameraResponse;
-extern victimTypes victimForMap;
-
-// Servo
-extern int servoPos;
-
-// StepChain
-extern int step;
-extern int lastStep;
-extern int nextStep;
-extern int stepToJumpBackTo;
-extern bool isFirstRun;
-extern bool stepHasChanged;
-extern bool processIsRunning;
-extern bool singleStepFlag;
-extern bool singleStep;
-extern bool chainFlag; //?
-extern bool chainFlagAngleTarget;
-extern bool ignoreNextPlateAddition;
-
-// Debug
-extern bool debugWindowFlag;
-
-// Correction
-extern float degreeOffset;
-extern float angleToFixSideWallDistance; 
-
-// PID
-// Rotation PID
-// Final
-extern double proportionalConstantForRotation;
-extern double integralConstantForRotation;
-extern double differentialConstantForRotation;
-
-extern int maxIntegralValueForRotation;
-extern int maxOutputSpeedForRotation;
-extern int minOutputSpeedForRotation;
-
-extern double degreeAccuracyForRotation;
-extern double speedAccuracyForRotation;
-extern double integralNewPointForRotation;
-
-// Programm Input
-extern bool doPIDForRotation;
-extern float degreesToRotateForRotation;
-
-// Processing
-extern double bnoSetpointForRotation;
-extern double bnoOffsetForRotation;
-extern double errorForRotation;
-
-extern double previousIntegralForRotation;
-extern double previouserrorForRotation;
-extern double previousmessungForRotation;
-
-extern double differenceMeasurementForRotation;
-extern double currentRotationForRotation;
-
-// Output
-extern double outputSpeedForRotation;
-
-
-// Drive PID
-extern bool doDrivePID;
-
-extern double bnoSetpointForDrive;
-extern double bnoOffsetForDrive;
-
-extern double errorForDrive;
-extern double previousErrorForDrive;
-extern double integralForDrive;
-extern double previousIntegralForDrive;
-extern double proportionalForDrive;
-
-extern double maxIntegralValueForDrive;
-extern double maxOutputValueDifferenceForDrive;
-
-extern double integralNewPointForDrive;
-
-extern double integralConstantForDrive;
-extern double proportionalConstantForDrive;
-// End PID
-
-// Multiplexer
-extern QWIICMUX muxFront;
-extern QWIICMUX muxBack;
 
 //MazeMap
 bool robotCompletedRightWallDrivePath = false;
@@ -1576,15 +1383,17 @@ int main()
     }
 
     // Display
-    utils.writeTextToDisplay(0,
+    robo.display.drawString(String(
                              "CT: " + utils.getStringWithLenght(String(cycleTime / 1000), 5) + " " +
                                  "V: " + victimType + " " +
-                                 "T: " + currentTileType);
-    utils.writeTextToDisplay(1,
+                                 "T: " + currentTileType), 
+                                0, 0);
+    robo.display.drawString(String(
                              "LST: " + utils.getStringWithLenght(String(lastStep), 5) + " " +
-                                 "NST: " + utils.getStringWithLenght(String(nextStep), 5));
+                                 "NST: " + utils.getStringWithLenght(String(nextStep), 5)), 
+                                0, 1);
     //utils.writeTextToDisplay(2, utils.getStringWithLenght(String(hasWallFront?1:0), 1)+utils.getStringWithLenght(String(hasWallRight?1:0), 1)+utils.getStringWithLenght(String(hasWallBack?1:0), 1)+utils.getStringWithLenght(String(hasWallLeft?1:0), 1));
-    utils.writeTextToDisplay(2, "P: "+utils.getStringWithLenght((String)bnoCalbPitch, 4));
+    robo.display.drawString(String( "P: "+utils.getStringWithLenght((String)bnoCalbPitch, 4)), 0, 2);
 
     processImageOutputs();
     //Serial.println("Ist: " + (String) bnoCalbHeading);

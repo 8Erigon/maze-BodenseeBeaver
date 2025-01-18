@@ -5,35 +5,36 @@
 #include "../General/DefineEnum.h" 
 #include "../Portexpander/src/SparkFun_I2C_Mux_Arduino_Library.h"
 
-class TOFonMux : public Adafruit_VL6180X{
+class TOFonMux{
     public:
     TOFonMux(uint8_t pinOnMux, QWIICMUX &expander, TwoWire &I2C_bus = Wire);
     TOFonMux();
 
-    boolean begin(TwoWire *theWire = &Wire) override; //Override functions are just base function but also switch mux port before
-    boolean setAddress(uint8_t newAddr) override;
-    uint8_t getAddress(void) override;
+    boolean begin(TwoWire *theWire = &Wire); //Override functions are just base function but also switch mux port before
+    boolean setAddress(uint8_t newAddr);
+    uint8_t getAddress(void);
 
-    uint8_t readRange(void) override;
-    float readLux(uint8_t gain) override;
-    uint8_t readRangeStatus(void) override;
+    uint8_t readRange(void);
+    float readLux(uint8_t gain);
+    uint8_t readRangeStatus(void);
 
-    boolean startRange(void) override;
-    boolean isRangeComplete(void) override;
-    boolean waitRangeComplete(void) override;
-    uint8_t readRangeResult(void) override;
+    boolean startRange(void);
+    boolean isRangeComplete(void);
+    boolean waitRangeComplete(void);
+    uint8_t readRangeResult(void);
 
-    void startRangeContinuous(uint16_t period_ms = 50) override;
-    void stopRangeContinuous(void) override;
+    void startRangeContinuous(uint16_t period_ms = 50) ;
+    void stopRangeContinuous(void);
     // readRangeResult and isRangeComplete apply here is well
 
-    void setOffset(uint8_t offset) override;
-    void getID(uint8_t *id_ptr) override;
+    void setOffset(uint8_t offset);
+    void getID(uint8_t *id_ptr);
 
     uint8_t range;
     uint8_t status;
     private:
     uint8_t pin;
+    Adafruit_VL6180X TOF = Adafruit_VL6180X();
     QWIICMUX *expander;
 
 };

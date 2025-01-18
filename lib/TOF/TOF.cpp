@@ -1,6 +1,6 @@
 #include "TOF.h"
 
-TOFonMux::TOFonMux(uint8_t pinOnMux, QWIICMUX &expander, TwoWire &I2C_bus) : Adafruit_VL6180X() {
+TOFonMux::TOFonMux(uint8_t pinOnMux, QWIICMUX &expander, TwoWire &I2C_bus){
     this->expander = &expander;
     this->pin = pinOnMux;
     Serial.println(begin(&I2C_bus));
@@ -16,7 +16,7 @@ boolean TOFonMux::begin(TwoWire *theWire) {
         return false;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::begin(theWire);
+    return this->TOF.begin(theWire);
 };
 
 boolean TOFonMux::setAddress(uint8_t newAddr) {
@@ -24,7 +24,7 @@ boolean TOFonMux::setAddress(uint8_t newAddr) {
         return false;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::setAddress(newAddr);
+    return this->TOF.setAddress(newAddr);
 }
 
 uint8_t TOFonMux::getAddress(void) {
@@ -32,7 +32,7 @@ uint8_t TOFonMux::getAddress(void) {
         return 0;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::getAddress();
+    return this->TOF.getAddress();
 }
 
 uint8_t TOFonMux::readRange(void) {
@@ -40,7 +40,7 @@ uint8_t TOFonMux::readRange(void) {
         return 0;
     }
     this->expander->setPort(this->pin);
-    range = Adafruit_VL6180X::readRange();
+    range = this->TOF.readRange();
     return range;
 }
 
@@ -49,7 +49,7 @@ float TOFonMux::readLux(uint8_t gain) {
         return 0;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::readLux(gain);
+    return this->TOF.readLux(gain);
 }
 
 uint8_t TOFonMux::readRangeStatus(void) {
@@ -57,7 +57,7 @@ uint8_t TOFonMux::readRangeStatus(void) {
         return 0;
     }
     this->expander->setPort(this->pin);
-    status = Adafruit_VL6180X::readRangeStatus();
+    status = this->TOF.readRangeStatus();
     return status;
 }
 
@@ -66,7 +66,7 @@ boolean TOFonMux::startRange(void) {
         return false;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::startRange();
+    return this->TOF.startRange();
 }
 
 boolean TOFonMux::isRangeComplete(void) {
@@ -74,7 +74,7 @@ boolean TOFonMux::isRangeComplete(void) {
         return false;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::isRangeComplete();
+    return this->TOF.isRangeComplete();
 }
 
 boolean TOFonMux::waitRangeComplete(void) {
@@ -82,7 +82,7 @@ boolean TOFonMux::waitRangeComplete(void) {
         return false;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::waitRangeComplete();
+    return this->TOF.waitRangeComplete();
 }
 
 uint8_t TOFonMux::readRangeResult(void) {
@@ -90,7 +90,7 @@ uint8_t TOFonMux::readRangeResult(void) {
         return 0;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::readRangeResult();
+    return this->TOF.readRangeResult();
 }
 
 void TOFonMux::startRangeContinuous(uint16_t period_ms) {
@@ -98,7 +98,7 @@ void TOFonMux::startRangeContinuous(uint16_t period_ms) {
         return;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::startRangeContinuous(period_ms);
+    return this->TOF.startRangeContinuous(period_ms);
 }
 
 void TOFonMux::stopRangeContinuous(void) {
@@ -106,7 +106,7 @@ void TOFonMux::stopRangeContinuous(void) {
         return;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::stopRangeContinuous();
+    return this->TOF.stopRangeContinuous();
 }
 
 void TOFonMux::setOffset(uint8_t offset) {
@@ -114,7 +114,7 @@ void TOFonMux::setOffset(uint8_t offset) {
         return;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::setOffset(offset);
+    return this->TOF.setOffset(offset);
 }
 
 void TOFonMux::getID(uint8_t *id_ptr) {
@@ -122,5 +122,5 @@ void TOFonMux::getID(uint8_t *id_ptr) {
         return;
     }
     this->expander->setPort(this->pin);
-    return Adafruit_VL6180X::getID(id_ptr);
+    return this->TOF.getID(id_ptr);
 }

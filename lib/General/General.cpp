@@ -11,6 +11,7 @@ void Robot::process(){
     /*for(int i = 0; i<8; i++){
         TOF[i].range = TOF[i].readRange();
     }*/
+    colorSensor.getRGB();
     led.show();
 }
 

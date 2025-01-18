@@ -4,6 +4,12 @@
 #include <Adafruit_TCS34725.h>
 #include "../Portexpander/src/SparkFun_I2C_Mux_Arduino_Library.h"
 
+struct RGB{
+    float r;
+    float g;
+    float b;
+};
+
 class ColorSensorOnMux{
     public:
     /*
@@ -32,6 +38,10 @@ class ColorSensorOnMux{
     void setIntLimits(uint16_t l, uint16_t h);
     void enable();
     void disable();
+
+    RGB getRGB();
+
+    RGB data;
 
     private:
     uint8_t pin;

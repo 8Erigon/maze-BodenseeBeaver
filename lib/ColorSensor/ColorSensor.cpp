@@ -154,3 +154,8 @@ void ColorSensorOnMux::disable(void) {
     this->expander->setPort(this->pin);
     return this->tcs.disable();
 }
+
+RGB ColorSensorOnMux::getRGB() {
+    this->tcs.getRGB(&this->data.r, &this->data.g, &this->data.b);
+    return this->data;
+}

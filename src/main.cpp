@@ -11,7 +11,6 @@ float RoboHeadingFinal = 0;
 
 bool isfirstRun = true;
 
-victimTypes victimType;
 // Defines
 
 // Geschwindichkeiten
@@ -328,7 +327,7 @@ float calcDegreesToRotate(){
     }
     return result;
 }
-
+victimTypes victimType;
 /*
 ---------------------------------------------------------
 ----------------------Main-------------------------------

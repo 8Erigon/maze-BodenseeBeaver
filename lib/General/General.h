@@ -30,7 +30,9 @@ class Robot{
     /*
     @details y coordinate of the robot
     */
-    int y;
+    int y; //cooordinates aren't used yet (& probably never)
+
+    static String shortenNumber(long number, uint8_t digits);
 
     Motor motors[4];
     Movement move; //Movement libary

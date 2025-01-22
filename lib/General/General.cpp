@@ -118,6 +118,22 @@ Robot::Robot() : //Member Initializer List
     colorSensor.setInterrupt(false);
 }
 
+
+/*
+@details Shortens a number to a certain number of digits and adds the sientific notation
+@return String of the number (string.lenght != digits)
+*/
+String Robot::shortenNumber(long number, uint8_t digits){
+    String numberString = String(number);
+    uint8_t lenghtDifference = numberString.length() - digits; //Number of digits to cut of
+    String DifferenceString = String(lenghtDifference);
+    if(lenghtDifference > 0){
+        numberString = numberString.substring(0, digits);
+    }
+    numberString.append("E" + DifferenceString); //Add sientific notation
+    return numberString;
+}
+
 void Robot::setLedColor(uint32_t color){
     for(int i = 0; i < LED_COUNT; i++){
         led.setPixelColor(i, color);
@@ -191,8 +207,8 @@ void Robot::AuswurfL()     {
     }
 }
 
-void Robot::ServoPos_Mid()  {
-    ourServo.write(ServoPos_Mid);
+void Robot::ServoPosReset()  {
+    ourServo.write(ServoPosMid);
 }
 
 void Robot::computeCoordinates(){

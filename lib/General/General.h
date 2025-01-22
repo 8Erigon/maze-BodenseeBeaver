@@ -34,7 +34,7 @@ class Robot{
 
     static String shortenNumber(long number, uint8_t digits);
     static String setNumberLenght(long number, uint8_t digits);
-    static String createScrollingString(String text, uint8_t lenght, uint deltaTime, uint8_t *lastPosition, uint8_t scrollPerSecond, uint8_t maxScrollPerFrame = 0, FillString fillString = right);
+    static String createScrollingString(String text, uint8_t lenght, uint deltaTime, uint8_t *lastPosition, uint8_t scrollPerSecond, uint8_t maxScrollPerFrame = 255, FillString fillString = right);
 
     Motor motors[4];
     Movement move; //Movement libary

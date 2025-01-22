@@ -153,6 +153,20 @@ String Robot::shortenNumber(long number, uint8_t digits){
     return numberString;
 }
 
+String Robot::setNumberLenght(long number, uint8_t digits){
+    String numberString = String(number);
+    int8_t difference = numberString.length() - digits; //Difference between numberString and digits
+    if(difference > 0){ //If numberString is to long
+        return Robot::shortenNumber(number, digits);
+    }
+    else{ //If numberString is to short
+        for(int i = 0; i < abs(difference); i++){
+            numberString = "0" + numberString; //add "0" to match the right lenght
+        }
+        return numberString;
+    }
+}
+
 void Robot::setLedColor(uint32_t color){
     for(int i = 0; i < LED_COUNT; i++){
         led.setPixelColor(i, color);

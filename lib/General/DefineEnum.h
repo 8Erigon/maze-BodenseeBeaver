@@ -44,8 +44,7 @@
 
 //-------Enums---------
 
-enum Buttons
-{
+enum Buttons{
     BUTTON1 = 1,
     BUTTON2 = 2,
     BUTTON3 = 3,
@@ -86,7 +85,7 @@ enum SkyDirection{
     West
 };
 
-enum WRGB {  //uint32_t for colors
+enum WRGB : uint32_t{  //uint32_t for colors
     //0x opacity red green blue
     RED = 0x00FF0000,
     GREEN = 0x0000FF00,
@@ -99,12 +98,18 @@ enum WRGB {  //uint32_t for colors
     NONE = 0xFF000000
 };
 
-enum ExpanderLeds
-{
+enum ExpanderLeds{
     LED5 = 2,
     LED6 = 3,
     LED7 = 4,
     LED8 = 5
+};
+
+enum FillString{
+    none,
+    left,
+    right,
+    both
 };
 
 #endif

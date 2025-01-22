@@ -167,6 +167,62 @@ String Robot::setNumberLenght(long number, uint8_t digits){
     }
 }
 
+/*
+@details Creates a scrolling String (for if you need to display a to large text)
+@param text String to scroll
+@param lenght Lenght of the output String
+@param deltaTime Time passed since last use of this function (in microsec)
+@param *lastPosition Variable for saving last position of the scroll
+@param scrollPerSecond How many characters should be scrolled per second
+@param maxScrollPerFrame Maximum number of characters that can be scrolled per frame (if deltaTime got to high)
+@param fillString Fill the String with spaces if it's to short
+@return Current text/String part
+*/
+String Robot::createScrollingString(String text, uint8_t lenght, uint deltaTime, uint8_t *lastPosition, uint8_t scrollPerSecond, uint8_t maxScrollPerFrame, FillString fillString){
+    String output = text;
+    if(text.length() < lenght){ //Check if text is to short for scroll
+        if(fillString == none){
+            return text;
+        }
+        uint8_t difference = lenght - text.length();
+        if(fillString == left){
+            for(int i = 0; i < difference; i++){
+                output = " " + output;
+            }
+        }
+        if(fillString == right){
+            for(int i = 0; i < difference; i++){
+                output = output + " ";
+            }
+        }
+        if(fillString == both){
+            for(int i = 0; i < difference; i++){
+                output = (i%2) ? (output + " ") : (" " + output); //Fill string right and left until lenght is met
+            }
+        }
+        return output;
+    }
+    uint8_t move = scrollPerSecond * (deltaTime / 1000); //How many characters should be scrolled
+    move = min(move, maxScrollPerFrame); //Check if move is to high
+    uint8_t leftBorder = *lastPosition + move; //Left border of the scrolling String
+    if(leftBorder >= text.length()){ //Check if leftBorder is out of bounce
+        leftBorder -= text.length();
+    }
+    *lastPosition = leftBorder; //Save last position
+    uint8_t rightBorder = leftBorder + lenght; //Right border of the scrolling String
+
+    if(rightBorder >= text.length()){ //Check if leftBorder is out of bounce
+        rightBorder -= text.length();
+        if(rightBorder < leftBorder){ //Check if rightBorder is left from leftBorder
+            output = text.substring(leftBorder) + text.substring(0, rightBorder); //Get the scrolling String
+        }
+    } else{
+    output = text.substring(leftBorder, rightBorder); //Get the scrolling String
+    }
+
+    return output;
+}
+
 void Robot::setLedColor(uint32_t color){
     for(int i = 0; i < LED_COUNT; i++){
         led.setPixelColor(i, color);

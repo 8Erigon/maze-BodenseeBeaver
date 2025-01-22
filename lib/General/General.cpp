@@ -121,16 +121,35 @@ Robot::Robot() : //Member Initializer List
 
 /*
 @details Shortens a number to a certain number of digits and adds the sientific notation
-@return String of the number (string.lenght != digits)
+@param number Number to shorten
+@param digits Lenght of the output String
+@return String of the number 
 */
 String Robot::shortenNumber(long number, uint8_t digits){
     String numberString = String(number);
-    uint8_t lenghtDifference = numberString.length() - digits; //Number of digits to cut of
-    String DifferenceString = String(lenghtDifference);
-    if(lenghtDifference > 0){
-        numberString = numberString.substring(0, digits);
+    uint8_t leftDigits = numberString.length() - digits; //Number of digits to cut of
+    String leftDigitsString = String(leftDigits); //String
+
+    uint8_t digitsCut = max(0, digits - numberString.length()); //Number of Digits that were cut off (min value = 0)
+    String digitsCutString = String(digitsCutString); //String
+
+    uint8_t outputLenght = leftDigits + (digitsCut ? 1 + digitsCutString.length() : 0); //Lenght of output String
+
+    while(outputLenght > digits){ //Check if outputLenght isn't to long
+        leftDigits -= outputLenght - digits; //Decreases leftDigits by the amout there where to much digits
+        digitsCut += outputLenght - digits; //Increases digitsCut by the amout there where to much digits
+        String digitsCutString = String(digitsCutString);
+        outputLenght = leftDigits + 1 + digitsCutString.length(); //Re-Calculates variable again 
+
+        if(leftDigits < 1){
+            return ""; /* There must be a number left */
+        }
     }
-    numberString.append("E" + DifferenceString); //Add sientific notation
+
+    numberString = numberString.substring(0, digits);
+    if(digitsCut > 0){
+        numberString.append("E" + digitsCutString); //Add sientific notation
+    }
     return numberString;
 }
 

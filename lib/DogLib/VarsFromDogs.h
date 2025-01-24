@@ -330,7 +330,7 @@ victimTypes victimType;
 GlobalMethods
 */
 
-void setUpRobot() {
+/*void setUpRobot() {
     Wire.begin();
     Wire.setClock(400000);
     Wire1.begin();
@@ -353,7 +353,7 @@ void setUpRobot() {
     Serial.println("Robot Started");
 }
 
-/*void processSwitchInputs() {
+void processSwitchInputs() {
     startSwitchIsOn = utils.isStartSwitchOn();
     SingleStepModeSwitchIsOn = utils.isSwitchOn(SWITCH9);
     debugWindowSwitchIsOn = utils.isSwitchOn(SWITCH10);

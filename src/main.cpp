@@ -1072,7 +1072,7 @@ int main()
     //utils.writeTextToDisplay(2, utils.getStringWithLenght(String(hasWallFront?1:0), 1)+utils.getStringWithLenght(String(hasWallRight?1:0), 1)+utils.getStringWithLenght(String(hasWallBack?1:0), 1)+utils.getStringWithLenght(String(hasWallLeft?1:0), 1));
     robo.display.drawString(String( "P: "+ robo.setNumberLenght( bnoCalbPitch, 4)), 0, 2);
 
-    processImageOutputs();
+    //processImageOutputs();
     //Serial.println("Ist: " + (String) bnoCalbHeading);
     //Serial.println("Soll: " + (String) angleTarget);
     isFirstRun = false;

@@ -5,7 +5,7 @@ bool CAMERA::handleTimeout(bool isBegin, uint32_t timeout){
         timeoutStartTime = millis();
     }  
     if(millis()-timeoutStartTime > TIMEOUT){
-        displayError("Camera has timeouted", FATAL);
+        //displayError("Camera has timeouted", FATAL);
         isDisabled = true;
         return true;
     }

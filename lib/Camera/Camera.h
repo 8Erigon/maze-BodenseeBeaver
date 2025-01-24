@@ -2,8 +2,7 @@
 #define CAMERA_H
 
 #include <Arduino.h>
-#include "../variables/globalVars.h"
-#include "Error.h"
+#include "../DogLib/VarsFromDogs.h"
 
 //Data Transmission Speed
 #define BAUD 57600

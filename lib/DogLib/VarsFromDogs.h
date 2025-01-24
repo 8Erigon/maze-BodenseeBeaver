@@ -273,7 +273,7 @@ double integralNewPointForDrive = 3;
 double integralConstantForDrive = 60;
 double proportionalConstantForDrive = 120;
 // End PID
-victimTypes victimType;
+char victimType;
 
 /*
 GlobalMethods

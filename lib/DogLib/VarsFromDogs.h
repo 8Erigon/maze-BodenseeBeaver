@@ -1,6 +1,7 @@
 #ifndef DOG_LIB
 #define DOG_LIB
 #include <Arduino.h>
+#include "../General/General.h"
 
 // float RoboHeading = 0; //Redefinition
 float RoboHeadingNew = 0;
@@ -352,7 +353,7 @@ void setUpRobot() {
     Serial.println("Robot Started");
 }
 
-void processSwitchInputs() {
+/*void processSwitchInputs() {
     startSwitchIsOn = utils.isStartSwitchOn();
     SingleStepModeSwitchIsOn = utils.isSwitchOn(SWITCH9);
     debugWindowSwitchIsOn = utils.isSwitchOn(SWITCH10);
@@ -397,9 +398,9 @@ void processVLTofInputs() {
 }
 void processLanbaoTofInputs(){
     distanceFrontMiddle = frontLanbaoTof.readDistance();
-    /*distanceRightMiddle = rightLanbaoTof.readDistance();
+    distanceRightMiddle = rightLanbaoTof.readDistance();
     distanceBackMiddle = backLanbaoTof.readDistance();
-    distanceLeftMiddle = leftLanbaoTof.readDistance();*/
+    distanceLeftMiddle = leftLanbaoTof.readDistance();
 }
 void processColorInput() {
     if(disableColorSensor)
@@ -425,7 +426,7 @@ void processColorInput() {
         displayError("Unknown Tile", NORMAL);
         return;
     }
-}
+}*/
 void calcBNOCalbHeading(){
     bnoCalbHeading = robotHeading - bnoOffsetCalbHeading;
     if(bnoCalbHeading < 0){
@@ -438,7 +439,7 @@ void calcBNOCalbPitch(){
     bnoCalbPitch = robotPitch - bnoOffsetCalbPitch;
 }
 
-void processBnoInputs() {
+/*void processBnoInputs() {
     robotHeading = bno.eulHeading();
     calcBNOCalbHeading();
     robotPitch = -bno.eulPitch();
@@ -450,7 +451,7 @@ void processBnoInputs() {
     currentLastPitchValue++;
     if(currentLastPitchValue >= 100)
         currentLastPitchValue = 0;
-}
+}*/
 
 void processImageInputs() {
     utils.processExpanderInputs();
@@ -470,6 +471,12 @@ void processImageOutputs() {
     digitalWriteFast(21, startLedMode);
 }
 
+void resetDrivePID() {
+    errorForDrive = 0;
+    integralForDrive = 0;
+    previousErrorForDrive = 0;
+    previousIntegralForDrive = 0;
+}
 
 float updateAngleTarget(float rotationDegrees){
 
@@ -487,19 +494,19 @@ float updateAngleTarget(float rotationDegrees){
     switch ((int16_t)(result+0.5f))
     {
     case 0:
-        mazeMap.setDirection(NORTH);
+        //mazeMap.setDirection(NORTH);
         break;
     case 90:
-        mazeMap.setDirection(EAST);
-        movement.resetDrivePID();
+        //mazeMap.setDirection(EAST);
+        resetDrivePID();
         break;
     case 180:
-        mazeMap.setDirection(SOUTH);
-        movement.resetDrivePID();
+        //mazeMap.setDirection(SOUTH);
+        resetDrivePID();
         break;
     case 270:
-        mazeMap.setDirection(WEST);
-        movement.resetDrivePID();
+        //mazeMap.setDirection(WEST);
+        resetDrivePID();
         break;
     default:
         break;

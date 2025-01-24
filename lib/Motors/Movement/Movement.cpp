@@ -104,6 +104,76 @@ bool Movement::doBackCorrection(uint8_t currentBackDistance) {
     this->speed = 0;
     return true;
 }
+bool Movement::rotateDegreesWithPID(float degrees, bool stepChanged) {
+    if (!doPIDForRotation)
+    {
+        //Serial.println(degrees);
+        if (!stepChanged) {
+            this->speed = 0;
+            this->drive(forward);
+            doPIDForRotation = false;
+            disableVlTofs = false;
+            disableColorSensor = false;
+            disableLanbaoTofs = false;
+            disableDisplay = false;
+            return true;
+        }
+        degreesToRotateForRotation = -degrees;
+        doPIDForRotation = true;
+        currentRotationForRotation = 0;
+        previousIntegralForRotation = 0;
+        previouserrorForRotation = 0;
+        outputSpeedForRotation = 0;
+        bnoOffsetForRotation = 0;
+        previousmessungForRotation = 0;
+        errorForRotation = 0;
+        bnoSetpointForRotation = robotHeading;
+        differenceMeasurementForRotation = 0;
+        disableVlTofs = true;
+        disableColorSensor = true;
+        disableLanbaoTofs = true;
+        disableDisplay = true;
+    }
+    bnoOffsetForRotation = bnoSetpointForRotation - robotHeading;
+    differenceMeasurementForRotation = bnoOffsetForRotation - previousmessungForRotation;
+
+    if (differenceMeasurementForRotation > 180 || differenceMeasurementForRotation < -180)
+    {
+        differenceMeasurementForRotation = bnoOffsetForRotation < previousmessungForRotation ? (bnoOffsetForRotation + 360) - previousmessungForRotation : bnoOffsetForRotation - (previousmessungForRotation + 360);
+    }
+    currentRotationForRotation += differenceMeasurementForRotation;
+    errorForRotation = degreesToRotateForRotation - currentRotationForRotation;
+
+    // Ende des PID
+    if ((errorForRotation > -degreeAccuracyForRotation && errorForRotation < degreeAccuracyForRotation) && outputSpeedForRotation < speedAccuracyForRotation && outputSpeedForRotation > -speedAccuracyForRotation)
+    {
+        this->speed = 0;
+        doPIDForRotation = false;
+        disableVlTofs = false;
+        disableColorSensor = false;
+        disableLanbaoTofs = false;
+        disableDisplay = false;
+        return true;
+    }
+    // PID Main
+    else
+    {
+        
+        double proportional = proportionalConstantForRotation * errorForRotation;
+        double integral = max(min((previousIntegralForRotation + 0.5f * integralConstantForRotation * (errorForRotation + previouserrorForRotation) / 1000), maxIntegralValueForRotation), -maxIntegralValueForRotation);
+        double differential = differentialConstantForRotation * (differenceMeasurementForRotation);
+
+        outputSpeedForRotation = max(min((proportional + integral + differential), maxOutputSpeedForRotation), -maxOutputSpeedForRotation);
+
+        previousIntegralForRotation = ((errorForRotation > 0 && integral < 0) || (errorForRotation < 0 && integral > 0)) ? ((errorForRotation > 0) ? integralNewPointForRotation : -integralNewPointForRotation) : integral;
+        previouserrorForRotation = errorForRotation;
+    }
+    previousmessungForRotation = bnoOffsetForRotation;
+    
+    this->speed = outputSpeedForRotation < 0 ? max(minOutputSpeedForRotation, outputSpeedForRotation * (-1) ) : max(minOutputSpeedForRotation, outputSpeedForRotation);
+    this->rotate(outputSpeedForRotation < 0 ? LEFT : RIGHT);
+    return false;
+}
 
 void Movement::ForwardOneTile(int speed){
     motors[0].speed = speed;

@@ -40,6 +40,7 @@ public:
     void TurnLeft (int Speed);
     bool doFrontCorrection(uint8_t distanceToSide);
     bool doBackCorrection(uint8_t currentBackDistance);
+    bool rotateDegreesWithPID(float degrees, bool stepChanged);
     void ForwardOneTile(int speed);
     void Stop(int time);
     /*

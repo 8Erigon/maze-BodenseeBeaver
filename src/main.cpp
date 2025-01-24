@@ -252,7 +252,7 @@ int main()
         step = 220;
         break;
       }
-      if (movement.doFrontCorrection((distanceNorthLeft + distanceNorthRight) / 2))
+      if (robo.move.doFrontCorrection((robo.TOF[TOF_FRONTLEFT].range + robo.TOF[TOF_FRONTRIGHT].range) / 2))
         step = 220;
       break;
 
@@ -482,7 +482,7 @@ int main()
         chainFlag = false;
         leftCamera.startScanning();
       }
-      if (movement.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
+      if (robo.move.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
         step = 605; // Position erreicht
       break;
 
@@ -571,7 +571,7 @@ int main()
         chainFlag = false;
         rightCamera.startScanning();
       }
-      if (movement.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
+      if (robo.move.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
         step = 705; // Position erreicht
       break;
 
@@ -669,21 +669,21 @@ int main()
         angleTarget = updateAngleTarget(-90);
         chainFlag = true;
       }
-      if (movement.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
+      if (robo.move.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
         step = 890; // Position erreicht
       break;
 
     case 860:
       // Drehen 90° rechts
       if(stepHasChanged) angleTarget = updateAngleTarget(90);
-      if (movement.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
+      if (robo.move.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
         step = 890;
       break;
 
     case 870:
       // Drehen 180°
       if(stepHasChanged) angleTarget = updateAngleTarget(180);
-      if (movement.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
+      if (robo.move.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
         step = 890; // Position erreicht
       break;
 
@@ -704,7 +704,7 @@ int main()
         step = 910;
         break;
       }
-      if (movement.doFrontCorrection((distanceNorthLeft + distanceNorthRight) / 2))
+      if (robo.move.doFrontCorrection((robo.TOF[TOF_FRONTLEFT].range + robo.TOF[TOF_FRONTRIGHT].range) / 2))
         step = 920;
       break;
 
@@ -714,7 +714,7 @@ int main()
         step = 920;
         break;
       }
-      if (movement.doBackCorrection(distanceSouthLeft)) {
+      if (robo.move.doBackCorrection(robo.TOF[TOF_BACKLEFT].range)) {
         step = 920;
       }
 
@@ -745,7 +745,7 @@ int main()
 
     case 970:
       //Winkelausrichtung
-      if (movement.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
+      if (robo.move.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
         step = 980;
       break;
 
@@ -855,7 +855,7 @@ int main()
       // Start Motor Rampe aufwärts
       robo.move.speed = ROBOT_RAMP_SPEED_UPWARDS;
       robo.move.goalAngle = robo.orientation.heading;
-      if (bnoCalbPitch < 5 || distanceNorthLeft < 10) {
+      if (bnoCalbPitch < 5 || robo.TOF[TOF_FRONTLEFT].range < 10) {
         robo.move.speed = 0;
         step = 2030;
       }
@@ -885,7 +885,7 @@ int main()
         step = 2050;
         break;
       }
-      if (movement.doFrontCorrection((distanceNorthLeft + distanceNorthRight) / 2))
+      if (robo.move.doFrontCorrection((robo.TOF[TOF_FRONTLEFT].range + robo.TOF[TOF_FRONTRIGHT].range) / 2))
         step = 2050;
       break;
 
@@ -916,7 +916,7 @@ int main()
       // Start Motor Rampe abwärts
       robo.move.speed = ROBOT_RAMP_SPEED_DOWNWARDS;
       robo.move.goalAngle = robo.orientation.heading;
-      if (bnoCalbPitch > -5 || distanceNorthLeft < 10) {
+      if (bnoCalbPitch > -5 || robo.TOF[TOF_FRONTLEFT].range < 10) {
         robo.move.speed = 0;
         step = 2130;
       }
@@ -946,7 +946,7 @@ int main()
         step = 2150;
         break;
       }
-      if (movement.doFrontCorrection((distanceNorthLeft + distanceNorthRight) / 2))
+      if (robo.move.doFrontCorrection((robo.TOF[TOF_FRONTLEFT].range + robo.TOF[TOF_FRONTRIGHT].range) / 2))
         step = 2150;
       break;
 
@@ -975,7 +975,7 @@ int main()
 
     case 2220:
       // Start Motor rückwärts
-      movement.driveAtSpeed(backward, ROBOT_DRIVE_SPEED);
+      robo.move.speed = -ROBOT_DRIVE_SPEED;
       // Stop Motor Zeit
       if (timerFunction(TON, TCHAIN1, !stepHasChanged, MeasTime)) {
         robo.move.speed = 0;
@@ -989,7 +989,7 @@ int main()
         step = 2240;
         break;
       }
-      if (movement.doBackCorrection(distanceSouthLeft)) {
+      if (robo.move.doBackCorrection(robo.TOF[TOF_BACKLEFT].range)) {
         step = 2240;
       }
       break;
@@ -1009,7 +1009,7 @@ int main()
       // Drehen 90° links
       if(stepHasChanged)
         angleTarget = updateAngleTarget(-90);
-      if (movement.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
+      if (robo.move.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
         step = 2290; // Position erreicht
       break;
 
@@ -1017,7 +1017,7 @@ int main()
       // Drehen 90° rechts
       if(stepHasChanged)
         angleTarget = updateAngleTarget(90);
-      if (movement.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
+      if (robo.move.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
         step = 2290; // Position erreicht
       break;
 
@@ -1025,7 +1025,7 @@ int main()
       // Drehen 180°
       if(stepHasChanged)
         angleTarget = updateAngleTarget(180);
-      if (movement.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
+      if (robo.move.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
         step = 2290; // Position erreicht
       break;
 

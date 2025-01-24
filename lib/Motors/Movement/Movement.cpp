@@ -71,6 +71,40 @@ void Movement::TurnLeft(int Speed){
 
 }
 
+bool Movement::doFrontCorrection(uint8_t currentFrontDistance){ //Copied from Dogs
+    if(!hasWallFront || bnoCalbPitch>5 || bnoCalbPitch<-5)
+        return true;
+    if (currentFrontDistance > (PERFECT_FRONT_DISTANCE + MAX_FRONT_DISTANCE_ERROR))
+    {
+        this->speed = 30;
+        this->goalAngle = this->orientation->heading;
+        return false;
+    }
+    if (currentFrontDistance < (PERFECT_FRONT_DISTANCE - MAX_FRONT_DISTANCE_ERROR))
+    {
+        this->speed = -30;
+        this->goalAngle = this->orientation->heading;
+        return false;
+    }
+    this->speed = 0;
+    return true;
+}
+bool Movement::doBackCorrection(uint8_t currentBackDistance) {
+    if (currentBackDistance < (PERFECT_BACK_DISTANCE - MAX_BACK_DISTANCE_ERROR))
+    {
+        this->speed = 30;
+        this->goalAngle = this->orientation->heading;
+        return false;
+    }
+    if (currentBackDistance > (PERFECT_BACK_DISTANCE + MAX_BACK_DISTANCE_ERROR))
+    {
+        this->speed = -30;
+        this->goalAngle = this->orientation->heading;
+    }
+    this->speed = 0;
+    return true;
+}
+
 void Movement::ForwardOneTile(int speed){
     motors[0].speed = speed;
     motors[1].speed = speed;

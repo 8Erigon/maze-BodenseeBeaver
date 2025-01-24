@@ -85,6 +85,13 @@ enum SkyDirection{
     West
 };
 
+enum RelatifDirection {
+    FRONT,
+    RIGHT,
+    LEFT,
+    BACK
+};
+
 enum WRGB{  //uint32_t for colors
     //0x opacity red green blue
     RED = 0x00FF0000,

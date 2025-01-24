@@ -4,7 +4,8 @@
 #include "../Motor/Motor.h"
 #include <TCA9534.h>
 #include <Adafruit_BNO055.h>
-//#include "General.h"
+#include "../General/DefineEnum.h"
+#include "../General/VarsFromDogs.h"
 
 #define TurnDuration 11000
 #define ForwardDuration 11000
@@ -37,6 +38,8 @@ public:
 
     void TurnRight (int Speed);
     void TurnLeft (int Speed);
+    bool doFrontCorrection(uint8_t distanceToSide);
+    bool doBackCorrection(uint8_t currentBackDistance);
     void ForwardOneTile(int speed);
     void Stop(int time);
     /*

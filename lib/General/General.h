@@ -103,7 +103,7 @@ class Robot{
 
     int ServoPosMid = 90;
     int ServoPosRight = 151;
-    int ServoPosLeft = 10;
+    int ServoPosLeft = 30;
     int ServoPos = 0;
 
     /*

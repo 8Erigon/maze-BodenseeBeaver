@@ -281,6 +281,14 @@ bool Robot::readButton(Buttons button) {
 void Robot::AuswurfR()     {
     move.Stop(0);
     ourServo.write(ServoPosMid);
+    delay(250);
+    ourServo.write(ServoPosMid + 5);
+    delay(250);
+    ourServo.write(ServoPosMid - 5);
+    delay(250);
+    ourServo.write(ServoPosMid);
+    delay(250);
+    
     for (ServoPos = ServoPosMid; ServoPos <= ServoPosRight; ServoPos++)  {
         ourServo.write(ServoPos);
         delay(10);
@@ -297,6 +305,14 @@ void Robot::AuswurfR()     {
 void Robot::AuswurfL()     {
     move.Stop(0);
     ourServo.write(ServoPosMid);
+    delay(250);
+    ourServo.write(ServoPosMid + 5);
+    delay(250);
+    ourServo.write(ServoPosMid - 5);
+    delay(250);
+    ourServo.write(ServoPosMid);
+    delay(250);
+
     for (ServoPos = ServoPosMid; ServoPos >= ServoPosLeft; ServoPos--)  {
         ourServo.write(ServoPos);
         delay(10);

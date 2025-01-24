@@ -273,57 +273,6 @@ double integralNewPointForDrive = 3;
 double integralConstantForDrive = 60;
 double proportionalConstantForDrive = 120;
 // End PID
-void calculateVictim(char victimAsChar) {
-    
-    switch (victimAsChar)
-    {
-    case 'H':
-        victimHarm = true;
-        victimForMap = H_VICTIM;
-        break;
-    case 'S':
-        victimStable = true;
-        victimForMap = S_VICTIM;
-        break;
-    case 'U':
-        victimForMap = U_VICTIM;
-        break;
-    case 'R':
-        victimRed = true;
-        victimForMap = RED_VICTIM;
-        break;
-    case 'Y':
-        victimYellow = true;
-        victimForMap = YELLOW_VICTIM;
-        break;
-    case 'G':
-        victimForMap = GREEN_VICTIM;
-        break;
-    case 'D':
-    // Später deactivated in die Map eintragen für information von wann bis wann eine Kamera nicht ansprechbar war
-        victimForMap = NOTHING;
-        break;
-    default:
-        victimForMap = NOTHING;
-        break;
-    }
-    hasVictim = victimForMap != NOTHING;
-    
-}
-float calcDegreesToRotate(){
-    float result = angleTarget-bnoCalbHeading;
-    if(result > 180){
-        result = result - 360;
-    }else if(result < -180){
-        result = result + 360;
-    }
-    if(stepHasChanged){
-        Serial.println("calc Result: " + (String)result);
-        Serial.println("calc Tar: "+(String)angleTarget);
-        Serial.println("calc Head: "+(String)bnoCalbHeading);
-    }
-    return result;
-}
 victimTypes victimType;
 
 /*
@@ -512,6 +461,148 @@ float updateAngleTarget(float rotationDegrees){
         break;
     }
     return result;
+}
+
+double atanInDegrees(double d) {
+    return degrees(atan(d));
+}
+
+void calculateVictim(char victimAsChar) {
+    
+    switch (victimAsChar)
+    {
+    case 'H':
+        victimHarm = true;
+        victimForMap = H_VICTIM;
+        break;
+    case 'S':
+        victimStable = true;
+        victimForMap = S_VICTIM;
+        break;
+    case 'U':
+        victimForMap = U_VICTIM;
+        break;
+    case 'R':
+        victimRed = true;
+        victimForMap = RED_VICTIM;
+        break;
+    case 'Y':
+        victimYellow = true;
+        victimForMap = YELLOW_VICTIM;
+        break;
+    case 'G':
+        victimForMap = GREEN_VICTIM;
+        break;
+    case 'D':
+    // Später deactivated in die Map eintragen für information von wann bis wann eine Kamera nicht ansprechbar war
+        victimForMap = NOTHING;
+        break;
+    default:
+        victimForMap = NOTHING;
+        break;
+    }
+    hasVictim = victimForMap != NOTHING;
+    
+}
+
+double calculateDegreeOffset(uint8_t dist1, uint8_t dist2, int distanceBetweenTofs) {
+    double a = atanInDegrees(((double)(dist1-dist2))/((double)distanceBetweenTofs)); //Berechnung des Winkels für parralelStellung
+    double b = 0;//atanInDegrees(((double)(dist1+dist2))/((double)(2*PLATE_LENGHT))); //Berechnung des Winkels für mittigstellung bei der nächsten Platte
+    return a+b;
+}
+
+float calcDegreesToRotate(){
+    float result = angleTarget-bnoCalbHeading;
+    if(result > 180){
+        result = result - 360;
+    }else if(result < -180){
+        result = result + 360;
+    }
+    if(stepHasChanged){
+        Serial.println("calc Result: " + (String)result);
+        Serial.println("calc Tar: "+(String)angleTarget);
+        Serial.println("calc Head: "+(String)bnoCalbHeading);
+    }
+    return result;
+}
+
+bool hasWallWithinReasonableDistance(uint16_t distance, uint16_t correctionToPlateEdge){
+    return (distance-correctionToPlateEdge)<=MAX_WALL_ACKNOWLEDGE_DISTANCE;
+}
+int getAmountOfTilesWithinReasonableDistance(uint16_t distance, uint16_t correctionToPlateEdge){
+    if(!hasWallWithinReasonableDistance(distance, correctionToPlateEdge))
+        return DEFAULT_AMOUNT_OF_TILES_TO_ADD;
+    return (int)((((double)distance-correctionToPlateEdge)/PLATE_LENGHT)+0.5); //0.5 = rounding & -correctionToPlateEdge = korrektur für plattenrand(muss abgeändert werden)
+}
+
+uint8_t calcDistanceFromPlateEdge(uint16_t distance, uint16_t correctionToPlateEdge){
+    return distance-(PLATE_LENGHT*getAmountOfTilesWithinReasonableDistance(distance, correctionToPlateEdge));
+}
+bool isAbout(float toCompare1, float toCompare2, float tolerance){
+    return abs(toCompare2-toCompare1)<tolerance;
+}
+char translatePlateTypeToChar(plateTypes plateType){
+    switch (plateType)
+    {
+    case WHITE_PLATE:
+        return 'W';
+    case BLACK_HOLE:
+        return 'B';
+    case CHECKPOINT:
+        return 'C';
+    case BLUE_PUDDLE:
+        return 'P';
+    default:
+        return '?';
+        break;
+    }
+}
+
+
+extern bool hasWall(uint8_t dist1, uint8_t dist2, bool isSensorValueUsable1, bool isSensorValueUsable2) {
+    if(!isSensorValueUsable1)
+        return dist2 <= ACKNOLEGE_WALL_DISTANCE;
+    if(!isSensorValueUsable2)
+        return dist1 <= ACKNOLEGE_WALL_DISTANCE;
+    return dist1 <= ACKNOLEGE_WALL_DISTANCE && dist2 <= ACKNOLEGE_WALL_DISTANCE;
+}
+extern uint8_t getDistance(uint8_t dist1, uint8_t dist2, bool isSensorValueUsable1, bool isSensorValueUsable2) {
+    if(!isSensorValueUsable1)
+        return dist2;
+    if(!isSensorValueUsable2)
+        return dist1;
+    return (dist1 + dist2)/2;
+}
+
+float calcAngleToRotateForCorrection(int errorToWall){
+    if(abs(errorToWall)>=50){
+        return errorToWall<0 ? -90.0 : 90.0;
+    }
+    return degrees(asin(((double)errorToWall)/50.0));
+}
+int calcErrorToWall(int frontDistance, int backDistance, int targetDistance) {
+    return targetDistance-((frontDistance+backDistance)/2);
+}
+
+void resetLast100PitchValues() {
+    for(int i = 0;i<100;i++)
+        last100PitchValues[i] = 123456789;
+}
+
+float getMeanOfLast100BnoPitches() {
+    float currentValue = 0;
+    int amountOfValues = 0;
+    for(int i = 0;i<100;i++) {
+        if(last100PitchValues[i] != 123456789 && abs(last100PitchValues[i]) > ACKNOLEGE_RAMP_UP_DEGREES) {
+            currentValue+=last100PitchValues[i];
+            Serial.println(last100PitchValues[i]);
+            Serial.println("C: "+(String)currentValue);
+            amountOfValues++;
+        }
+    }
+    currentValue/=amountOfValues;
+    Serial.println("V: "+(String)currentValue);
+    return currentValue;
 }
 
 #endif

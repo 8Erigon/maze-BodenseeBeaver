@@ -110,7 +110,6 @@ bool Movement::rotateDegreesWithPID(float degrees, bool stepChanged) {
         //Serial.println(degrees);
         if (!stepChanged) {
             this->speed = 0;
-            this->drive(forward);
             doPIDForRotation = false;
             disableVlTofs = false;
             disableColorSensor = false;
@@ -171,7 +170,7 @@ bool Movement::rotateDegreesWithPID(float degrees, bool stepChanged) {
     previousmessungForRotation = bnoOffsetForRotation;
     
     this->speed = outputSpeedForRotation < 0 ? max(minOutputSpeedForRotation, outputSpeedForRotation * (-1) ) : max(minOutputSpeedForRotation, outputSpeedForRotation);
-    this->rotate(outputSpeedForRotation < 0 ? LEFT : RIGHT);
+    this->speed *= (outputSpeedForRotation < 0 ? LEFT : RIGHT); //change forward/backwards
     return false;
 }
 

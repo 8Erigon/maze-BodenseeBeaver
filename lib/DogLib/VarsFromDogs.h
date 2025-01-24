@@ -453,7 +453,7 @@ void calcBNOCalbPitch(){
         currentLastPitchValue = 0;
 }*/
 
-void processImageInputs() {
+/*void processImageInputs() {
     utils.processExpanderInputs();
     processSwitchInputs();
     processButtonInputs();
@@ -469,7 +469,7 @@ void processImageOutputs() {
     utils.processLedOutputs();
     servo.write(servoPos);
     digitalWriteFast(21, startLedMode);
-}
+}*/
 
 void resetDrivePID() {
     errorForDrive = 0;

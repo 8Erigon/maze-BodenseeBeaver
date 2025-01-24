@@ -1060,16 +1060,16 @@ int main()
 
     // Display
     robo.display.drawString(String(
-                             "CT: " + utils.getStringWithLenght(String(cycleTime / 1000), 5) + " " +
+                             "CT: " + robo.setNumberLenght( (cycleTime / 1000), 5) + " " +
                                  "V: " + victimType + " " +
                                  "T: " + currentTileType), 
                                 0, 0);
     robo.display.drawString(String(
-                             "LST: " + utils.getStringWithLenght(String(lastStep), 5) + " " +
-                                 "NST: " + utils.getStringWithLenght(String(nextStep), 5)), 
+                             "LST: " + robo.setNumberLenght( (lastStep), 5) + " " +
+                                 "NST: " + robo.setNumberLenght( (nextStep), 5)), 
                                 0, 1);
     //utils.writeTextToDisplay(2, utils.getStringWithLenght(String(hasWallFront?1:0), 1)+utils.getStringWithLenght(String(hasWallRight?1:0), 1)+utils.getStringWithLenght(String(hasWallBack?1:0), 1)+utils.getStringWithLenght(String(hasWallLeft?1:0), 1));
-    robo.display.drawString(String( "P: "+utils.getStringWithLenght((String)bnoCalbPitch, 4)), 0, 2);
+    robo.display.drawString(String( "P: "+ robo.setNumberLenght( bnoCalbPitch, 4)), 0, 2);
 
     processImageOutputs();
     //Serial.println("Ist: " + (String) bnoCalbHeading);

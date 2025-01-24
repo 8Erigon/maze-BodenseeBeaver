@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-float RoboHeading = 0;
+// float RoboHeading = 0; //Redefinition
 float RoboHeadingNew = 0;
 float RoboHeadingFinal = 0;
 
@@ -67,8 +67,6 @@ bool isfirstRun = true;
 #define MS_FOR_DRIVING_1m_RAMP_UP 1700 // Dummy Value
 #define MS_FOR_DRIVING_1m_RAMP_DOWN 1700 // Dummy Value
 #define ROUND_MAX_VALUE_FOR_HEIGHT 150 // +- Dieses Werts
-
-extern bool robotCompletedRightWallDrivePath;
 
 //enums
 enum plateTypes : uint8_t
@@ -324,3 +322,185 @@ float calcDegreesToRotate(){
     return result;
 }
 victimTypes victimType;
+
+/*
+GlobalMethods
+*/
+
+void setUpRobot() {
+    Wire.begin();
+    Wire.setClock(400000);
+    Wire1.begin();
+    Wire1.setClock(400000);
+    SPI.begin();
+    Serial.begin(115200);
+    rightCamera.init(&Serial7);
+    leftCamera.init(&Serial6);
+
+    initMux(&muxFront, 0x71);
+    initMux(&muxBack, 0x70);
+    initVLTofs();
+    servo.attach(22);
+    utils.init();
+    movement.initMotors();
+    bno.init();
+    hud.init();
+
+    pinMode(21, OUTPUT);
+    Serial.println("Robot Started");
+}
+
+void processSwitchInputs() {
+    startSwitchIsOn = utils.isStartSwitchOn();
+    SingleStepModeSwitchIsOn = utils.isSwitchOn(SWITCH9);
+    debugWindowSwitchIsOn = utils.isSwitchOn(SWITCH10);
+    SW11 = utils.isSwitchOn(SWITCH11);
+    SW12 = utils.isSwitchOn(SWITCH12);
+}
+void processButtonInputs() {
+    resetChainButtonIsPressed = utils.isButtonPressed(BUTTON1);
+    singleStepButtonIsPressed = utils.isButtonPressed(BUTTON2);
+    resetCycleTimeButtonIsPressed = utils.isButtonPressed(BUTTON3);
+    cycleDebugWindowButtonIsPressed = utils.isButtonPressed(BUTTON4);
+    BTN5 = utils.isButtonPressed(BUTTON5);
+    mazeMapPrintButtonIsPressed = utils.isButtonPressed(BUTTON6);
+}
+
+void processVLTofInputs() {
+    if (disableVlTofs)
+        return;
+    distanceFrontLeftSide = frontLeftSideVLTof.readSensorDistance();
+    distanceFrontRightSide = frontRightSideVLTof.readSensorDistance();
+    distanceRightFrontSide = rightFrontSideVLTof.readSensorDistance();
+    distanceLeftFrontSide = leftFrontSideVLTof.readSensorDistance();
+    if(!muxFront.setPort(73))
+        displayError("Failed reset mux to port: " + String(73) + " | " + String(muxFront._deviceAddress), FATAL);
+    
+    distanceRightBackSide = rightBackSideVLTof.readSensorDistance();
+    distanceBackRightSide = backRightSideVlTof.readSensorDistance();
+    distanceBackLeftSide = backLeftSideVlTof.readSensorDistance();
+    distanceLeftBackSide = leftBackSideVLTof.readSensorDistance();
+    if(!muxBack.setPort(73))
+        displayError("Failed reset mux to port: " + String(73) + " | " + String(muxBack._deviceAddress), FATAL);
+
+    averageDistanceFront = getDistance(distanceFrontLeftSide, distanceFrontRightSide, frontLeftSideVLTof.sensorValueIsUsable(), frontRightSideVLTof.sensorValueIsUsable());
+    averageDistanceRight = getDistance(distanceRightBackSide, distanceRightFrontSide, rightBackSideVLTof.sensorValueIsUsable(), rightFrontSideVLTof.sensorValueIsUsable());
+    averageDistanceBack  = getDistance(distanceBackLeftSide, distanceBackRightSide, backLeftSideVlTof.sensorValueIsUsable(), backRightSideVlTof.sensorValueIsUsable());
+    averageDistanceLeft  = getDistance(distanceLeftBackSide, distanceLeftFrontSide, leftBackSideVLTof.sensorValueIsUsable(), leftFrontSideVLTof.sensorValueIsUsable());
+
+    hasWallFront = hasWall(distanceFrontLeftSide, distanceFrontRightSide, frontLeftSideVLTof.sensorValueIsUsable(), frontRightSideVLTof.sensorValueIsUsable());
+    hasWallRight = hasWall(distanceRightBackSide, distanceRightFrontSide, rightBackSideVLTof.sensorValueIsUsable(), rightFrontSideVLTof.sensorValueIsUsable());
+    hasWallBack = hasWall(distanceBackLeftSide, distanceBackRightSide, backLeftSideVlTof.sensorValueIsUsable(), backRightSideVlTof.sensorValueIsUsable());
+    hasWallLeft = hasWall(distanceLeftBackSide, distanceLeftFrontSide, leftBackSideVLTof.sensorValueIsUsable(), leftFrontSideVLTof.sensorValueIsUsable());
+}
+void processLanbaoTofInputs(){
+    distanceFrontMiddle = frontLanbaoTof.readDistance();
+    /*distanceRightMiddle = rightLanbaoTof.readDistance();
+    distanceBackMiddle = backLanbaoTof.readDistance();
+    distanceLeftMiddle = leftLanbaoTof.readDistance();*/
+}
+void processColorInput() {
+    if(disableColorSensor)
+        return;
+    isOnBlackTile = false;
+    isOnBlueTile = false;
+    isOnControllTile = false;
+    currentTileType = utils.getCurrentPlateColor();
+    switch (currentTileType)
+    {
+    case BLACK_HOLE:
+        isOnBlackTile = true;
+        break;
+    case BLUE_PUDDLE:
+        isOnBlueTile = true;
+        break;
+    case CHECKPOINT:
+        isOnControllTile = true;
+        break;
+    case WHITE_PLATE:
+        break;
+    default:
+        displayError("Unknown Tile", NORMAL);
+        return;
+    }
+}
+void calcBNOCalbHeading(){
+    bnoCalbHeading = robotHeading - bnoOffsetCalbHeading;
+    if(bnoCalbHeading < 0){
+        bnoCalbHeading = bnoCalbHeading + 360;
+    }else if(bnoCalbHeading >= 360){
+        bnoCalbHeading = bnoCalbHeading - 360;
+    }
+}
+void calcBNOCalbPitch(){
+    bnoCalbPitch = robotPitch - bnoOffsetCalbPitch;
+}
+
+void processBnoInputs() {
+    robotHeading = bno.eulHeading();
+    calcBNOCalbHeading();
+    robotPitch = -bno.eulPitch();
+    calcBNOCalbPitch();
+    robotAccX = bno.accDataX();
+    robotAccY = bno.accDataY();
+    robotAccZ = bno.accDataZ();
+    last100PitchValues[currentLastPitchValue] = bnoCalbPitch;
+    currentLastPitchValue++;
+    if(currentLastPitchValue >= 100)
+        currentLastPitchValue = 0;
+}
+
+void processImageInputs() {
+    utils.processExpanderInputs();
+    processSwitchInputs();
+    processButtonInputs();
+
+    processColorInput();
+    processVLTofInputs();
+    //processLanbaoTofInputs();
+    processBnoInputs();
+}
+
+void processImageOutputs() {
+    movement.processOutputs();
+    utils.processLedOutputs();
+    servo.write(servoPos);
+    digitalWriteFast(21, startLedMode);
+}
+
+
+float updateAngleTarget(float rotationDegrees){
+
+    float result = angleTarget + rotationDegrees;
+    if(result >= 360){
+        result = result - 360;
+    }else if(result < 0){
+        result = result + 360;
+    }
+    if(stepHasChanged){
+        Serial.println("update Result: " + (String)result);
+        Serial.println("update Tar: "+(String)angleTarget);
+        Serial.println("update Rot Deg: "+(String)rotationDegrees);
+    }
+    switch ((int16_t)(result+0.5f))
+    {
+    case 0:
+        mazeMap.setDirection(NORTH);
+        break;
+    case 90:
+        mazeMap.setDirection(EAST);
+        movement.resetDrivePID();
+        break;
+    case 180:
+        mazeMap.setDirection(SOUTH);
+        movement.resetDrivePID();
+        break;
+    case 270:
+        mazeMap.setDirection(WEST);
+        movement.resetDrivePID();
+        break;
+    default:
+        break;
+    }
+    return result;
+}

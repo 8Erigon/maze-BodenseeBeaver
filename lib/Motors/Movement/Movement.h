@@ -5,7 +5,7 @@
 #include <TCA9534.h>
 #include <Adafruit_BNO055.h>
 #include "../General/DefineEnum.h"
-#include "../General/VarsFromDogs.h"
+#include "../DogLib/VarsFromDogs.h"
 
 #define TurnDuration 11000
 #define ForwardDuration 11000

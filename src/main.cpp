@@ -2,7 +2,7 @@
 #include "../lib/General/General.h"
 #include "../lib/MatrixVector/vektors.h"
 #include "../lib/Timer/timer.h"
-#include "../lib/General/VarsFromDogs.h"
+#include "../lib/DogLib/VarsFromDogs.h"
 
 
 /*

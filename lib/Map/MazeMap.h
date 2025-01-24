@@ -14,6 +14,10 @@ enum skyDirection{
 	north = 0,
 	south = 1,
 	west = 2,
+struct wallsOfTile{  
+	uint8_t north;
+	uint8_t east;
+	uint8_t sout
 	east = 3
 };
 
@@ -25,11 +29,7 @@ NULL = undefiniert,
 NEIN schnell > speichereffizienz*/
 /*
 @details uint8_t for each of the 4 directions. For Walls or Victims.
-*/
-struct wallsOfTile{  
-	uint8_t north;
-	uint8_t east;
-	uint8_t south;
+*/h;
 	uint8_t west;
 };
 

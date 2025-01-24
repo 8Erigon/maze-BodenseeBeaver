@@ -1,3 +1,5 @@
+#ifndef DOG_LIB
+#define DOG_LIB
 #include <Arduino.h>
 
 // float RoboHeading = 0; //Redefinition
@@ -504,3 +506,5 @@ float updateAngleTarget(float rotationDegrees){
     }
     return result;
 }
+
+#endif

@@ -179,7 +179,8 @@ int main()
       break;
 
     case 120: // Kompass auf Null setzen
-      bno.init();
+      uint8_t sys, gyro, accel, mag;
+      robo.bno.getCalibration(&sys, &gyro, &accel, &mag); //habe bno.init ersetzt
       step = 130;
       break;
 

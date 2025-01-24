@@ -283,6 +283,7 @@ bool Robot::readButton(Buttons button) {
 
 void Robot::AuswurfR()     {
     move.Stop(0);
+    setLedColor(WRGB::RED);
     ourServo.write(ServoPosMid);
     delay(250);
     ourServo.write(ServoPosMid + 5);
@@ -303,10 +304,12 @@ void Robot::AuswurfR()     {
     delay(250);
     ourServo.write(ServoPosRight);
     delay(250);
+    setLedColor(WRGB::NONE);
 }
 
 void Robot::AuswurfL()     {
     move.Stop(0);
+    setLedColor(WRGB::RED);
     ourServo.write(ServoPosMid);
     delay(250);
     ourServo.write(ServoPosMid + 5);
@@ -327,6 +330,7 @@ void Robot::AuswurfL()     {
     delay(250);
     ourServo.write(ServoPosLeft);
     delay(250);
+    setLedColor(WRGB::NONE);
 }
 
 void Robot::ServoPosReset()  {

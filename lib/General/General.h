@@ -20,6 +20,8 @@
 #include <Servo.h>
 //Colorsensor
 #include "../ColorSensor/ColorSensor.h"
+//Camera
+#include "../Camera/Camera.h"
 
 class Robot{
     public:
@@ -40,6 +42,9 @@ class Robot{
     Movement move; //Movement libary
 
     TOFonMux TOF[8]; //Time of flight sensors on the mux
+
+    CAMERA leftCamera;
+    CAMERA rightCamera;
 
     ILI9341_t3n display = ILI9341_t3n(7, 8);
 

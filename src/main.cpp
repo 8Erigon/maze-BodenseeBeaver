@@ -132,8 +132,8 @@ int main()
       // Kamera recht zurüclksetzen
       if (stepHasChanged)
         chainFlag = true;
-      if (rightCamera.resetCamera(stepHasChanged)) {
-        victimType = rightCamera.getVictim();
+      if (robo.rightCamera.resetCamera(stepHasChanged)) {
+        victimType = robo.rightCamera.getVictim();
         chainFlag = false;
       }
       if (!chainFlag)
@@ -144,8 +144,8 @@ int main()
       // Kamera links zurücksetzen
       if (stepHasChanged)
         chainFlag = true;
-      if (leftCamera.resetCamera(stepHasChanged)) {
-        victimType = leftCamera.getVictim();
+      if (robo.leftCamera.resetCamera(stepHasChanged)) {
+        victimType = robo.leftCamera.getVictim();
         chainFlag = false;
       }
       if (!chainFlag)
@@ -215,8 +215,8 @@ int main()
       // Start Kamera
       if (chainFlag && timerFunction(TON, TCHAIN2, !stepHasChanged, 400000)) {
         chainFlag = false;
-        rightCamera.startScanning();
-        leftCamera.startScanning();
+        robo.rightCamera.startScanning();
+        robo.leftCamera.startScanning();
       }
       // Stop Motor Zeit
       if (timerFunction(TON, TCHAIN1, !stepHasChanged, 1000000)) {
@@ -269,8 +269,8 @@ int main()
     case 230:
       // Blaues Feld
       // Stop Kamera
-      leftCamera.stopScanningAndRequestVictim(stepHasChanged);
-      rightCamera.stopScanningAndRequestVictim(stepHasChanged);
+      robo.leftCamera.stopScanningAndRequestVictim(stepHasChanged);
+      robo.rightCamera.stopScanningAndRequestVictim(stepHasChanged);
       // 5 sec warten
       robo.move.speed = 0;
       if (timerFunction(TON, TCHAIN1, !stepHasChanged, 5000000)) {
@@ -281,8 +281,8 @@ int main()
     case 240:
       // Controll Feld
       // Stop Kamera
-      leftCamera.stopScanningAndRequestVictim(stepHasChanged);
-      rightCamera.stopScanningAndRequestVictim(stepHasChanged);
+      robo.leftCamera.stopScanningAndRequestVictim(stepHasChanged);
+      robo.rightCamera.stopScanningAndRequestVictim(stepHasChanged);
       step = 800;
       break;
 
@@ -295,9 +295,9 @@ int main()
       // Stop Kamera und warte bis diese die daten gesendet hat
       if (stepHasChanged)
         chainFlag = true;
-      rightCamera.stopScanningAndRequestVictim(stepHasChanged);
-      leftCamera.stopScanningAndRequestVictim(stepHasChanged);
-      if (rightCamera.requestIsCompleted() && leftCamera.requestIsCompleted()) {
+      robo.rightCamera.stopScanningAndRequestVictim(stepHasChanged);
+      robo.leftCamera.stopScanningAndRequestVictim(stepHasChanged);
+      if (robo.rightCamera.requestIsCompleted() && robo.leftCamera.requestIsCompleted()) {
         chainFlag = false;
       }
       if (!chainFlag)
@@ -314,7 +314,7 @@ int main()
     case 310:
       // Rechte Kamera Auswertung
       if (stepHasChanged)
-        victimType = rightCamera.getVictim();
+        victimType = robo.rightCamera.getVictim();
       calculateVictim(victimType);
       step = 400;
       if (hasVictim)
@@ -389,7 +389,7 @@ int main()
     case 410:
       // Kamer Links Auswertung
       if (stepHasChanged)
-        victimType = leftCamera.getVictim();
+        victimType = robo.leftCamera.getVictim();
       calculateVictim(victimType);
       step = 500;
       if (hasVictim)
@@ -481,7 +481,7 @@ int main()
       // Start Kamera links
       if (chainFlag && timerFunction(TON, TCHAIN2, !stepHasChanged, 250000)) {
         chainFlag = false;
-        leftCamera.startScanning();
+        robo.leftCamera.startScanning();
       }
       if (robo.move.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
         step = 605; // Position erreicht
@@ -489,14 +489,14 @@ int main()
 
     case 605:
       // Kameras Links auslesen
-      if (leftCamera.stopScanningAndRequestVictim(stepHasChanged))
+      if (robo.leftCamera.stopScanningAndRequestVictim(stepHasChanged))
         step = 610;
       break;
 
     case 610:
       // Kamera Auswertung Links
       if (stepHasChanged)
-        victimType = leftCamera.getVictim();
+        victimType = robo.leftCamera.getVictim();
       calculateVictim(victimType);
       step = 880;
       if (hasVictim)
@@ -570,7 +570,7 @@ int main()
       // Start Kamera rechts
       if (chainFlag && timerFunction(TON, TCHAIN2, !stepHasChanged, 250000)) {
         chainFlag = false;
-        rightCamera.startScanning();
+        robo.rightCamera.startScanning();
       }
       if (robo.move.rotateDegreesWithPID(calcDegreesToRotate(), stepHasChanged))
         step = 705; // Position erreicht
@@ -578,14 +578,14 @@ int main()
 
     case 705:
       // Kameras Rechts auslesen
-      if (rightCamera.stopScanningAndRequestVictim(stepHasChanged))
+      if (robo.rightCamera.stopScanningAndRequestVictim(stepHasChanged))
         step = 710;
       break;
 
     case 710:
       // Kamera Auswertung Rechts
       if (stepHasChanged)
-        victimType = rightCamera.getVictim();
+        victimType = robo.rightCamera.getVictim();
       calculateVictim(victimType);
       step = 800;
       if (hasVictim)
@@ -847,8 +847,8 @@ int main()
 
     case 2010:
       // Stoppe Kameras vor Rampe
-      leftCamera.stopScanningAndRequestVictim(stepHasChanged);
-      rightCamera.stopScanningAndRequestVictim(stepHasChanged);
+      robo.leftCamera.stopScanningAndRequestVictim(stepHasChanged);
+      robo.rightCamera.stopScanningAndRequestVictim(stepHasChanged);
       step = 2020;
       break;
 
@@ -908,8 +908,8 @@ int main()
 
     case 2110:
       // Stoppe Kameras vor Rampe
-      leftCamera.stopScanningAndRequestVictim(stepHasChanged);
-      rightCamera.stopScanningAndRequestVictim(stepHasChanged);
+      robo.leftCamera.stopScanningAndRequestVictim(stepHasChanged);
+      robo.rightCamera.stopScanningAndRequestVictim(stepHasChanged);
       step = 2120;
       break;
 
@@ -969,8 +969,8 @@ int main()
 
     case 2210:
       // Stoppe Kameras vor schwarzer Platte
-      leftCamera.stopScanningAndRequestVictim(stepHasChanged);
-      rightCamera.stopScanningAndRequestVictim(stepHasChanged);
+      robo.leftCamera.stopScanningAndRequestVictim(stepHasChanged);
+      robo.rightCamera.stopScanningAndRequestVictim(stepHasChanged);
       step = 2220;
       break;
 

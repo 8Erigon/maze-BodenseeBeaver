@@ -285,6 +285,13 @@ void Robot::AuswurfR()     {
         ourServo.write(ServoPos);
         delay(10);
     }
+    delay(500);
+    ourServo.write(ServoPosRight + 5);
+    delay(250);
+    ourServo.write(ServoPosRight - 5);
+    delay(250);
+    ourServo.write(ServoPosRight);
+    delay(250);
 }
 
 void Robot::AuswurfL()     {
@@ -294,6 +301,13 @@ void Robot::AuswurfL()     {
         ourServo.write(ServoPos);
         delay(10);
     }
+    delay(500);
+    ourServo.write(ServoPosLeft - 5);
+    delay(250);
+    ourServo.write(ServoPosLeft + 5);
+    delay(250);
+    ourServo.write(ServoPosLeft);
+    delay(250);
 }
 
 void Robot::ServoPosReset()  {

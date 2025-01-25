@@ -100,7 +100,7 @@
 #ifdef __cplusplus
 #include "Arduino.h"
 #include <DMAChannel.h>
-#include "../Spi/SPI.h"
+#include "../lib/SPI/SPI.h"
 
 #endif
 #include <stdint.h>

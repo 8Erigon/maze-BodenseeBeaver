@@ -25,7 +25,7 @@
 #include "Arduino.h"
 
 #include "utility/imumaths.h"
-#include <Adafruit_I2CDevice.h>
+#include "../Adafruit BusIO@1.16.1/Adafruit_I2CDevice.h"
 #include <Adafruit_Sensor.h>
 
 /** BNO055 Address A **/

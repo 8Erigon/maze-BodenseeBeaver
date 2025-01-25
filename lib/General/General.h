@@ -8,8 +8,8 @@
 //Expander
 #include "../TCA9534/TCA9534.h"
 //Motors
-#include "..\Motors\Motor\Motor.h"
-#include "..\Motors\Movement\Movement.h"
+#include "..\Motor\Motor.h"
+#include "..\Movement\Movement.h"
 //BNO
 #include <Adafruit_BNO055.h>
 //TOF

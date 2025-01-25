@@ -2,7 +2,7 @@
 #define Movement_h
 
 #include "../Motor/Motor.h"
-#include <TCA9534.h>
+#include "../TCA9534/TCA9534.h"
 #include <Adafruit_BNO055.h>
 #include "../General/DefineEnum.h"
 #include "../DogLib/VarsFromDogs.h"

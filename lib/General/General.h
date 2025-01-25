@@ -6,7 +6,7 @@
 //Display
 #include "../ILI9341_t3n/ILI9341_t3n.h"
 //Expander
-#include <TCA9534.h>
+#include "../TCA9534/TCA9534.h"
 //Motors
 #include "..\Motors\Motor\Motor.h"
 #include "..\Motors\Movement\Movement.h"
@@ -17,7 +17,7 @@
 //LED
 #include "..\Adafruit_Neopixel\Adafruit_Neopixel.h"
 //Servo
-#include <Servo.h>
+#include "../Servo/Servo.h"
 //Colorsensor
 #include "../ColorSensor/ColorSensor.h"
 //Camera

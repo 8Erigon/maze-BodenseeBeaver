@@ -1,9 +1,9 @@
 #ifndef TOF_h
 #define TOF_h
 
-#include "../Adafruit_VL6180X/Adafruit_VL6180X.h"
-#include "../General/DefineEnum.h" 
-#include "../Portexpander/src/SparkFun_I2C_Mux_Arduino_Library.h"
+#include "Adafruit_VL6180X.h"
+#include "DefineEnum.h" 
+#include "SparkFun_I2C_Mux_Arduino_Library.h"
 
 class TOFonMux{
     public:

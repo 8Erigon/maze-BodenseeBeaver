@@ -1,11 +1,11 @@
 #ifndef Movement_h
 #define Movement_h
 
-#include "../Motor/Motor.h"
-#include "../TCA9534/TCA9534.h"
-#include "../Adafruit BNO055/Adafruit_BNO055.h"
-#include "../General/DefineEnum.h"
-#include "../DogLib/VarsFromDogs.h"
+#include "Motor.h"
+#include "TCA9534.h"
+#include "Adafruit_BNO055.h"
+#include "DefineEnum.h"
+//#include "VarsFromDogs.h"
 
 #define TurnDuration 11000
 #define ForwardDuration 11000

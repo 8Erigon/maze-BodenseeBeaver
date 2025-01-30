@@ -1,4 +1,5 @@
 #include "Movement.h"
+#include "VarsFromDogs.h"
 
 
 Movement::Movement(Motor &motor, sensors_vec_t &orientation, sensors_vec_t &acceleration): motors(&motor){ //Benutzt "Member Initializer List"-Technik ("motors = &motor")

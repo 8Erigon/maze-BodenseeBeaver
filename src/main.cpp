@@ -1,8 +1,7 @@
 #include <Arduino.h>
-#include "../lib/General/General.h"
-#include "../lib/Timer/timer.h"
-
-
+#include "General.h"
+#include "timer.h"
+#include "VarsFromDogs.h"
 
 /*
 ---------------------------------------------------------

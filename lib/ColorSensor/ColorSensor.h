@@ -1,8 +1,8 @@
 #ifndef COLOR_SENSOR_H
 #define COLOR_SENSOR_H
 
-#include <../Adafruit TCS34725/Adafruit_TCS34725.h>
-#include "../Portexpander/src/SparkFun_I2C_Mux_Arduino_Library.h"
+#include <Adafruit_TCS34725.h>
+#include <SparkFun_I2C_Mux_Arduino_Library.h>
 
 struct RGB{
     float r;

@@ -1,8 +1,8 @@
 #ifndef Motor_h
 #define Motor_h
 
-#include "../TCA9534/TCA9534.h"
-#include "../General/DefineEnum.h"
+#include "TCA9534.h"
+#include "DefineEnum.h"
 
 class Motor{
 public:

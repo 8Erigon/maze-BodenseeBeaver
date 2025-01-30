@@ -4,24 +4,24 @@
 //Defines & Enums
 #include "DefineEnum.h"
 //Display
-#include "../ILI9341_t3n/ILI9341_t3n.h"
+#include "ILI9341_t3n.h"
 //Expander
-#include "../TCA9534/TCA9534.h"
+#include "TCA9534.h"
 //Motors
-#include "..\Motor\Motor.h"
-#include "..\Movement\Movement.h"
+#include "Motor.h"
+#include "Movement.h"
 //BNO
 #include <Adafruit_BNO055.h>
 //TOF
-#include "../TOF/TOF.h"
+#include "TOF.h"
 //LED
-#include "..\Adafruit_Neopixel\Adafruit_Neopixel.h"
+#include "Adafruit_Neopixel.h"
 //Servo
-#include "../Servo/Servo.h"
+#include "Servo.h"
 //Colorsensor
-#include "../ColorSensor/ColorSensor.h"
+#include "ColorSensor.h"
 //Camera
-#include "../Camera/Camera.h"
+#include "Camera.h"
 
 class Robot{
     public:

@@ -15,7 +15,7 @@
 //TOF
 #include "TOF.h"
 //LED
-#include "Adafruit_Neopixel.h"
+#include "Adafruit_NeoPixel.h"
 //Servo
 #include "Servo.h"
 //Colorsensor
